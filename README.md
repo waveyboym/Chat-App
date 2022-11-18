@@ -3,9 +3,11 @@ A real time chat application done with electron and react with a firebase banken
 
 # Presentation
 ![private messaging](img/privchat.png "private messaging")
+\
+\
 ![room messaging"](img/roomchat.png "room messaging")
 
-#Technologies used and npm packages
+# Technologies used and npm packages
 //
 
-#Images used in presentation
+# Images used in presentation
