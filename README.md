@@ -27,3 +27,10 @@ A real time chat application done with electron and react with a firebase banken
 2. https://unsplash.com/photos/PGdW_bHDbpI
 3. https://unsplash.com/photos/m_7p45JfXQo
 4. https://unsplash.com/photos/nY14Fs8pxT8
+
+# TODO
+1. Improve user interface for navigating between private messages and room messages
+2. Add support for presence detection(whether or not a user is online)
+3. Add ability to view all friends in a separate component 
+4. Add stories/most recent updates
+5. Maybe add more themes
