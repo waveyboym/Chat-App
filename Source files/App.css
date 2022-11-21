@@ -1,0 +1,143 @@
+/*
+ * @NOTE: Prepend a `~` to css file paths that are in your node_modules
+ *        See https://github.com/webpack-contrib/sass-loader#imports
+ */
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap');
+
+::-webkit-scrollbar {width: 3px;}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 15px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #8D8D8D; 
+  border-radius: 15px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {background: #a8a8a8;}
+
+::-webkit-scrollbar:hover {width: 5px;}
+
+::-webkit-scrollbar:active {width: 5px;}
+
+/* Handle on active */
+::-webkit-scrollbar-thumb:active {background: #cacaca;}
+
+:root {--fallback-title-bar-height: 40px;}
+
+@font-face {
+  font-family: 'Noto Color Emoji';
+  src: url('NotoColorEmoji.ttf');
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  min-width: 1024px;
+  min-height: 700px;
+  font-family: 'Baloo Bhai 2', cursive;/*, 'Noto Color Emoji'*/
+  overflow: hidden;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: overlay;
+  background: #14161F;
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */ 
+}
+
+.draggable {
+  app-region: drag;
+  /* Pre-fix app-region during standardization process */
+  -webkit-app-region: drag;
+}
+
+.nonDraggable {
+  app-region: no-drag;
+  /* Pre-fix app-region during standardization process */
+  -webkit-app-region: no-drag;
+}
+
+#titleBarContainer {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  height: env(titlebar-area-height, var(--fallback-title-bar-height));
+  width: 100%;
+  background: transparent;
+}
+
+#titleBar {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  display: flex;
+  user-select: none;
+  height: 100%;
+  left: env(titlebar-area-x, 0);
+  width: env(titlebar-area-width, 100%);
+  font-weight: bold;
+  text-align: center;
+  align-items: center;
+}
+
+.window-controls-section{
+  display: flex;
+  position: absolute;
+  right: 0;
+}
+
+.button-area{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  margin-left: 5px;
+  height: env(titlebar-area-height, var(--fallback-title-bar-height));
+  width: env(titlebar-area-height, var(--fallback-title-bar-height));
+}
+
+#restore{
+  position: absolute;
+  right: 0;
+  margin-right: env(titlebar-area-height, var(--fallback-title-bar-height));
+  padding-right: 5px;
+  visibility: hidden;
+}
+
+.restore-sub-area{
+  height: env(titlebar-area-height, var(--fallback-title-bar-height));
+  width: env(titlebar-area-height, var(--fallback-title-bar-height));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+}
+
+#root {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: env(titlebar-area-height, var(--fallback-title-bar-height));
+  overflow: hidden;
+}
+
+.body-main-content{
+  height: 100vh;
+  width: 100vw;
+  min-width: 1024px;
+  min-height: 700px;
+  position: fixed;
+  top: 0;
+  z-index: 50;
+}
