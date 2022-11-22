@@ -23,7 +23,7 @@ A real time chat application done with electron and react with a firebase banken
 11. Use-local-storage: https://github.com/nas5w/use-local-storage
 
 # I am a user/tester
-Executable for MacOS, Linux and Windows will be coming soon
+Executable for MacOS, Linux and Windows will be coming soon...
 
 # I am a developer
 1. Make a folder on your desktop named for example "ChatApp"
@@ -41,6 +41,50 @@ npm install
 4. clone the files in the folder labelled as "Source Files" from this repository into <Chat App project name>/src/renderer
 5. In <Chat App project name>/src/main delete a file named "main.ts"
 5. clone the file labelled as "main.ts" in the folder labelled "renderer" from this repository into <Chat App project name>/src/main
+6. Open a terminal where your project is located <Chat App project name> and run these commands to install the necessary dependencies:\
+(only install the one's you do not have)
+```bash
+npm install -g sass
+```
+```bash
+npm install framer-motion
+```
+```bash
+npm install @mui/material @emotion/react @emotion/styled
+```
+```bash
+npm install --save emoji-mart @emoji-mart/data @emoji-mart/react
+```
+```bash
+npm install firebase
+```
+```bash
+npm install react-colorful
+```
+```bash
+npm install react-loader-spinner --save
+```
+```bash
+npm i react-toggle-dark-mode
+```
+```bash
+npm i use-local-storage
+```
+7. Set up and initilise a firebase web app by following the docs here: https://firebase.google.com/
+8. In <Chat App project name>/src/renderer/firebase.js, initialise Firebase by pasting in the correct data and keys which you will get from your firebase project
+```javascript
+const firebaseApp = initializeApp ({
+    apiKey: "<your API key from firebase>",
+    authDomain: "<your authDomain from firebase>",
+    projectId: "<your project ID from firebase>",
+    storageBucket: "<your storage bucket from firebase>",
+    messagingSenderId: "<your messaging sender ID from firebase>",
+    appId: "<your app ID from firebase>",
+    measurementId: "<your measurement ID from firebase>"
+});
+```
+\
+9. Click on get started and create a firebase app. Add authentication(for google, facebook, twitter, github and password based login), firestore database and storage in the console.
 7. Open a terminal where your project is located <Chat App project name> and run this command:
 ```bash
 npm start
