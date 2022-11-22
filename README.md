@@ -22,6 +22,35 @@ A real time chat application done with electron and react with a firebase banken
 10. React-time-ago: https://github.com/JoseRFelix/react-toggle-dark-mode
 11. Use-local-storage: https://github.com/nas5w/use-local-storage
 
+# I am a user/tester
+Executable for MacOS, Linux and Windows will be coming soon
+
+# I am a developer
+1. Make a folder on your desktop named for example "ChatApp"
+2. Visit https://github.com/electron-react-boilerplate/electron-react-boilerplate and follow readme instructions to download the boilerplate code\
+                                        \
+                                         OR\
+                                         \
+Clone Electron react boilerplate from github by running and naming your chat app project
+```
+git clone --depth 1 --branch main https://github.com/electron-react-boilerplate/electron-react-boilerplate.git <Chat App project name>
+cd <Chat App project name>
+npm install
+``` 
+3. Once that is done, delete all files in <Chat App project name>/src/renderer
+4. clone the files in the folder labelled as "Source Files" from this repository into <Chat App project name>/src/renderer
+5. In <Chat App project name>/src/main delete a file named "main.ts"
+5. clone the file labelled as "main.ts" in the folder labelled "renderer" from this repository into <Chat App project name>/src/main
+7. Open a terminal where your project is located <Chat App project name> and run this command:
+```bash
+npm start
+```
+8. To make changes, you can do so by going to <Chat App project name>/src/renderer and modifying any of the source files there and you will immediately see a refresh thanks to React's Fast Refresh
+9. To make a production build for your operating system, run
+```bash
+npm run package
+```
+
 # Images used in presentation
 1. https://unsplash.com/photos/ruJm3dBXCqw
 2. https://unsplash.com/photos/PGdW_bHDbpI
