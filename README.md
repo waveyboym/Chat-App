@@ -51,16 +51,16 @@ npm start
 npm run package
 ```
 
-# Images used in presentation
-1. https://unsplash.com/photos/ruJm3dBXCqw
-2. https://unsplash.com/photos/PGdW_bHDbpI
-3. https://unsplash.com/photos/m_7p45JfXQo
-4. https://unsplash.com/photos/nY14Fs8pxT8
-
-# TODO
+ # TODO
 1. Improve load times between opening messages
 2. Improve user interface for navigating between private messages and room messages
 3. Add support for presence detection(whether or not a user is online)
 4. Add ability to view all friends in a separate component 
 5. Add stories/most recent updates
 6. Maybe add more themes
+
+# Images used in presentation
+1. https://unsplash.com/photos/ruJm3dBXCqw
+2. https://unsplash.com/photos/PGdW_bHDbpI
+3. https://unsplash.com/photos/m_7p45JfXQo
+4. https://unsplash.com/photos/nY14Fs8pxT8
