@@ -13,23 +13,31 @@ document.onreadystatechange = () => {
 
 function handleWindowControls() {
     // Make minimise/maximise/restore/close buttons work when they are clicked
-    document.getElementById('minimize').addEventListener("click", () => {
-        ipcrendererobj.sendMessage("minimize-window");
-    });
+    if(document.getElementById('minimize') !== null){
+        document.getElementById('minimize').addEventListener("click", () => {
+            ipcrendererobj.sendMessage("minimize-window");
+        });
+    }
 
-    document.getElementById('maximize').addEventListener("click", () => {
-        toggleMaxRestoreButtons();
-        ipcrendererobj.sendMessage("toggle-maximize-window");
-    });
+    if(document.getElementById('maximize') !== null){
+        document.getElementById('maximize').addEventListener("click", () => {
+            toggleMaxRestoreButtons();
+            ipcrendererobj.sendMessage("toggle-maximize-window");
+        });
+    }
 
-    document.getElementById('restore').addEventListener("click", () => {
-        toggleMaxRestoreButtons();
-        ipcrendererobj.sendMessage("toggle-maximize-window");
-    });
-
-    document.getElementById('close').addEventListener("click", () => {
-        ipcrendererobj.sendMessage("close-window");
-    });
+    if(document.getElementById('restore') !== null){
+        document.getElementById('restore').addEventListener("click", () => {
+            toggleMaxRestoreButtons();
+            ipcrendererobj.sendMessage("toggle-maximize-window");
+        });
+    }
+    
+    if(document.getElementById('close') !== null){
+        document.getElementById('close').addEventListener("click", () => {
+            ipcrendererobj.sendMessage("close-window");
+        });
+    }
 }
 
 async function toggleMaxRestoreButtons() {
