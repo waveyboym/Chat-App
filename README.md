@@ -21,6 +21,7 @@ A real time chat application done with electron and react with a firebase banken
 9. React-loader-spinner: https://github.com/mhnpd/react-loader-spinner
 10. React-time-ago: https://github.com/JoseRFelix/react-toggle-dark-mode
 11. Use-local-storage: https://github.com/nas5w/use-local-storage
+12. Icon pack(Basil Icons): https://www.figma.com/community/file/931906394678748246
 
 # I am a user/tester
 Executable for MacOS, Linux and Windows will be coming soon...
