@@ -85,7 +85,7 @@ const firebaseApp = initializeApp ({
 });
 ```
 \
-9. Click on get started and create a firebase app. Add authentication(for google, facebook, twitter, github and password based login), firestore database and storage in the console.
+9. Click on get started and create a firebase app. Add authentication(for google, facebook, twitter, github and password based login), firestore database and storage in the console. \
 10. Open a terminal where your project is located <Chat App project name> and run this command:
 ```bash
 npm start
