@@ -1,5 +1,5 @@
 # Chat-App
-A real time chat application done with electron and react with a firebase bankend
+A real time chat application done with electron and react with a firebase backend
 
 # Presentation
 ![private messaging](img/privchat.png "private messaging")
@@ -86,12 +86,12 @@ const firebaseApp = initializeApp ({
 ```
 \
 9. Click on get started and create a firebase app. Add authentication(for google, facebook, twitter, github and password based login), firestore database and storage in the console.
-7. Open a terminal where your project is located <Chat App project name> and run this command:
+10. Open a terminal where your project is located <Chat App project name> and run this command:
 ```bash
 npm start
 ```
-8. To make changes, you can do so by going to <Chat App project name>/src/renderer and modifying any of the source files there and you will immediately see a refresh thanks to React's Fast Refresh
-9. To make a production build for your operating system, run
+11. To make changes, you can do so by going to <Chat App project name>/src/renderer and modifying any of the source files there and you will immediately see a refresh thanks to React's Fast Refresh
+12. To make a production build for your operating system, run
 ```bash
 npm run package
 ```
