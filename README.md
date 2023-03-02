@@ -1,6 +1,9 @@
 # Chat-App
 A real time chat application done with electron and react with a firebase backend
 
+# Note
+I am currently working on migrating this project to tauri and making changes and fixes instead of strictly providing fixes for errors in this repo. The update for that should be out soon...
+
 # Presentation
 ![private messaging](img/privchat.png "private messaging")
 \
