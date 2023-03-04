@@ -1,0 +1,174 @@
+@import "constantMixins";
+
+.requests-section, .Addfriend-section, .JoinRoom-section{
+    width: calc(100vw - 461px);
+    height: calc(100vh - 40px);
+    background: $darker-side-bar-col;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    .top-bar-blur{
+        position: absolute;
+        top: 40px;
+        height: 52px;
+        width: calc(100vw - 461px);
+        background: $top-layer-blur;
+        display: flex;
+        align-items: center;
+        backdrop-filter: blur(10px);
+        h1{
+            font-size: 24px;
+            color: $text-col;
+            margin-left: 15px;
+        }
+    }
+}
+
+.Addfriend-section, .JoinRoom-section{
+    .add-friend-section, .join-room-section{
+        width: calc(100vw - 461px);
+        height: calc(100vh - 40px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow-y: scroll;
+
+        h2{font-size: 25px; font-weight: 400; color: $text-col;}
+
+        input[type="text"]{
+            width: calc(100% - 400px);
+            height: 35px;
+            border: none;
+            outline: none;
+            background: $input-textbox-selected-col;
+            box-shadow: 5px 5px 26px rgba(0, 0, 0, 0.25);
+            padding: 0px 0px 0px 0px;
+            padding-left: 8px;
+            padding-right: 8px;
+            border-radius: 9px;
+            font-size: 20px;
+            color: $text-col;
+            font-family: 'Baloo Bhai 2', cursive;
+            font-weight: 400;
+            margin-top: 7px;
+        }
+
+        p{font-size: 20px; font-weight: 400; color: $gray-text-col; margin-top: 10px;}
+
+        .send-request-btn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 177px;
+            height: 45px;
+            background: $clickable-btn;
+            margin-top: 15px;
+            border-radius: 12px;
+
+            img{margin-left: 5px;}
+
+            h3{
+                color: $good-change-col;
+                font-weight: 400;
+                font-size: 20px;
+            }
+        }
+
+        h4{
+            font-size: 20px; font-weight: 400; color: $bad-change-col; margin-top: 10px;
+        }
+
+        h5{
+            font-size: 20px; font-weight: 400; color: $gray-text-col; margin-top: 10px;
+        }
+    }
+}
+
+.JoinRoom-section{
+    .join-room-section{
+        h1{
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-weight: 400;
+            font-size: 32px;
+            color: $text-col;
+        }
+    }
+}
+
+.requests-section{
+    .requests{
+        width: calc(100vw - 461px);
+        height: calc(100vh - 40px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow-y: scroll;
+
+        .filler-div{
+            margin-top: 50px;
+        }
+    }
+}
+
+.request-message{
+    width: calc(100vw - 500px);
+    height: 63px;
+    display: flex;
+    align-items: center;
+    .user-img{
+        overflow: hidden;
+        width: 45px;
+        height: 45px;
+        background: transparent;
+        border-radius: 50%;
+
+        .icon{
+            display: inline;
+            min-width: 100%;
+            margin: 0 auto;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .icon-house-light, .icon-house-dark{
+            overflow: hidden;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: $darker-side-bar-col;
+        }
+    }
+
+    h2{
+        width: calc(100vw - 780px);
+        max-width: calc(100vw - 780px);
+        color: $text-col;
+        font-weight: 400;
+        font-size: 20px;
+        margin-left: 18px;
+    }
+
+    .accept-request, .delete-request{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: $clickable-btn;
+        width: 97px;
+        height: 40px;
+        margin-left: 15px;
+        border-radius: 10px;
+
+        h3{margin-left: 5px; font-size: 18px;}
+    }
+
+    .accept-request{h3{color: $good-change-col;}}
+
+    .delete-request{h3{color: $bad-change-col;}}
+}
