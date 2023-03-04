@@ -2,7 +2,7 @@
 A real time chat application done with electron and react with a firebase backend
 
 # Note
-I am currently working on migrating this project to tauri and making changes and fixes instead of strictly providing fixes for errors in this repo. The update for that should be out soon...
+This is the old version of this repo, that should remain as read only. It uses electron whilst the version that is in main uses tauri. This version will no longer receive updates or fixes hence why it is read only. I am keeping the code up incase anyone might want to see it
 
 # Presentation
 ![private messaging](img/privchat.png "private messaging")
