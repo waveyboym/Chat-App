@@ -41,7 +41,7 @@ Executable for MacOS, Linux and Windows will be coming soon...
 # Setting up firebase
 1. To set up firebase, navigate to <a href="https://firebase.google.com/docs/web/setup?authuser=0#add-sdk-and-initialize">firebase setup</a> and follow the instructions.
 2. Once you have created a new project, add your <a href="https://firebase.google.com/docs/web/learn-more?authuser=0#config-object">Firebase project configuration</a> into the file <a href="https://github.com/waveyboym/Chat-App/blob/main/Fiddle%20Chat%20App%20src%20files(windows-os)/src/firebase.js">firebase.js</a> that came from this repository when you downloaded the source files.
-3. Now add support for google, facebook, twitter, github and email and password authentication. According to firebase docs, the instructions for that are as follows:
+3. Now add support for google, facebook, twitter, github and email and password authentication. According to firebase docs, the instructions for that are as follows:\
        **Enable Google as a sign-in method in the Firebase console:**\
        **In the Firebase console, open the Auth section.**\
        **On the Sign in method tab, enable the Google sign-in method and click Save**\
