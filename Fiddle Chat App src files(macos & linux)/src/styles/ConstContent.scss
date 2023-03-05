@@ -1,0 +1,312 @@
+@import "constantMixins";
+
+.all-content{
+    
+    .constant-top-navbar{
+        height: $title-bar-height;
+        width: 100vw;
+        background: $darker-side-bar-col;
+    }
+
+    .Chat-App-Main-Content{
+        z-index: 1000;
+        width: 100vw;
+        height: calc(100vh - $title-bar-height);
+        display: flex;
+    
+        .constant-side-navbar{
+            width: 461px;
+            height: calc(100vh - $title-bar-height);
+            height: 100vh;
+            display: flex;
+        }
+    }
+
+    .loading-content-page{
+        z-index: 3000;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(37, 37, 37, 0.05);
+        backdrop-filter: blur(25px);
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        h1{
+            color: $text-col;
+            font-size: 30px;
+            margin-bottom: 50px;
+        }
+    }
+}
+
+.SMNavbar-nav{
+    width: 105px;
+    height: calc(100vh - $title-bar-height);
+    background: $darker-side-bar-col;
+    display: flex;
+    flex-direction: column; 
+    flex-wrap: wrap;        
+    align-items: center;
+
+    .current-logged-user-icon{
+        margin-top: 2vh;
+        overflow: hidden;
+        width: 70px;
+        height: 70px;
+        background: transparent;
+        border-radius: 50%;
+        border: 1px solid $light-blue-col;
+        .logged-in-user-icn{
+            display: inline;
+            min-width: 100%;
+            margin: 0 auto;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .icon-house-light, .icon-house-dark{
+            overflow: hidden;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: $darker-side-bar-col;
+        }
+    }
+
+    .navigators{
+        margin-top: 17vh;
+        .nav-icon{margin-top: 4vh; cursor: pointer;}
+    }
+
+    .fiddle-chat-app-logo{
+        position: absolute;
+        bottom: 20px;
+    }
+}
+
+.MsgNavBar-navbar{
+    width: 356px;
+    height: calc(100vh - $title-bar-height);
+    background: $lighter-side-bar-col;
+    .constant-msg-header{
+        margin-left: 7px;
+        width: 342px;
+        overflow: hidden;
+
+        .h1-container{
+            height: 52px;
+            display: flex;
+            width: 100%;
+            justify-content: flex-start;
+            align-items: center;
+            h1{
+                font-size: 24px;
+                color: $text-col;
+                text-align: left;
+            }
+        }
+        
+        input[type="text"]{
+            width: 334px;
+            height: 40px;
+            border: none;
+            padding: 0px 0px 0px 0px;
+            padding-left: 4px;
+            padding-right: 4px;
+            outline: none;
+            background: $darker-side-bar-col;
+            border-radius: 9px;
+            font-size: 14px;
+            font-family: 'Baloo Bhai 2', cursive;
+            color: $text-col;
+        }
+    }
+
+    .contacts{
+        margin-left: 7px;
+        width: 345px;
+        margin-top: 2vh;
+        min-height: calc(660px + $title-bar-height);
+        overflow-y: scroll;
+        h1{
+            color: $text-col;
+            font-size: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+    }
+
+    .room-nav-container{
+        position: fixed;
+        width: 342px;
+        background: $darker-side-bar-col;
+        border-radius: 12px;
+        display: flex;
+        flex-wrap: wrap;
+        bottom: 7px;
+        left: 112px;
+        overflow-x: hidden;
+
+        h1{
+            color: $text-col;
+            font-size: 20px;
+            margin-top: 20px;
+            margin-left: 5px;
+            text-align: center;
+        }
+
+        .openarrow{position: absolute; left: 315px; margin-top: 23px; cursor: pointer;}
+    }
+}
+
+.blank-page{
+    width: calc(100vw - 461px);
+    height: calc(100vh - $title-bar-height);
+    background: $darker-side-bar-col;
+    color: $text-col;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h1{
+        font-size: 30px;
+        font-weight: 600;
+        color: $text-col;
+    }
+
+    .icon{margin-top: 20px;}
+}
+
+.contact-msg-card{
+    width: 342px;
+    height: 63px;
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
+    overflow: hidden;
+    .friends-icon{
+        overflow: hidden;
+        width: 35px;
+        height: 35px;
+        background: transparent;
+        margin-left: 10px;
+        border-radius: 50%;
+        .icon{
+            display: inline;
+            min-width: 100%;
+            margin: 0 auto;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .icon-house-light, .icon-house-dark{
+            overflow: hidden;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: $darker-side-bar-col;
+        }
+    }
+
+    .name-and-message{
+        margin-left: 10px;
+        width: 239px;
+        overflow: hidden;
+        height: 50px;
+        text-overflow: ellipsis;
+        h2{
+            font-size: 18px;
+            color: $text-col;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            text-overflow: ellipsis;
+            text-align: left;
+        }
+
+        h3{
+            margin-top: 2px;
+            color: $text-col;
+            font-size: 11px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            font-weight: 400;
+            text-align: left;
+        }
+    }
+
+    .unread-message-circle{
+        margin-left: 6px;
+        border-radius: 50%;
+        background-color: $light-blue-col;
+        height: 10px;
+        width: 10px;
+    }
+}
+
+.room-msg-card{
+    width: 150px;
+    height: 49px;
+    border-radius: 9px;
+    margin-left: 7px;
+    margin-top: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    .room-icon{
+        overflow: hidden;
+        width: 35px;
+        height: 35px;
+        background: transparent;
+        margin-left: 7px;
+        border-radius: 50%;
+        .icon{
+            display: inline;
+            min-width: 100%;
+            margin: 0 auto;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .icon-house-light, .icon-house-dark{
+            overflow: hidden;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: $darker-side-bar-col;
+        }
+    }
+
+    h2{
+        width: 90px;
+        font-size: 18px;
+        color: $text-col;
+        margin-left: 7px;
+        text-overflow: ellipsis;
+        margin-right: 11px;
+    }
+}
+
+.contact-msg-card:hover{background: $input-textbox-selected-col;}
+.room-msg-card:hover{background: $input-textbox-selected-col;}
+
+.contact-msg-card:active{background: $input-textbox-selected-active-col;}
+.room-msg-card:active{background: $input-textbox-selected-active-col;}
+
+.selected-contact-msg{background: $input-textbox-selected-col;}
