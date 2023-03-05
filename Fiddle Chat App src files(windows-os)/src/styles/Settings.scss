@@ -2,15 +2,15 @@
 
 .settings-details-box{
     width: calc(100vw - 461px);
-    height: calc(100vh - 40px);
+    height: calc(100vh - $title-bar-height);
     display: flex;
 
     .settings-navigator{
-        height: calc(100vh - 40px);
+        height: calc(100vh - $title-bar-height);
         width: 251px;
         .top-bar-blur{
             position: absolute;
-            top: 40px;
+            top: $title-bar-height;
             height: 52px;
             width: 251px;
             background: $top-layer-blur;
@@ -29,7 +29,7 @@
             flex-direction: column;
             align-items: center;
             background: $darker-side-bar-col;
-            height: calc(100vh - 40px);
+            height: calc(100vh - $title-bar-height);
             width: 251px;
             .sttngs_dlg-state-changer{
                 margin-top: 9px;
@@ -63,11 +63,11 @@
 
 .personal-details{
     width: 100%;
-    height: calc(100vh - 40px);
+    height: calc(100vh - $title-bar-height);
     overflow-x: hidden;
     .top-bar-blur{
         position: absolute;
-        top: 40px;
+        top: $title-bar-height;
         height: 52px;
         width: 100%;
         background: $top-layer-blur;
@@ -83,7 +83,7 @@
 
     .personal-details-box{
         width: 100%;
-        height: calc(100vh - 40px);
+        height: calc(100vh - $title-bar-height);
         background: $lighter-side-bar-col;
         overflow-y: scroll;
         display: flex;
@@ -312,10 +312,10 @@
 
 .themes{
     width: 100%;
-    height: calc(100vh - 40px);
+    height: calc(100vh - $title-bar-height);
     .top-bar-blur{
         position: absolute;
-        top: 40px;
+        top: $title-bar-height;
         height: 52px;
         width: 100%;
         background: $top-layer-blur;
@@ -331,7 +331,7 @@
 
     .themes-box{
         width: 100%;
-        height: calc(100vh - 40px);
+        height: calc(100vh - $title-bar-height);
         overflow-y: scroll;
         background: $lighter-side-bar-col;
         display: flex;
@@ -445,10 +445,10 @@
 
 .about{
     width: 100%;
-    height: calc(100vh - 40px);
+    height: calc(100vh - $title-bar-height);
     .top-bar-blur{
         position: absolute;
-        top: 40px;
+        top: $title-bar-height;
         height: 52px;
         width: 100%;
         background: $top-layer-blur;
@@ -464,7 +464,7 @@
 
     .themes-box{
         width: 100%;
-        height: calc(100vh - 40px);
+        height: calc(100vh - $title-bar-height);
         background: $lighter-side-bar-col;
         display: flex;
         align-items: center;

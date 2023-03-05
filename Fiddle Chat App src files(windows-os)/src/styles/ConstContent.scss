@@ -17,6 +17,7 @@
         .constant-side-navbar{
             width: 461px;
             height: calc(100vh - $title-bar-height);
+            height: 100vh;
             display: flex;
         }
     }
@@ -133,7 +134,7 @@
         margin-left: 7px;
         width: 345px;
         margin-top: 2vh;
-        min-height: 700px;
+        min-height: calc(660px + $title-bar-height);
         overflow-y: scroll;
         h1{
             color: $text-col;

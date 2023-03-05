@@ -2,7 +2,7 @@
 
 .requests-section, .Addfriend-section, .JoinRoom-section{
     width: calc(100vw - 461px);
-    height: calc(100vh - 40px);
+    height: calc(100vh - $title-bar-height);
     background: $darker-side-bar-col;
     display: flex;
     flex-direction: column;
@@ -11,7 +11,7 @@
     
     .top-bar-blur{
         position: absolute;
-        top: 40px;
+        top: $title-bar-height;
         height: 52px;
         width: calc(100vw - 461px);
         background: $top-layer-blur;
@@ -29,7 +29,7 @@
 .Addfriend-section, .JoinRoom-section{
     .add-friend-section, .join-room-section{
         width: calc(100vw - 461px);
-        height: calc(100vh - 40px);
+        height: calc(100vh - $title-bar-height);
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -102,7 +102,7 @@
 .requests-section{
     .requests{
         width: calc(100vw - 461px);
-        height: calc(100vh - 40px);
+        height: calc(100vh - $title-bar-height);
         display: flex;
         flex-direction: column;
         align-items: center;

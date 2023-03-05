@@ -14,7 +14,7 @@
         .top-bar-blur{
             position: absolute;
             width: calc(100vw - 714px);
-            top: 40px;
+            top: $title-bar-height;
             height: 52px;
             background: $top-layer-blur;
             display: flex;

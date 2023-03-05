@@ -14,7 +14,7 @@
         .top-bar-blur{
             position: absolute;
             width: calc(100vw - 542px);
-            top: 40px;
+            top: $title-bar-height;
             height: 52px;
             background: $top-layer-blur;
             display: flex;
@@ -307,6 +307,7 @@
             font-size: 12px;
             word-wrap: break-word;
             font-weight: 400;
+            text-align: left;
             -webkit-user-select: text;  /* Chrome all / Safari all */
             -moz-user-select: text;     /* Firefox all */
             -ms-user-select: text;      /* IE 10+ */
