@@ -3,7 +3,7 @@
 .all-content{
     
     .constant-top-navbar{
-        height: env(titlebar-area-height, 40px);
+        height: $title-bar-height;
         width: 100vw;
         background: $darker-side-bar-col;
     }
@@ -11,12 +11,12 @@
     .Chat-App-Main-Content{
         z-index: 1000;
         width: 100vw;
-        height: calc(100vh - 40px);
+        height: calc(100vh - $title-bar-height);
         display: flex;
     
         .constant-side-navbar{
             width: 461px;
-            height: calc(100vh - 40px);
+            height: calc(100vh - $title-bar-height);
             display: flex;
         }
     }
@@ -45,7 +45,7 @@
 
 .SMNavbar-nav{
     width: 105px;
-    height: calc(100vh - 40px);
+    height: calc(100vh - $title-bar-height);
     background: $darker-side-bar-col;
     display: flex;
     flex-direction: column; 
@@ -93,7 +93,7 @@
 
 .MsgNavBar-navbar{
     width: 356px;
-    height: calc(100vh - 40px);
+    height: calc(100vh - $title-bar-height);
     background: $lighter-side-bar-col;
     .constant-msg-header{
         margin-left: 7px;
@@ -168,7 +168,7 @@
 
 .blank-page{
     width: calc(100vw - 461px);
-    height: calc(100vh - 40px);
+    height: calc(100vh - $title-bar-height);
     background: $darker-side-bar-col;
     color: $text-col;
     display: flex;
