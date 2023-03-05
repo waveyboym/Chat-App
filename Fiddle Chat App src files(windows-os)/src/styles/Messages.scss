@@ -2,12 +2,12 @@
 
 .messages-details-box{
     width: calc(100vw - 461px);
-    height: calc(100vh - 40px);
+    height: calc(100vh - $title-bar-height);
     display: flex;
 
     .messages-box{
         width: calc(100vw - 542px);//503
-        height: calc(100vh - 40px);
+        height: calc(100vh - $title-bar-height);
         border-left: 1px solid $border-col;
         border-right: 1px solid $border-col;
 
@@ -59,17 +59,17 @@
 
         .text-messages-box{
             width: calc(100vw - 542px);
-            height: calc(100vh - 40px);
+            height: calc(100vh - $title-bar-height);
             z-index: 500;
 
             .text-messages-container-plain{
                 width: calc(100vw - 542px);
-                height: calc(100vh - 40px);
+                height: calc(100vh - $title-bar-height);
                 background: $darker-side-bar-col;
 
                 .background-img-container{
                     width: calc(100vw - 542px);
-                    height: calc(100vh - 40px);
+                    height: calc(100vh - $title-bar-height);
                     overflow: hidden;
                     z-index: 100;
         
@@ -84,9 +84,9 @@
 
                 .chat-bg-layer{
                     background: $chat-bg-layer; 
-                    margin-top: calc(-100vh + 40px);
+                    margin-top: calc(-100vh + $title-bar-height);
                     width: calc(100vw - 542px);
-                    height: calc(100vh - 40px);
+                    height: calc(100vh - $title-bar-height);
                     overflow-y: scroll;
                     overflow: overlay;
                     position: absolute;
@@ -244,7 +244,7 @@
 
     .details-box{
         width: 79px;
-        height: calc(100vh - 40px);
+        height: calc(100vh - $title-bar-height);
         display: flex;
         flex-direction: column;
         align-items: center;
