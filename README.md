@@ -31,7 +31,7 @@ Executable for MacOS, Linux and Windows will be coming soon...
 
 # I am a developer
 1. Setup Tauri on your desktop following the instructions here <a href="https://tauri.app/v1/guides/getting-started/prerequisites">set up tauri</a>
-2. Once Tauri has been set up, download the source files for your operating system from this repository. So if you use <a href="https://github.com/waveyboym/Chat-App/tree/main/Fiddle%20Chat%20App%20src%20files(windows-os)">windows-os</a> or if you use macos or linux(coming soon).
+2. Once Tauri has been set up, download the source files for your operating system from this repository. So if you use <a href="https://github.com/waveyboym/Chat-App/tree/main/Fiddle%20Chat%20App%20src%20files(windows-os)">windows-os</a> or if you use <a href="https://github.com/waveyboym/Chat-App/tree/main/Fiddle%20Chat%20App%20src%20files(macos%20%26%20linux)">macos or linux</a>. Please note that the only difference between the folders is that the windows-os one is a frameless window with no borders for the app whearas the macos/linux one has a titlebar, borders and is not a frameless custom window however itt can still work just fine on windows incase you don't want a frameless window.
 3. If you do not have node js installed on your computer, install it here <a href="https://nodejs.org/en/download/">nodejs</a>
 4. Open a terminal where the folder that you just downloaded is located and run ```npm install```
 5. Once all of the node modules have been installed, run ```npm install --save-dev @tauri-apps/cli```
