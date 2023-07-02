@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="src-tauri/icons/32x32.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fiddle Chat App</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@400;600&display=swap');
+        body{
+            user-select: none;
+            margin: 0;
+            font-family: 'Baloo Bhai 2', cursive;
+        }
+        #titleBarContainer {
+            height: 60px;
+            width: 300px;
+            background: transparent;
+            position: fixed;
+            z-index: 100;
+            top: 0;
+            left: 0;
+        }
+
+        .splashscreen-screen{
+            width: 300px;
+            height: 400px;
+            overflow: hidden;
+            background: linear-gradient(252.46deg, #001D36 0%, #3F1A61 52.08%, #8A7A94 100%);
+            background-blend-mode: hard-light;
+        }
+
+        .splashscreen-content-page{
+            z-index: 3000;
+            width: 300px;
+            height: 400px;
+            background: rgba(37, 37, 37, 0.05);
+            backdrop-filter: blur(35px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .splashscreen-content-page h1{
+            color: #E6E6E6;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        .splashscreen-content-page h2{
+            color: #E6E6E6;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="splashscreen-screen">
+        <div class="splashscreen-content-page">
+            <div data-tauri-drag-region id="titleBarContainer"></div>
+            <h1>Fiddle Chat App</h1>
+            <!-- By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL -->
+            <svg width="120" height="30" viewBox="0 0 120 30" xmlns="http://www.w3.org/2000/svg" fill="#fff">
+                <circle cx="15" cy="15" r="15">
+                    <animate attributeName="r" from="15" to="15"
+                            begin="0s" dur="0.8s"
+                            values="15;9;15" calcMode="linear"
+                            repeatCount="indefinite" />
+                    <animate attributeName="fill-opacity" from="1" to="1"
+                            begin="0s" dur="0.8s"
+                            values="1;.5;1" calcMode="linear"
+                            repeatCount="indefinite" />
+                </circle>
+                <circle cx="60" cy="15" r="9" fill-opacity="0.3">
+                    <animate attributeName="r" from="9" to="9"
+                            begin="0s" dur="0.8s"
+                            values="9;15;9" calcMode="linear"
+                            repeatCount="indefinite" />
+                    <animate attributeName="fill-opacity" from="0.5" to="0.5"
+                            begin="0s" dur="0.8s"
+                            values=".5;1;.5" calcMode="linear"
+                            repeatCount="indefinite" />
+                </circle>
+                <circle cx="105" cy="15" r="15">
+                    <animate attributeName="r" from="15" to="15"
+                            begin="0s" dur="0.8s"
+                            values="15;9;15" calcMode="linear"
+                            repeatCount="indefinite" />
+                    <animate attributeName="fill-opacity" from="1" to="1"
+                            begin="0s" dur="0.8s"
+                            values="1;.5;1" calcMode="linear"
+                            repeatCount="indefinite" />
+                </circle>
+            </svg>
+            <h2>getting everything ready for you...</h2>
+        </div>
+    </div>
+  </body>
+  <script>
+    const invoke = window.__TAURI__.invoke;
+
+    window.addEventListener('DOMContentLoaded', () => {
+      // This will wait for the window to load, but you could
+      // run this function on whatever trigger you want
+      setTimeout(() => {invoke('close_splashscreen')}, 4000);
+    })
+  </script>
+</html>
