@@ -1,0 +1,158 @@
+:root{
+    --root-text-col: #444444;
+    --root-input-textbox: #61616136;//also selected colour 
+    --root-input-textbox-active:#83838336;
+    --root-dark-side-bar-col: #DCDBDB;
+    --root-top-most-app-draggable-sec: #d3d3d3;
+    --root-lighter-side-bar-col: #F1F1F1;
+    --root-clickable-btn-colour: #151829;
+    --root-window-controls-hovCol: rgba(170, 170, 170, 0.1);
+    --root-window-controls-actCol: rgba(170,170,170,0.2);
+    --root-border-col: rgba(255, 255, 255, 0.637);
+    --root-chat-bg-layer: rgba(197, 197, 197, 0.25);
+    --root-emoji-border-col: #C3C3C3;
+}
+
+[data-theme='dark'] {
+    --root-text-col: #E6E6E6;
+    --root-input-textbox: #a9a9a936;//also selected colour
+    --root-input-textbox-active: #dadada36;
+    --root-dark-side-bar-col: #14161F;
+    --root-top-most-app-draggable-sec: #14161F;
+    --root-lighter-side-bar-col: #151829;
+    --root-clickable-btn-colour: #E6E6E6;
+    --root-window-controls-hovCol: rgba(255,255,255,0.1);
+    --root-window-controls-actCol: rgba(255,255,255,0.2);
+    --root-border-col: rgba(52, 52, 52, 0.37);
+    --root-chat-bg-layer: rgba(0, 0, 0, 0.25);
+    --root-emoji-border-col: #404040;
+}
+
+/**
+    PINK
+*/
+
+[data-theme='lpink']{
+    --root-text-col: #444444;
+    --root-input-textbox: #61616136;//also selected colour 
+    --root-input-textbox-active:#83838336;
+    --root-dark-side-bar-col: #e4ade4;
+    --root-top-most-app-draggable-sec: #d9a1e0;
+    --root-lighter-side-bar-col: #f0d0f7;
+    --root-clickable-btn-colour: #151829;
+    --root-window-controls-hovCol: rgba(170, 170, 170, 0.1);
+    --root-window-controls-actCol: rgba(170,170,170,0.2);
+    --root-border-col: rgba(255, 255, 255, 0.637);
+    --root-chat-bg-layer: rgba(197, 197, 197, 0.25);
+    --root-emoji-border-col: #C3C3C3;
+}
+
+[data-theme='dpink']{
+    --root-text-col: #E6E6E6;
+    --root-input-textbox: #a9a9a936;//also selected colour
+    --root-input-textbox-active: #dadada36;
+    --root-dark-side-bar-col: #53002a;
+    --root-top-most-app-draggable-sec: #853b66;
+    --root-lighter-side-bar-col: #6b2456;
+    --root-clickable-btn-colour: #E6E6E6;
+    --root-window-controls-hovCol: rgba(255,255,255,0.1);
+    --root-window-controls-actCol: rgba(255,255,255,0.2);
+    --root-border-col: rgba(52, 52, 52, 0.37);
+    --root-chat-bg-layer: rgba(0, 0, 0, 0.25);
+    --root-emoji-border-col: #404040;
+}
+
+/**
+    RED
+*/
+[data-theme='lred']{
+    --root-text-col: #444444;
+    --root-input-textbox: #61616136;//also selected colour 
+    --root-input-textbox-active:#83838336;
+    --root-dark-side-bar-col: #da7979;
+    --root-top-most-app-draggable-sec: #db7171;
+    --root-lighter-side-bar-col: #f8a9a9;
+    --root-clickable-btn-colour: #151829;
+    --root-window-controls-hovCol: rgba(170, 170, 170, 0.1);
+    --root-window-controls-actCol: rgba(170,170,170,0.2);
+    --root-border-col: rgba(255, 255, 255, 0.637);
+    --root-chat-bg-layer: rgba(197, 197, 197, 0.25);
+    --root-emoji-border-col: #C3C3C3;
+}
+
+[data-theme='dred']{
+    --root-text-col: #E6E6E6;
+    --root-input-textbox: #a9a9a936;//also selected colour
+    --root-input-textbox-active: #dadada36;
+    --root-dark-side-bar-col: #7e1010;
+    --root-top-most-app-draggable-sec: #9c2b2b;
+    --root-lighter-side-bar-col: #9e3333;
+    --root-clickable-btn-colour: #E6E6E6;
+    --root-window-controls-hovCol: rgba(255,255,255,0.1);
+    --root-window-controls-actCol: rgba(255,255,255,0.2);
+    --root-border-col: rgba(52, 52, 52, 0.37);
+    --root-chat-bg-layer: rgba(0, 0, 0, 0.25);
+    --root-emoji-border-col: #404040;
+}
+
+/**
+    GREEN
+*/
+[data-theme='lgreen']{
+    --root-text-col: #444444;
+    --root-input-textbox: #61616136;//also selected colour 
+    --root-input-textbox-active:#83838336;
+    --root-dark-side-bar-col: #aee48f;
+    --root-top-most-app-draggable-sec: #9fdd90;
+    --root-lighter-side-bar-col: #e0f7d0;
+    --root-clickable-btn-colour: #151829;
+    --root-window-controls-hovCol: rgba(170, 170, 170, 0.1);
+    --root-window-controls-actCol: rgba(170,170,170,0.2);
+    --root-border-col: rgba(255, 255, 255, 0.637);
+    --root-chat-bg-layer: rgba(197, 197, 197, 0.25);
+    --root-emoji-border-col: #C3C3C3;
+}
+
+[data-theme='dgreen']{
+    --root-text-col: #E6E6E6;
+    --root-input-textbox: #a9a9a936;//also selected colour
+    --root-input-textbox-active: #dadada36;
+    --root-dark-side-bar-col: #166430;
+    --root-top-most-app-draggable-sec: #1d8325;
+    --root-lighter-side-bar-col: #446d44;
+    --root-clickable-btn-colour: #E6E6E6;
+    --root-window-controls-hovCol: rgba(255,255,255,0.1);
+    --root-window-controls-actCol: rgba(255,255,255,0.2);
+    --root-border-col: rgba(52, 52, 52, 0.37);
+    --root-chat-bg-layer: rgba(0, 0, 0, 0.25);
+    --root-emoji-border-col: #404040;
+}
+
+/**
+    ADD MORE THEMES BY COPYING THE ABOVE AND CHANGING
+    --root-dark-side-bar-col
+    --root-top-most-app-draggable-sec
+    --root-lighter-side-bar-col
+*/
+
+$text-col: var(--root-text-col);
+$gray-text-col: #7B7B7B;
+$input-textbox-selected-col: var(--root-input-textbox);
+$input-textbox-selected-active-col: var(--root-input-textbox-active);
+$darker-side-bar-col: var(--root-dark-side-bar-col);
+$top-most-app-draggable-sec: var(--root-top-most-app-draggable-sec);
+$lighter-side-bar-col: var(--root-lighter-side-bar-col);
+$bad-change-col: #FD5959;
+$good-change-col: #55D804;
+$light-blue-col: #1ac2c2;
+$text-box-colours: #a9a9a936;
+$silver-ish-gradient: linear-gradient(268.03deg, #8b8b8ba6 -0.17%, #cececea6 99.83%);
+$top-layer-blur: #7C7C8030;
+$clickable-btn: var(--root-clickable-btn-colour);
+$window-controls-hovCol: var(--root-window-controls-hovCol);
+$window-controls-actCol: var(--root-window-controls-actCol);
+$border-col: var(--root-border-col);
+$chat-bg-layer: var(--root-chat-bg-layer);
+$emoji-border-col: var(--root-emoji-border-col);
+$dark-selected-col: #8257FE;
+$title-bar-height: 40px;//change to 0px when using OS title bar, change to 40px when using custom title bar

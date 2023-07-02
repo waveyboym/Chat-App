@@ -1,0 +1,162 @@
+/*
+* @NOTE: Prepend a `~` to css file paths that are in your node_modules
+*        See https://github.com/webpack-contrib/sass-loader#imports
+*/
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap');
+
+::-webkit-scrollbar {width: 3px;}
+
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 15px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #8D8D8D; 
+  border-radius: 15px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {background: #a8a8a8;}
+
+::-webkit-scrollbar:hover {width: 5px;}
+
+::-webkit-scrollbar:active {width: 5px;}
+
+/* Handle on active */
+::-webkit-scrollbar-thumb:active {background: #cacaca;}
+
+@font-face {
+  font-family: 'Noto Color Emoji';
+  src: url('NotoColorEmoji.ttf');
+}
+
+:root{
+  --root-window-controls-hovCol: rgba(170, 170, 170, 0.1);
+  --root-window-controls-actCol: rgba(170,170,170,0.2);
+  --fallback-title-bar-height: 40px;
+}
+
+[data-theme='dark'] {
+  --root-window-controls-hovCol: rgba(255,255,255,0.1);
+  --root-window-controls-actCol: rgba(255,255,255,0.2);
+}
+
+#titleBarContainer {
+  height: var(--fallback-title-bar-height);
+  width: 100%;
+  background: transparent;
+  position: fixed;
+  z-index: 100;
+  user-select: none;
+  display: flex;
+  justify-content: space-between;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+#titleBarContainer h1{
+  font-weight: bold;
+  font-size: 20px;
+  margin-left: 20px;
+  color: white;
+}
+
+#titleBarContainer .window-controls-section{
+  display: flex;
+  width: 120px;
+  height: var(--fallback-title-bar-height);
+}
+
+#titleBarContainer .window-controls-section .button-area, #maximize{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  height: var(--fallback-title-bar-height);
+  width: var(--fallback-title-bar-height);
+}
+
+#titleBarContainer .window-controls-section .inter-changeable-btn {
+  height: var(--fallback-title-bar-height);
+  width: var(--fallback-title-bar-height);
+}
+
+#restore{
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-right: var(--fallback-title-bar-height);
+  visibility: hidden;
+}
+
+.restore-sub-area{
+  height: var(--fallback-title-bar-height);
+  width: var(--fallback-title-bar-height);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+}
+
+#minimize:hover, #maximize:hover {
+  background: var(--root-window-controls-hovCol);
+}
+
+#minimize:active, #maximize:active{
+  background: var(--root-window-controls-actCol);
+}
+
+#restore .restore-sub-area:hover{
+  background: var(--root-window-controls-hovCol);
+}
+#restore .restore-sub-area:active{
+  background: var(--root-window-controls-actCol);
+}
+
+#close:hover{background: #E81123;}
+
+#close:active{background: #F1707A;}
+
+html{
+  background: #14161F;
+  height: 100vh;
+  width: 100vw;
+  min-width: 1024px;
+  min-height: 700px;/*change to 660px when using OS title bar, change to 700px when using custom*/
+  overflow-x: hidden;
+  overflow: overlay;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  min-width: 1024px;
+  min-height: 700px;/*change to 660px when using OS title bar, change to 700px when using custom*/
+  font-family: 'Baloo Bhai 2', cursive;/*, 'Noto Color Emoji'*/
+  overflow: hidden;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: overlay;
+  background: #14161F;
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */ 
+}
+
+.body-main-content{
+  height: 100vh;
+  width: 100vw;
+  min-width: 1024px;
+  min-height: 700px;/*change to 660px when using OS title bar, change to 700px when using custom*/
+  position: fixed;
+  top: 0;
+  z-index: 50;
+}

@@ -1,0 +1,512 @@
+@import "constantMixins";
+
+.settings-details-box{
+    width: calc(100vw - 461px);
+    height: calc(100vh - $title-bar-height);
+    display: flex;
+
+    .settings-navigator{
+        height: calc(100vh - $title-bar-height);
+        width: 251px;
+        .top-bar-blur{
+            position: absolute;
+            top: $title-bar-height;
+            height: 52px;
+            width: 251px;
+            background: $top-layer-blur;
+            display: flex;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            h1{
+                margin-left: 15px;
+                font-size: 24px;
+                color: $text-col;
+            }
+        }
+
+        .settings-selection{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: $darker-side-bar-col;
+            height: calc(100vh - $title-bar-height);
+            width: 251px;
+            .sttngs_dlg-state-changer{
+                margin-top: 9px;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                width: 237px;
+                height: 40px;
+                border-radius: 16px;
+                cursor: pointer;
+                img{margin-left: 40px;}
+
+                h2{
+                    margin-left: 7px;
+                    font-size: 18px;
+                    font-weight: 400;
+                    color: $text-col;
+                }
+            }
+
+            .sttngs_dlg-state-changer:nth-child(1){margin-top: 84px;}
+
+            .sttngs_dlg-state-changer:hover{background: $input-textbox-selected-col;}
+
+            .sttngs_dlg-state-changer:active{background: $input-textbox-selected-active-col;}
+
+            .selected-sttngs{background: $input-textbox-selected-col;}
+        }
+    }
+}
+
+.personal-details{
+    width: 100%;
+    height: calc(100vh - $title-bar-height);
+    overflow-x: hidden;
+    .top-bar-blur{
+        position: absolute;
+        top: $title-bar-height;
+        height: 52px;
+        width: 100%;
+        background: $top-layer-blur;
+        display: flex;
+        align-items: center;
+        backdrop-filter: blur(10px);
+        h1{
+            margin-left: 15px;
+            font-size: 24px;
+            color: $text-col;
+        }
+    }
+
+    .personal-details-box{
+        width: 100%;
+        height: calc(100vh - $title-bar-height);
+        background: $lighter-side-bar-col;
+        overflow-y: scroll;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow-x: hidden;
+
+        .users-profile-img-changer{
+            width: calc(100% - 80px);
+            min-width: 255px;
+            padding-top: 65px;
+            display: flex;
+            flex-wrap: wrap;
+            min-height: max-content;
+            align-items: center;
+            
+            .user-profile-img{
+                overflow: hidden;
+                width: 70px;
+                height: 70px;
+                background: transparent;
+                border-radius: 50%;
+                margin-right: 15px;
+
+                .icon{
+                    display: inline;
+                    min-width: 100%;
+                    margin: 0 auto;
+                    height: 100%;
+                    object-fit: cover;
+                }
+
+                .icon-house-light, .icon-house-dark{
+                    overflow: hidden;
+                    width: 70px;
+                    height: 70px;
+                    border-radius: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background: $darker-side-bar-col;
+                }
+            }
+
+            .upload-btn-container{
+                display: flex;
+                height: 70px;
+                align-items: center;
+                input[type="file"]::file-selector-button{
+                    width: calc(100% - 100px);
+                    height: 37px;
+                    border: none;
+                    padding: 0px 0px 0px 0px;
+                    padding-left: 4px;
+                    padding-right: 4px;
+                    outline: none;
+                    background: $silver-ish-gradient;
+                    border-radius: 17px;
+                    font-size: 14px;
+                    font-family: 'Baloo Bhai 2', cursive;
+                    color: $text-col;
+                    cursor: pointer;
+                }
+    
+                .upload-btn{
+                    margin-left: -160px;
+                }
+            }
+        }
+
+        .pd-form-object, .pd-div-flexbox .pd-form-object{
+            width: calc(100% - 80px);
+            min-width: 255px;
+            margin-top: -1px;
+
+            h3{
+                font-size: 18px;
+                margin-bottom: -1px;
+                color: $text-col;
+                font-weight: 400;
+            }
+
+            input[type="text"], input[type="password"]{
+                width: calc(100% - 16px);
+                height: 35px;
+                border: none;
+                outline: none;
+                background: $input-textbox-selected-col;
+                box-shadow: 5px 5px 26px rgba(0, 0, 0, 0.25);
+                padding: 0px 0px 0px 0px;
+                padding-left: 8px;
+                padding-right: 8px;
+                border-radius: 13px;
+                font-size: 20px;
+                color: $text-col;
+                font-family: 'Baloo Bhai 2', cursive;
+                font-weight: 400;
+            }
+
+            .password-control{
+                margin-left: calc(100% - 40px);
+                margin-top: -28px;
+                cursor: pointer;
+            }
+        }
+
+        .pd-div-flexbox{
+            width: calc(100% - 80px);
+            min-width: 255px;
+            display: flex;
+            flex-wrap: wrap;
+            .pd-form-object{width: 267px;}
+            .pd-form-object:nth-child(2){margin-left: calc(100% - 534px);}
+        }
+
+        .controls{
+           // margin-left: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            width: calc(100% - 80px);
+            margin-top: 10px;
+            margin-bottom: 15px;
+
+            .save-changes, .google-logout, .facebook-logout, .twitter-logout, .github-logout, .logout, .delete-account{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 177px;
+                height: 45px;
+                background: $clickable-btn;
+                margin-top: 15px;
+                border-radius: 18px;
+                margin-left: 7px;
+                margin-right: 7px;
+
+                img{margin-left: 5px;}
+
+                h2{
+                    color: $gray-text-col;
+                    font-size: 20px;
+                }
+            }
+
+            .save-changes{h2{color: $good-change-col;}}
+
+            .delete-account{margin-right: 0px;}
+
+            .logout, .delete-account{h2{color: $bad-change-col;}}
+            
+        }
+
+        .error-display{
+            font-size: 18px; 
+            font-weight: 400; 
+            color: $gray-text-col; 
+            margin-top: 10px;
+        }
+    }
+
+    .delete-account-dialogue{
+        z-index: 2500;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(37, 37, 37, 0.05);
+        backdrop-filter: blur(25px);
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        .delete-box{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 400px;
+            height: 150px;
+
+            h1{
+                color: $text-col;
+                font-size: 20px;
+                font-weight: 400;
+                margin-bottom: 10px;
+            }
+
+            p{
+                color: $gray-text-col;
+                font-size: 14px;
+                font-weight: 400;
+                font-style: italic;
+                margin-bottom: 10px;
+                text-align: justify;
+            }
+
+            .delete-confirm{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .confirm-delete, .abort-delete{
+                    width: 150px;
+                    height: 30px;
+                    border-radius: 13px;
+                    color: $bad-change-col;
+                    font-size: 12px;
+                    font-weight: 400;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background: $clickable-btn;
+                }
+
+                .abort-delete{
+                    margin-left: 20px;
+                    color: $good-change-col;
+                }
+            }
+
+        }
+
+        
+    }
+}
+
+.themes{
+    width: 100%;
+    height: calc(100vh - $title-bar-height);
+    .top-bar-blur{
+        position: absolute;
+        top: $title-bar-height;
+        height: 52px;
+        width: 100%;
+        background: $top-layer-blur;
+        display: flex;
+        align-items: center;
+        backdrop-filter: blur(10px);
+        h1{
+            font-size: 24px;
+            color: $text-col;
+            margin-left: 15px;
+        }
+    }
+
+    .themes-box{
+        width: 100%;
+        height: calc(100vh - $title-bar-height);
+        overflow-y: scroll;
+        background: $lighter-side-bar-col;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .currently-selected{
+            margin-top: 15px;
+            .currently-selected-shape{
+                overflow: hidden;
+                margin-top: 25px; 
+                margin-right: auto;
+                margin-left: auto;
+                width: 80px;
+                height: 80px;
+                border-radius: 23px;
+                border: 3px solid $light-blue-col;
+
+                .background-img{
+                    display: inline;
+                    min-width: 100%;
+                    margin: 0 auto;
+                    height: 100%;
+                    object-fit: cover;
+                }
+
+                .selected-colour{
+                    width: 80px;
+                    height: 80px;
+                }
+            }
+        }
+
+        h3{
+            font-size: 14px;
+            margin-top: 20px; 
+            text-align: center; 
+            color: $text-col;
+            font-weight: 400;
+        }
+
+        .upload-btn-container{
+            display: flex;
+                height: 70px;
+                align-items: center;
+                input[type="file"]::file-selector-button{
+                    width: calc(100% - 100px);
+                    height: 37px;
+                    border: none;
+                    padding: 0px 0px 0px 0px;
+                    padding-left: 4px;
+                    padding-right: 4px;
+                    outline: none;
+                    background: $silver-ish-gradient;
+                    border-radius: 17px;
+                    font-size: 14px;
+                    font-family: 'Baloo Bhai 2', cursive;
+                    color: $text-col;
+                    cursor: pointer;
+                }
+        }
+
+        h2, h4{
+            font-size: 20px;
+            margin-top: 30px; 
+            text-align: center; 
+            color: $text-col;
+            font-weight: 400;
+        }
+
+        h2{margin-top: 65px;}
+
+        h4{margin-top: 50px; }
+
+        .colour-palletes{
+            margin-top: 5px;
+            width: calc(100% - 80px);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            .theme-selector{
+                display: flex;
+                height: 40px;
+                width: 180px;
+                align-items: center;
+                margin-top: 5px;
+                margin-bottom: 5px;
+                .colour-circle{
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 15px;
+                    margin-left: 10px;
+                    margin-right: 15px;
+                    cursor: pointer;
+                }
+    
+                .selected-colour-circle{border: 1px solid rgb(97, 188, 248);}
+    
+                #dark-blue-col{background: #202335;}
+    
+                #light-white-col{background: #F1F1F1;}
+
+                #light-pink-col{background: #c791ce;}
+
+                #dark-pink-col{background: #52244c;}
+
+                #light-red-col{background: #e4adad;}
+
+                #dark-red-col{background: #522424;}
+
+                #light-green-col{background: #c1e4ad;}
+
+                #dark-green-col{background: #245233;}
+    
+                #dark-blue-col-light-white-col{background: linear-gradient(to bottom, #14161F, #F1F1F1);}
+            }
+        }
+
+        .colour-picker-holder{
+            margin-top: -10px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+    }
+}
+
+.about{
+    width: 100%;
+    height: calc(100vh - $title-bar-height);
+    .top-bar-blur{
+        position: absolute;
+        top: $title-bar-height;
+        height: 52px;
+        width: 100%;
+        background: $top-layer-blur;
+        display: flex;
+        align-items: center;
+        backdrop-filter: blur(10px);
+        h1{
+            font-size: 24px;
+            color: $text-col;
+            margin-left: 15px
+        }
+    }
+
+    .themes-box{
+        width: 100%;
+        height: calc(100vh - $title-bar-height);
+        background: $lighter-side-bar-col;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        .icon{
+            margin-top: 5px;
+        }
+
+        h2{
+            margin-top: 5px;
+            font-size: 18px;
+            font-weight: 400;
+            color: $text-col;
+        }
+    }
+}
+
+@media only screen and (max-width: 1330px){
+    .personal-details{
+        .personal-details-box{
+            .pd-div-flexbox{
+                .pd-form-object:nth-child(2){margin-left: 0px;}
+            }
+        }
+    }
+}

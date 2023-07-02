@@ -1,0 +1,317 @@
+$white-text-col: #E6E6E6;
+$gray-text-col: #444444;
+$external-login-btn-col: #EAEAEA;
+$external-login-btn-col-active: #cccccc;
+$text-box-colours: #a9a9a936;
+$component-change-lnk: #c6c6c694;
+$component-change-lnk-active: #91909094;
+$login-btn-col: #4200FF;
+$login-btn-col-active: #6630fa;
+
+.login-home{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(252.46deg, #001D36 0%, #3F1A61 52.08%, #8A7A94 100%);
+    background-blend-mode: hard-light;
+
+    .circle-1, .circle-2, .circle-3, .circle-4{
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        backdrop-filter: blur(20px);
+        border-radius: 50%;
+    }
+
+    .circle-1{
+        background: rgba(70, 99, 172, 0.65);
+        left: 80vw;
+        top: 10vh;
+    }
+
+    .circle-2{
+        background: rgba(111, 54, 184, 0.65);
+        left: 60vw;
+        top: 80vh;
+    }
+
+    .circle-3{
+        background: rgba(114, 13, 139, 0.65);
+        left: 40vw;
+        top: 60vh;
+    }
+
+    .circle-4{
+        background: rgba(119, 56, 149, 0.65);
+        left: 30vw;
+        top: 20vh;
+    }
+
+    .login-home-blurer{
+        z-index: 1000;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(37, 37, 37, 0.05);
+        backdrop-filter: blur(35px);
+
+        .company-logo{
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            width: 100vw;
+            bottom: 0;
+            height: 45px;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .login-content{
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+            .login-display-graphic{
+                margin-right: 5vw;
+                width: 90vh;
+                height: 90vh;
+                .blob-g{
+                    width: 90vh;
+                    height: 90vh;
+                }
+                .social-friends-g{
+                    position: absolute;
+                    margin-top: 26vh;
+                    margin-left: -40vw;
+                }
+            }
+
+            .signup-section, .login-section, .reset-pswd-section, .reset-pswd-confirm-section{
+                margin-left: 5vw;
+                width: 395px;
+                height: 601px;
+
+                h1{
+                    text-align: center;
+                    font-size: 40px;
+                    color: $white-text-col;
+                    margin-bottom: -15px;
+                }
+
+                form{
+                    color: $white-text-col;
+                    .login-form-object{
+
+                        h3{
+                            font-size: 20px;
+                            text-align: left;
+                            margin-left: 25px;
+                            margin-bottom: -2px;
+                        }
+    
+                        input[type="text"], input[type="password"]{
+                            width: 357px;
+                            height: 35px;
+                            margin-left: 15px;
+                            border: none;
+                            outline: none;
+                            background: $text-box-colours;
+                            box-shadow: 5px 5px 26px rgba(0, 0, 0, 0.25);
+                            padding: 0px 0px 0px 0px;
+                            padding-left: 4px;
+                            padding-right: 4px;
+                            border-radius: 9px;
+                            font-size: 20px;
+                            color: $white-text-col;
+                            font-family: 'Baloo Bhai 2', cursive;
+                        }
+                    }
+
+                    button[type="submit"]{
+                        background: $login-btn-col;
+                        color: $white-text-col;
+                        font-family: 'Baloo Bhai 2', cursive;
+                        font-size: 30px;
+                        cursor: pointer;
+                        border: none;
+                        outline: none;
+                        margin-top: 32px;
+                        width: 365px;
+                        height: 57px;
+                        margin-left: 20px;
+                        border-radius: 15px;
+                        text-align: center;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+
+                    button[type="submit"]:active{background: $login-btn-col-active;}
+                }
+
+                h4{
+                    color: $component-change-lnk;
+                    font-size: 14px;
+                    margin-left: 15px;
+                    text-decoration-line: underline;
+                    cursor: pointer;
+                }
+
+                h4:active{color: $component-change-lnk-active;}
+
+                h6{
+                    color: #FD5959;
+                    font-size: 14px;
+                    margin-left: 15px;
+                    margin-top: -2px;
+                }
+
+                h5{
+                    margin-top: -7px;
+                    color: $white-text-col;
+                    text-align: center;
+                    font-size: 20px;
+                }
+
+                .external-auth-buttons{
+                    width: 365px;
+                    height: 129px;
+                    display: flex;
+                    flex-wrap: wrap;
+                    margin-left: 15px;
+
+                    .auth-button{
+                        cursor: pointer;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 175px;
+                        height: 57px;
+                        border-radius: 15px;
+                        background: $external-login-btn-col;
+                        h2{
+                            color: $gray-text-col;
+                            font-size: 30px;
+                        }
+                    }
+
+                    .auth-button:nth-child(even){margin-left: 15px;}
+
+                    .auth-button:active{
+                        background: $external-login-btn-col-active;
+                    }
+                }
+
+                .email-opened-g, .email-sent-g{
+                    display: block;
+                    margin-top: 32px;
+                    margin-left: auto;
+                    margin-right: auto;
+                }
+
+                .okbutton{
+                    background: $login-btn-col;
+                    color: $white-text-col;
+                    font-family: 'Baloo Bhai 2', cursive;
+                    font-size: 30px;
+                    cursor: pointer;
+                    border: none;
+                    outline: none;
+                    margin-top: 32px;
+                    width: 365px;
+                    height: 57px;
+                    margin-left: 15px;
+                    border-radius: 15px;
+                    text-align: center;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .okbutton:active{background: $login-btn-col-active;}
+            }
+
+            .reset-pswd-confirm-section{
+                height: 451px;
+                h3{
+                    margin-top: -7px;
+                    color: $white-text-col;
+                    text-align: center;
+                    font-size: 20px;
+                    margin-top: 5px;
+                }
+            }
+        }
+    }
+
+    .loading-content-page{
+        z-index: 3000;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        background: rgba(37, 37, 37, 0.05);
+        backdrop-filter: blur(35px);
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+
+        h1{
+            color: $white-text-col;
+            font-size: 30px;
+            margin-bottom: 50px;
+        }
+    }
+}
+
+@media only screen and (max-width: 1300px){
+    .login-home{
+        .login-home-blurer{
+            .login-content{
+                .login-display-graphic{
+                    width: 70vh;
+                    height: 70vh;
+                    .blob-g{
+                        width: 70vh;
+                        height: 70vh;
+                    }
+                    .social-friends-g{
+                        margin-top: 15vh;
+                        margin-left: -48vw;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 1100px) and (max-width: 1200px){
+    .login-home{
+        .login-home-blurer{
+            .login-content{
+                .login-display-graphic{
+                    .social-friends-g{
+                        margin-left: -43vw;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1300px){
+    .login-home{
+        .login-home-blurer{
+            .login-content{
+                .login-display-graphic{
+                    .social-friends-g{
+                        margin-left: -41vw;
+                    }
+                }
+            }
+        }
+    }
+}
