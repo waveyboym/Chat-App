@@ -27,7 +27,8 @@ The old version will no longer receive updates and/or fixes. I'm just putting it
 12. Icon pack(Basil Icons): https://www.figma.com/community/file/931906394678748246
 
 # I am a user/tester
-Executable for MacOS, Linux and Windows will be coming soon...
+Executable for windows is available here: https://github.com/waveyboym/Chat-App/releases/tag/v0.0.2-alpa
+Executable for MacOS, and Linux will be coming soon...
 
 # I am a developer
 1. Setup Tauri on your desktop following the instructions here <a href="https://tauri.app/v1/guides/getting-started/prerequisites">set up tauri</a>
