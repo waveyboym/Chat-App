@@ -78,6 +78,7 @@ const PersonalDetails : FunctionComponent<PersonalDetailsProps> = ({darklight}) 
 
   function signOutOfApp(){
     setLoadingTrue();
+    
     signOut(auth);
   }
 
@@ -111,9 +112,10 @@ const PersonalDetails : FunctionComponent<PersonalDetailsProps> = ({darklight}) 
               )()
             }
           </div>
-          <motion.div className="upload-btn-container" whileTap={{scale: 0.97}}>
+          <motion.label className="upload-btn-container" whileTap={{scale: 0.97}}>
             <input name="profile" type="file" accept="image/png, image/jpeg" onChange={uploadImg}/>
-          </motion.div>
+            upload profile
+          </motion.label>
         </div>
         <Tooltip title="You cannot modify your User ID" placement="top" TransitionComponent={Zoom} followCursor>
             <div className="pd-form-object">

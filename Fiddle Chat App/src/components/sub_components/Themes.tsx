@@ -10,15 +10,18 @@ const Themes : FunctionComponent<ThemesProps> = ({changeTheme}) => {
   const defaultBG = "#14161F";
   const [chatbackgroundcol, setbackgroundcol] = useLocalStorage<string>('chatBackgroundcol', defaultBG);
   const [themeCol, sethemeCol] = useLocalStorage<string>('themeCol', defaultBG);
-  const [chatbackgroundimg, setchatbackgroundimg] = useLocalStorage<string | null>('chatbackgroundimg', null);
+  const [chatbackgroundimg, setchatbackgroundimg] = useLocalStorage<any>('chatbackgroundimg', null);//don't change any type because of FileReader ArrayBuffer
   const [RGBACP_color, setColor] = useState({ r: 200, g: 150, b: 35, a: 0.5 });
   const getCurrentTheme = () => window.matchMedia("(prefers-color-scheme: dark)").matches;
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(getCurrentTheme());  
   const mqListener = ((e: { matches: boolean | ((prevState: boolean) => boolean); }) => {setIsDarkTheme(e.matches);});
 
-  function uploadImg(e: any){setchatbackgroundimg(URL.createObjectURL(e.target.files[0]));}
-
-  function changeChatBackground(colour: string){setbackgroundcol(colour); setchatbackgroundimg(null);}
+  function uploadImg(e: any){
+    const image = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(image);
+    reader.addEventListener('load', () => setchatbackgroundimg(reader.result));
+  }
 
   function convertRGBAtoHex(obj: RgbaColor){
     setColor(obj);
@@ -161,9 +164,10 @@ const Themes : FunctionComponent<ThemesProps> = ({changeTheme}) => {
           </div>
           <h3>Currently selected chat background colour/image</h3>
         </div>
-        <motion.div className="upload-btn-container" whileTap={{scale: 0.97}}>
+        <motion.label className="upload-btn-container" whileTap={{scale: 0.97}}>
           <input name="background-img" type="file" accept="image/png, image/jpeg" onChange={uploadImg}/>
-        </motion.div>
+          upload chat wallpaper
+        </motion.label>
         
         <h4>Colour picker</h4>
         <div className="colour-picker-holder">
