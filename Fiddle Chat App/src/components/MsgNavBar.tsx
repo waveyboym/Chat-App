@@ -67,17 +67,58 @@ const MsgNavBar : FunctionComponent<MsgNavBarProps> = ({setTheme, darklight, cur
   function handleSearch(e: any){
     set_isSearching(true);
     if(e.key === "Enter"){
-      console.log(searchText);
-      //if(openRoomNav)searchForRoom(searchText);
-      //else searchForContact(searchText);
+      if(openRoomNav)searchForRoom(searchText);
+      else searchForContact(searchText);
     }
     else{setsearchText(e.target.value);}
   }
 
-  function cancelSearch(){
+  const cancelSearch = async() =>{
     set_isSearching(false);
-    if(openRoomNav)getAllRooms();
-    else getAllContacts();
+    setsearchText("");
+    if(openRoomNav){
+      const userRef: DocumentReference<DocumentData> = doc(db, "users", UserUID);
+      const q: Query<DocumentData> = query(collection(userRef, "rooms"));
+
+      setroomlist([]);
+      const roomquery = await getDocs(q);
+      if(roomlist.length != 0)setroomlist([]);
+      setroomlist([]);
+      roomquery.forEach(async(roomdoc) => {
+        const roomref: DocumentReference<DocumentData> = doc(db,"rooms", roomdoc.id);
+        const roomdata: DocumentSnapshot<DocumentData> = await getDoc(roomref);
+        if(roomdata.exists()){
+          setroomlist(oldArray => [...oldArray, {
+            id: roomdata.id,
+            profile: roomdata.data().displayPhoto,
+            name: roomdata.data().roomname,
+          }]);
+        }
+      });
+    }
+    else{
+      const userRef: DocumentReference<DocumentData> = doc(db, "users", UserUID);
+      const q: Query<DocumentData> = query(collection(userRef, "friends"), orderBy("timestamp", "desc"), limit(25));
+
+      const querySnapshot = await getDocs(q);
+      set_contactlistlength(querySnapshot.size);
+      setContactslist([]);
+      if(Contactslist.length != 0)setContactslist([]);
+
+      querySnapshot.forEach(async(currentdoc) => {
+        if(currentdoc.data().messageHolder === true){
+          //go and find ref with message and push to array from this user
+          const messagesRef: DocumentReference<DocumentData> = doc(userRef, "messages", currentdoc.data().friendID);
+          await createContactObj(messagesRef, currentdoc.data().friendID);
+        }
+        else{
+          //go to friend ref with message and push to array from them
+          const friendRef: DocumentReference<DocumentData> = doc(db, "users", currentdoc.data().friendID);
+          const messagesRef: DocumentReference<DocumentData> = doc(friendRef, "messages", UserUID);
+          await createContactObj(messagesRef, currentdoc.data().friendID);
+        }
+      })
+    }
   }
 
   function changeSelectedIdTo(idtoset: string){setselectedID(idtoset); set_accessMsg(idtoset);}
@@ -121,9 +162,6 @@ const MsgNavBar : FunctionComponent<MsgNavBarProps> = ({setTheme, darklight, cur
   }
 
   const searchForContact = async(arg: string) => {
-    if(contactsLoaded.current === false)return;
-    contactsLoaded.current = false;
-
     const q: Query<DocumentData> = query(collection(db, "users"), orderBy("timestamp", "desc"), where("username", "==", arg), limit(25));
 
     const querySnapshot = await getDocs(q);
@@ -166,8 +204,6 @@ const MsgNavBar : FunctionComponent<MsgNavBarProps> = ({setTheme, darklight, cur
   }
 
   const searchForRoom = async(arg: string) => {
-    if(roomsLoaded.current === false)return;
-    roomsLoaded.current = false;
     const q: Query<DocumentData> = query(collection(db, "rooms"), orderBy("timestamp", "desc"), where("roomname", "==", arg), limit(25));
 
     setroomlist([]);
@@ -197,15 +233,12 @@ const MsgNavBar : FunctionComponent<MsgNavBarProps> = ({setTheme, darklight, cur
   }, [Contactslist])
 
   useEffect(() => {
-    const callgetAllRooms = async() => {await getAllRooms();}
-
-    UserUID ?  callgetAllRooms() : () => {}
-  }, [UserUID])
-
-  useEffect(() => {
-    const callGetAllContacts = async() => {await getAllContacts();}
+    const loadsetup = async() => {
+      await getAllContacts();
+      await getAllRooms();
+    }
     
-    UserUID ?  callGetAllContacts() : () => {}
+    UserUID ? loadsetup() : () => {}
   }, [UserUID])
 
   return (
@@ -213,7 +246,7 @@ const MsgNavBar : FunctionComponent<MsgNavBarProps> = ({setTheme, darklight, cur
       <div className="constant-msg-header">
         <div className="h1-container"><h1>{openRoomNav ? "Rooms" : "Messages"}</h1></div>
         <div className="search-bar">
-          <input name="searchbox" type="text" onKeyDown={(e: any) => handleSearch(e)} placeholder={openRoomNav ? "Search for a room" : "Search for a user"} value={searchText}/>
+          <input name="searchbox" type="text" onKeyDown={(e: any) => handleSearch(e)} placeholder={openRoomNav ? "Search for a room" : "Search for a user"}/>
           {
             darklight === 'light' && isSearching ? 
             <img className="cancel-search" src={cross_LM} alt="cancel-search" onClick={cancelSearch}/>

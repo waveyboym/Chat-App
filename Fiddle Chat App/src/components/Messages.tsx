@@ -32,17 +32,20 @@ const Messages : FunctionComponent<MessagesProps> = ({msgRequestID, darklight, s
     dob: string, 
     pronouns: string
   }>({id: msgRequestID, username: "", profile: null, dob: "", pronouns: ""});
-  const [onloadComplete, setonloadComplete] = useState<boolean>(false);
+
+  const onloadComplete = useRef<boolean>(false);
   const [messagesList, setmessagesList] = useState<{
-      msgid: string, id: string, profile: string, name: string, latest_msg: string, date_sent: string
+      msgid: string, id: string, profile: string | null, name: string, latest_msg: string, date_sent: string
     }[]>([]);
   const [value, setValue] = useState<string>('');
-  const [msgHolder, setmsgHolder] = useState<boolean>(false);
+  const msgHolder= useRef<boolean>(false);
+  const tempProfile = useRef<string | null>(null);
+  const tempUsername = useRef<string>("");
 
   const [emojipickerchngr, set_emojipickerchngr] = useState<boolean>(false);
   const defaultBG: string = "#14161F";
   const [chatbackgroundcol, setbackgroundcol] = useLocalStorage<string>('chatBackgroundcol', defaultBG);
-  const [chatbackgroundimg, setchatbackgroundimg] = useLocalStorage<string | null>('chatbackgroundimg', null);
+  const [chatbackgroundimg, setchatbackgroundimg] = useLocalStorage<any>('chatbackgroundimg', null);//don't change any type because of FileReader ArrayBuffer
 
   const [blockMSG, setblockMSG] = useState<boolean>(false);
 
@@ -74,7 +77,7 @@ const Messages : FunctionComponent<MessagesProps> = ({msgRequestID, darklight, s
         id: friendsProfile.id,
         user: userDB,
         friendId: msgRequestID,
-        messageholder: msgHolder,
+        messageholder: msgHolder.current,
         message: value
       };
     handleSendingPrivateMessage(obj).then((boolval) => setblockMSG(!boolval)).catch((error) => console.log(error));
@@ -85,20 +88,24 @@ const Messages : FunctionComponent<MessagesProps> = ({msgRequestID, darklight, s
   const initFriend = async(friendRef: DocumentReference<DocumentData>): Promise<"FAILED" | "SUCCESS"> => {
     const frienddocSnap: DocumentSnapshot<DocumentData> = await getDoc(friendRef);
     if(frienddocSnap.exists() !== true)return "FAILED";
-    const objToInsert: {id: string, username: string, profile: string, dob: string, pronouns: string} = 
-      {
-        id: msgRequestID,
-        username: frienddocSnap.data()?.username,
-        profile: frienddocSnap.data()?.displayPhoto,
-        dob: frienddocSnap.data()?.dateOfBirth,
-        pronouns: frienddocSnap.data()?.pronouns,
-      }
-    setfriendsProfile(objToInsert);
-    return "SUCCESS";
+    else{
+      const objToInsert: {id: string, username: string, profile: string | null, dob: string, pronouns: string} = 
+        {
+          id: msgRequestID,
+          username: frienddocSnap.data()?.username,
+          profile: frienddocSnap.data()?.displayPhoto,
+          dob: frienddocSnap.data()?.dateOfBirth,
+          pronouns: frienddocSnap.data()?.pronouns,
+        }
+      tempProfile.current = frienddocSnap.data()?.displayPhoto;
+      tempUsername.current = frienddocSnap.data()?.username;
+      setfriendsProfile(objToInsert);
+      return "SUCCESS";
+    }
   }
 
   const getMessageRef = (): DocumentReference<DocumentData> => {
-    if(msgHolder === true){
+    if(msgHolder.current === true){
       const userRef: DocumentReference<DocumentData> = doc(db, "users", userDB.uid);
       return doc(userRef, "messages", msgRequestID);
     }
@@ -108,58 +115,53 @@ const Messages : FunctionComponent<MessagesProps> = ({msgRequestID, darklight, s
     }
   }
 
-  useEffect(() => {
-    const initMessages = async(): Promise<() => void> => {
-      if(onloadComplete === false)return () => {};
+  const initMessages = async(): Promise<() => void> => {
+    const messagesRef: DocumentReference<DocumentData> = getMessageRef();
+    const q: Query<DocumentData> = query(collection(messagesRef, "privatemessages"), orderBy("timestamp", "asc"), limit(25));
+    const unsub: Unsubscribe = onSnapshot(q, (querySnapshot) => {
+      setmessagesList([]);
+      let messagesarr: {
+          msgid: string, 
+          id: string, 
+          profile: string | null, 
+          name: string, 
+          latest_msg: string, 
+          date_sent: string
+        }[] = [];
 
-      const messagesRef: DocumentReference<DocumentData> = getMessageRef();
-      const q: Query<DocumentData> = query(collection(messagesRef, "privatemessages"), orderBy("timestamp", "asc"), limit(25));
-      const unsub: Unsubscribe = onSnapshot(q, (querySnapshot) => {
-        setmessagesList([]);
-        let messagesarr: {
-            msgid: string, 
-            id: string, 
-            profile: string, 
-            name: string, 
-            latest_msg: string, 
-            date_sent: string
-          }[] = [];
-
-        querySnapshot.forEach((currentdoc) => {
-          if(currentdoc.data().senderID === userDB.uid){
-            messagesarr.push({
-              msgid: currentdoc.id,
-              id: userDB.uid,
-              profile: userDB.displayPhoto,
-              name: userDB.username,
-              latest_msg: currentdoc.data().messageSent,
-              date_sent: currentdoc.data().timestamp
-            });
-          }
-          else{
-            messagesarr.push({
-              msgid: currentdoc.id,
-              id: friendsProfile.id,
-              profile: friendsProfile.profile === null ? "" : friendsProfile.profile,
-              name: friendsProfile.username,
-              latest_msg: currentdoc.data().messageSent,
-              date_sent: currentdoc.data().timestamp
-            });
-          }
-        })
-        setmessagesList(messagesarr);
+      querySnapshot.forEach((currentdoc) => {
+        if(currentdoc.data().senderID === userDB.uid){
+          messagesarr.push({
+            msgid: currentdoc.id,
+            id: userDB.uid,
+            profile: userDB.displayPhoto,
+            name: userDB.username,
+            latest_msg: currentdoc.data().messageSent,
+            date_sent: currentdoc.data().timestamp
+          });
+        }
+        else{
+          messagesarr.push({
+            msgid: currentdoc.id,
+            id: msgRequestID,
+            profile: tempProfile.current,
+            name: tempUsername.current,
+            latest_msg: currentdoc.data().messageSent,
+            date_sent: currentdoc.data().timestamp
+          });
+        }
       })
-      return () =>{unsub();}
-    }
-    
-    userDB && userDB.uid ? initMessages() : () => {};
-  }, [friendsProfile, onloadComplete])
-
+      setmessagesList(messagesarr);
+    })
+    return () =>{unsub();}
+  }
+  
   useEffect(() => {ref.current?.scrollIntoView({ behavior: "smooth"});}, [messagesList])
   
   useEffect(() => {
     const loadSetup = async() => {
-        setonloadComplete(false);
+        if(onloadComplete.current === true)return;
+        onloadComplete.current = true;
         //init basic user profile data
         const userRef = doc(db, "users", userDB.uid);
         const friendRef: DocumentReference<DocumentData> = doc(db, "users", msgRequestID);
@@ -172,11 +174,12 @@ const Messages : FunctionComponent<MessagesProps> = ({msgRequestID, darklight, s
             setblockMSG(true);
             return;
           }
-
-          if(MessageHolderSnap.data()?.messageHolder === true)setmsgHolder(true);
-          else setmsgHolder(false);
+          else{
+            msgHolder.current = MessageHolderSnap.data()?.messageHolder === true ? true : false;
+            await initMessages();
+          }
+          
         }
-        setonloadComplete(true);
     }
     
     userDB && userDB.uid ? loadSetup() : () => {};

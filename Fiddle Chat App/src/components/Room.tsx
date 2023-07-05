@@ -30,7 +30,7 @@ const Room : FunctionComponent<RoomProps> = ({darklight, roomRequestID, set_acce
 
     const [roomdetails, setroomDetails] = useState<{id: string, profile: string | null, roomName: string}>({id: "", profile: "", roomName: ""});
     const [RoommessagesList, setmessagesList] = useState<{msgID: string, id: string, profile: string | null, name: string, latest_msg: string, date_sent: string}[]>([]);
-    const [onloadComplete, setonloadComplete] = useState<boolean>(false);
+    const onloadComplete = useRef<boolean>(false);
     const [value, setValue] = useState<string>('');
     const [RoomMembers, setRoomMembers] = useState<{
         id: string,
@@ -38,11 +38,11 @@ const Room : FunctionComponent<RoomProps> = ({darklight, roomRequestID, set_acce
         profile: string,
         inRoom: boolean
     }[]>([]);
-    const [membersArrSize, setmembersArrSize] = useState<number>(0);
+    const membersArrSize = useRef<number>(0);
 
     const defaultBG: string = "#14161F";
     const [chatbackgroundcol, setbackgroundcol] = useLocalStorage<string>('chatBackgroundcol', defaultBG);
-    const [chatbackgroundimg, setchatbackgroundimg] = useLocalStorage<string | null>('chatbackgroundimg', null);
+    const [chatbackgroundimg, setchatbackgroundimg] = useLocalStorage<any>('chatbackgroundimg', null);//don't change any type because of FileReader ArrayBuffer
 
     const ref = useRef<null | HTMLDivElement>(null);
     const contactsLoaded = useRef<boolean>(false);
@@ -83,7 +83,7 @@ const Room : FunctionComponent<RoomProps> = ({darklight, roomRequestID, set_acce
     const getAllRoomMembers = async(roomRef: DocumentReference<DocumentData>): Promise<() => void> => {
         const unsub: Unsubscribe = onSnapshot(collection(roomRef, "members"), (memberquery) => {
             setRoomMembers([]);
-            setmembersArrSize(memberquery.size);
+            membersArrSize.current = memberquery.size;
             memberquery.forEach(async(docdata) => {
                 const memberRef: DocumentReference<DocumentData> = doc(db, "users", docdata.id);
                 const memberdocSnap: DocumentSnapshot<DocumentData> = await getDoc(memberRef);
@@ -103,9 +103,9 @@ const Room : FunctionComponent<RoomProps> = ({darklight, roomRequestID, set_acce
 
     useEffect(() => {
         const initMessagesData = async(): Promise<() => void> => {
-            if(onloadComplete === false)return () => {};
+            if(onloadComplete.current === false)return () => {};
             if(RoomMembers.length === 0)return () => {};
-            if(RoomMembers.length !== membersArrSize)return () => {};
+            if(RoomMembers.length !== membersArrSize.current)return () => {};
 
             if(messagesLoaded.current === true)return () => {};
             messagesLoaded.current = true;
@@ -133,7 +133,7 @@ const Room : FunctionComponent<RoomProps> = ({darklight, roomRequestID, set_acce
             return () =>{unsub();}
         }
 
-        (onloadComplete === true) && (RoomMembers.length > 0) && (RoomMembers.length === membersArrSize) ? 
+        (onloadComplete.current === true) && (RoomMembers.length > 0) && (RoomMembers.length === membersArrSize.current) ? 
             initMessagesData() 
             : 
             () => {};
@@ -144,7 +144,6 @@ const Room : FunctionComponent<RoomProps> = ({darklight, roomRequestID, set_acce
             if(contactsLoaded.current === true)return;
             contactsLoaded.current = true;
             //init basic room data
-            setonloadComplete(false)
             const roomRef = doc(db, "rooms", roomRequestID);
 
             const roomdocSnap = await getDoc(roomRef);
@@ -155,9 +154,7 @@ const Room : FunctionComponent<RoomProps> = ({darklight, roomRequestID, set_acce
                             roomName: roomdocSnap.data()?.roomname,
                             });
             //load room members
-            getAllRoomMembers(roomRef).then(() => {
-                setonloadComplete(true);
-            }).catch((_error) => {});
+            getAllRoomMembers(roomRef).then(() => onloadComplete.current = true).catch((_error) => {});
         }
 
         roomRequestID ? initRoomData() : () => {};
