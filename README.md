@@ -31,7 +31,7 @@ Executable for windows is available <a href="https://github.com/waveyboym/Chat-A
 Executable for MacOS, and Linux will be coming soon...
 
 # I am a developer
-1. Setup Tauri on your desktop following the instructions here <a href="https://tauri.app/v1/guides/getting-started/prerequisites">set up tauri</a>
+1. Setup Tauri on your desktop following the instructions here <a href="https://tauri.app/v1/guides/getting-started/prerequisites">set up tauri</a>. Please setup a project with vite and react + typescript.
 2. Once Tauri has been set up, download the source files from this repo and copy and pase everything contained in <a href="https://github.com/waveyboym/Chat-App/tree/main/Fiddle%20Chat%20App">Fiddle Chat App</a> into the root of your newly created project.
 3. If you do not have node js installed on your computer, install it here <a href="https://nodejs.org/en/download/">nodejs</a>
 4. Open a terminal where the folder that you just downloaded is located and run ```npm install```. This will install all the npm packages used by this projct for you.
