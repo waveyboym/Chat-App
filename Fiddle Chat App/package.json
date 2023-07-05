@@ -1,7 +1,7 @@
 {
   "name": "fiddle-chat-app",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -24,6 +24,7 @@
     "react-dom": "^18.2.0",
     "react-loader-spinner": "^5.3.4",
     "react-router-dom": "^6.14.0",
+    "semver": "^7.5.3",
     "use-local-storage": "^3.0.0"
   },
   "devDependencies": {
