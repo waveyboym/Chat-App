@@ -131,22 +131,22 @@
             .upload-btn-container{
                 display: flex;
                 height: 70px;
+                width: calc(100% - 100px);
+                justify-content: center;
+                height: 37px;
+                border: none;
+                padding: 0px 0px 0px 0px;
+                padding-left: 4px;
+                padding-right: 4px;
+                outline: none;
+                background: $silver-ish-gradient;
+                border-radius: 15px;
+                font-size: 14px;
+                font-family: 'Baloo Bhai 2', cursive;
+                color: $text-col;
+                cursor: pointer;
                 align-items: center;
-                input[type="file"]::file-selector-button{
-                    width: calc(100% - 100px);
-                    height: 37px;
-                    border: none;
-                    padding: 0px 0px 0px 0px;
-                    padding-left: 4px;
-                    padding-right: 4px;
-                    outline: none;
-                    background: $silver-ish-gradient;
-                    border-radius: 17px;
-                    font-size: 14px;
-                    font-family: 'Baloo Bhai 2', cursive;
-                    color: $text-col;
-                    cursor: pointer;
-                }
+                input[type="file"]{display: none;} 
     
                 .upload-btn{
                     margin-left: -160px;
@@ -375,23 +375,22 @@
 
         .upload-btn-container{
             display: flex;
-                height: 70px;
-                align-items: center;
-                input[type="file"]::file-selector-button{
-                    width: calc(100% - 100px);
-                    height: 37px;
-                    border: none;
-                    padding: 0px 0px 0px 0px;
-                    padding-left: 4px;
-                    padding-right: 4px;
-                    outline: none;
-                    background: $silver-ish-gradient;
-                    border-radius: 17px;
-                    font-size: 14px;
-                    font-family: 'Baloo Bhai 2', cursive;
-                    color: $text-col;
-                    cursor: pointer;
-                }
+            height: 70px;
+            width: calc(100% - 100px);
+            justify-content: center;
+            border: none;
+            padding: 0px 0px 0px 0px;
+            padding-left: 4px;
+            padding-right: 4px;
+            outline: none;
+            background: $silver-ish-gradient;
+            border-radius: 15px;
+            font-size: 14px;
+            font-family: 'Baloo Bhai 2', cursive;
+            color: $text-col;
+            cursor: pointer;
+            align-items: center;
+            input[type="file"]{display: none;} 
         }
 
         h2, h4{

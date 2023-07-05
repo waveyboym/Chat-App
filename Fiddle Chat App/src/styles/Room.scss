@@ -108,7 +108,7 @@
                         margin-right: auto;
                         padding: 8px;
                         width: fit-content;
-                        border-radius: 20px;
+                        border-radius: 17px;
                         background-color: $darker-side-bar-col;
                         color: $text-col;
                         font-weight: 400;
@@ -403,9 +403,9 @@
 
                     .chat-bg-layer-room{
                         width: calc(100vw - 582px);
-                        .chat-aligner-room{width: calc(100vw - 582px);}
+                        .chat-aligner-room{width: calc(100vw - 585px);}
 
-                        .chat-aligner-plus-room{width: calc(100vw - 582px);}
+                        .chat-aligner-plus-room{width: calc(100vw - 585px);}
                     }
                 }
     
