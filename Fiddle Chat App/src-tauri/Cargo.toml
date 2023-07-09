@@ -1,10 +1,10 @@
 [package]
 name = "fiddle-chat-app"
-version = "0.0.0"
-description = "A Tauri App"
-authors = ["you"]
+version = "0.0.2"
+description = "A real time chat application that allows users to chat with each other through private messages and rooms"
+authors = ["waveyboym"]
 license = ""
-repository = ""
+repository = "https://github.com/waveyboym/Chat-App"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
