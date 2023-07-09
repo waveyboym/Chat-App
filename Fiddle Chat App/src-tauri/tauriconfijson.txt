@@ -12,8 +12,8 @@
     "withGlobalTauri": true
   },
   "package": {
-    "productName": "fiddle-chat-app",
-    "version": "0.0.1"
+    "productName": "Fiddle Chat App",
+    "version": "0.0.2"
   },
   "tauri": {
     "allowlist": {
@@ -49,8 +49,8 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
-      "longDescription": "",
+      "identifier": "com.fiddle-chat-app.dev",
+      "longDescription": "A real time chat application that allows users to chat with each other through private messages and rooms",
       "macOS": {
         "entitlements": null,
         "exceptionDomain": "",
@@ -59,7 +59,7 @@
         "signingIdentity": null
       },
       "resources": [],
-      "shortDescription": "",
+      "shortDescription": "A real time chat app",
       "targets": "all",
       "windows": {
         "certificateThumbprint": null,
@@ -115,8 +115,8 @@
     "withGlobalTauri": true
   },
   "package": {
-    "productName": "fiddle-chat-app",
-    "version": "0.0.1"
+    "productName": "Fiddle Chat App",
+    "version": "0.0.2"
   },
   "tauri": {
     "allowlist": {
@@ -152,8 +152,8 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
-      "longDescription": "",
+      "identifier": "com.fiddle-chat-app.dev",
+      "longDescription": "A real time chat application that allows users to chat with each other through private messages and rooms",
       "macOS": {
         "entitlements": null,
         "exceptionDomain": "",
@@ -162,7 +162,7 @@
         "signingIdentity": null
       },
       "resources": [],
-      "shortDescription": "",
+      "shortDescription": "A real time chat app",
       "targets": "all",
       "windows": {
         "certificateThumbprint": null,
