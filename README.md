@@ -66,12 +66,16 @@ more information about rules in your database: https://firebase.google.com/docs/
 # Change App window from frameless to not frameless
 1. Open <a href="https://github.com/waveyboym/Chat-App/blob/main/Fiddle%20Chat%20App/src/App.tsx">App.tsx</a> and comment out all the code that is not commented out and uncomment all the code that is commented out, so coment out everything from line 1 to line 119 and uncomment everything from line 123 up until lin 171.
 2. Open <a href="https://github.com/waveyboym/Chat-App/blob/main/Fiddle%20Chat%20App/src/App.css">App.css</a> and at line 131, 140 and 158 where there is a comment saying /*change to 660px when using OS title bar, change to 700px when using custom*/, change the values to 660px, that is change ```min-height: 700px;``` to ```min-height: 660px;``` or example.
-3. Open <a href="https://github.com/waveyboym/Chat-App/blob/main/Fiddle%20Chat%20App/src/styles/_constantMixins.scss">_constantMixins.scss</a> and at line 158 change \ ```$title-bar-height: 40px;//change to 0px when using OS title bar, change to 40px when using custom title bar``` \ to \ ```$title-bar-height: 0px;//change to 0px when using OS title bar, change to 40px when using custom title bar```
+3. Open <a href="https://github.com/waveyboym/Chat-App/blob/main/Fiddle%20Chat%20App/src/styles/_constantMixins.scss">_constantMixins.scss</a> and at line 158 change: \
+```$title-bar-height: 40px;//change to 0px when using OS title bar, change to 40px when using custom title bar``` \ to
+```$title-bar-height: 0px;//change to 0px when using OS title bar, change to 40px when using custom title bar``` \
 4. Open <a href="https://github.com/waveyboym/Chat-App/blob/main/Fiddle%20Chat%20App/src-tauri/tauri.conf.json">tauri.conf.json</a> and replace everything in that file with the code found in <a href="https://github.com/waveyboym/Chat-App/blob/main/Fiddle%20Chat%20App/src-tauri/tauriconfijson.txt">tauriconfijson.txt</a>, line 109 - line 204. It is titled under "TAURI CONFI FOR NON-FRAMELESS WINDOW"
 5. You are done and may now launch the app with ```npm run tauri dev```
 
 # Adding more colour themes
-1. To add another colour theme, first go to <a href="https://github.com/waveyboym/Chat-App/blob/main/Fiddle%20Chat%20App/src/components/sub_components/Themes.tsx">Themes.tsx</a> and going to line 155 and copying aand pasting the code above it, i looks like this \ ```<div className="theme-selector">
+1. To add another colour theme, first go to <a href="https://github.com/waveyboym/Chat-App/blob/main/Fiddle%20Chat%20App/src/components/sub_components/Themes.tsx">Themes.tsx</a> and go to line 155 and copy and paste the code above it; it looks like this :
+```
+<div className="theme-selector">
             <motion.div 
               className={themeCol === "light-yellow-col" ? "colour-circle selected-colour-circle" : "colour-circle"}
               id="light-yellow-col" 
@@ -80,15 +84,18 @@ more information about rules in your database: https://firebase.google.com/docs/
               onClick={() => changeThemeColours("light-yellow-col", "lyellow")}>
             </motion.div>
             <h3>Light yellow theme</h3>
-          </div>```
-2. Change the parametes to suite your needs fo the colour you want to create.
-3. Go to <a href="https://github.com/waveyboym/Chat-App/blob/main/Fiddle%20Chat%20App/src/App.tsx">App.tsx</a> and at line 28 add the colour name of your colour, eg "lgreen" was chosen above, so lyellow would be added as another colourtheme to compare \ ```colourtheme === "light" || colourtheme === "lpink" || colourtheme === "lred" || colourtheme === "lgreen" || colourtheme === "lyellow"```
+          </div>
+```
+2. Change the parameters to suite your needs for the colour you want to create.
+3. Go to <a href="https://github.com/waveyboym/Chat-App/blob/main/Fiddle%20Chat%20App/src/App.tsx">App.tsx</a> and at line 28 add the colour name of your colour, eg "lgreen" was chosen above, so lyellow would be added as another colourtheme to compare: 
+```colourtheme === "light" || colourtheme === "lpink" || colourtheme === "lred" || colourtheme === "lgreen" || colourtheme === "lyellow"```
 4. Do the same thing as above at line 33 in the same file
 5. Go to <a href="https://github.com/waveyboym/Chat-App/blob/main/Fiddle%20Chat%20App/src/styles/Settings.scss">Settings.scss</a> and at line 448 add the class name of the theme-selector you created and it's corresponding colour, eg ```#light-yellow-col{background: #f8e962;}```
 6. Go to <a href="https://github.com/waveyboym/Chat-App/blob/main/Fiddle%20Chat%20App/src/styles/_constantMixins.scss">_constantMixins.scss</a> and depending on whether or not the colour you created is a darker or lighter colour, copy all the code in root, that is line 1 to 14 or line 16 to 29 and paste it at line 131.
 7. Name ```[data-theme='dgreen']``` with the name of your colour, eg ```[data-theme='lyellow']```. Make sure this matches otherwise the colours won't reflect when you change the theme.
-8. Change the three variables, --root-dark-side-bar-col,
-    --root-top-most-app-draggable-sec and 
+8. Change the three variables, \
+    --root-dark-side-bar-col, \
+    --root-top-most-app-draggable-sec and  \
     --root-lighter-side-bar-col by adjusting their colours in the section of code you just copied over to suit your needs.
 9. You are done and may now launch the app with ```npm run tauri dev```
 
