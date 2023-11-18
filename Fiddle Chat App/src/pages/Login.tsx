@@ -4,10 +4,11 @@ import { app_banner_small, app_logo_small, social_friendsvg, blob} from "../proj
 import {Signupform, Loginform, Resetpswd, ResetpswdConfirm} from "../components/sub_components";
 import { useAuth } from "../contexts/Authcontext";
 import {  MutatingDots } from  'react-loader-spinner';
+import { authProviderType } from '../types';
 
 export default function Login() {
     const [currentPage, setPage] = useState<string>("signup");
-    const {isLoading}: any = useAuth();
+    const {isLoading}: authProviderType = useAuth();
 
     function changeToSignUpFrom(){setPage("signup");}
 

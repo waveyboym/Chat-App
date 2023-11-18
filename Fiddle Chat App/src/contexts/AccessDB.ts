@@ -2,6 +2,7 @@ import { deleteUser, updatePassword, updateEmail, User } from "firebase/auth";
 import { auth, db, storage } from "../firebase";
 import { doc, updateDoc, getDoc, setDoc, Timestamp, collection, addDoc, deleteDoc, increment, DocumentData, DocumentReference, DocumentSnapshot } from "firebase/firestore"; 
 import { ref, uploadBytesResumable, getDownloadURL, StorageReference, UploadTask } from "firebase/storage";
+import { personalDetailsForm } from "../types";
 const validEmail: RegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const validPassword: RegExp = new RegExp('^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,}$');
 const validusername: RegExp = new RegExp('^(?=.*?[a-z]).{4,}$');
@@ -10,18 +11,8 @@ const OneHourMarkMS: number = 3600000;
 
 function getElapsedMilliSeconds(dateString: any){   return Math.abs(new Date().getTime() - new Date(dateString).getTime());}
 
-export const changePersonalDetails = async(obj : {
-    oldData: any,
-    newData: {
-      profile: any,
-      uid: string,
-      username: string,
-      password: string;
-      email: string,
-      dob: string,
-      pronouns: string,
-      position: string
-}}) => {
+export const changePersonalDetails = async(obj : {oldData: DocumentData | null,newData: personalDetailsForm}) => {
+    if(obj.oldData === null)return "User object is null";
     const oldDetails = obj.oldData;
     const newDetails = obj.newData;
 
@@ -163,7 +154,8 @@ const updateUserEmail = (newEmail: string) => {
     return "SUCCESS";
 }
 
-export const sendFriendRequestTo = async(obj: {currentUser: any, friendId: string}) => {
+export const sendFriendRequestTo = async(obj: {currentUser: DocumentData | null, friendId: string}) => {
+    if(obj.currentUser === null)return "User object is null";
     const thisuser = obj.currentUser;
     const friendId = obj.friendId;
 

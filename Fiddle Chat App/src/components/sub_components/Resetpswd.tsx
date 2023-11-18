@@ -4,6 +4,7 @@ import { emailopened } from "../../projectAssets";
 import { motion } from "framer-motion";
 import { sendResetpswdEmail} from "../../contexts/FormHandler";
 import { useAuth } from "../../contexts/Authcontext";
+import { authProviderType } from '../../types';
 const startResetpwdState = {email: ''}
 
 type ResetpswdProps = {callback_ResetConfirm: () => void; callback_LoginForm: () => void;}
@@ -12,7 +13,7 @@ const Resetpswd : FunctionComponent<ResetpswdProps> = ({callback_ResetConfirm, c
     const [form, setform] = useState<{email: string}>(startResetpwdState);
     const [err, setErr] = useState<boolean>(false);
     const [error_msg, setError_msg] = useState<string>("");
-    const {setLoadingTrue, setLoadingFalse}: any = useAuth();
+    const {setLoadingTrue, setLoadingFalse}: authProviderType = useAuth();
 
     function handleChange(e: any){setform({ ... form, [e.target.name] : e.target.value});}
 

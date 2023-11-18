@@ -3,13 +3,14 @@ import {Messages, Settings, AddFriend, JoinRoom, Requests, SMNavbar, MsgNavBar, 
 import { useState, FunctionComponent } from 'react';
 import { useAuth } from "../contexts/Authcontext";
 import { Circles } from  'react-loader-spinner';
+import { authProviderType } from "../types";
 
 type HomeProps = {curr_Theme: string, darklight: string, changeTheme: (arg: string) => void;}
 
 const Chats : FunctionComponent<HomeProps> = ({curr_Theme, darklight, changeTheme}) => {
   const [current_state, set_current_state] = useState<string>("home");
   const [messageAccess, set_messageAccess] = useState<string>("");
-  const {isLoading}: any = useAuth();
+  const {isLoading}: authProviderType = useAuth();
 
   function unselectMsg(){
     let oldSelecteed = document.querySelector(".selected-contact-msg");

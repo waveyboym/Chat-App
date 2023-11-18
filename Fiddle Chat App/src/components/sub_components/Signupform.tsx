@@ -1,12 +1,12 @@
 import {useState, FunctionComponent} from 'react';
 import "../../styles/Login.scss";
-import { facebooksvg, githubsvg,
-    googlesvg, twittersvg} from "../../projectAssets";
+import { githubsvg, googlesvg} from "../../projectAssets";
 import { motion } from "framer-motion";
-import { createNewUser, googleprovider, facebookprovider, twitterprovider, githubprovider } from "../../contexts/FormHandler";
-import { signInWithPopup } from "firebase/auth";
+import { createNewUser, googleprovider, githubprovider } from "../../contexts/FormHandler";
+import { UserCredential, signInWithPopup } from "firebase/auth";
 import { auth } from "../../firebase";
 import { useAuth } from '../../contexts/Authcontext';
+import { authProviderType } from '../../types';
 
 const startSignUpState = {
     emailaddress: '',
@@ -20,7 +20,7 @@ const Signupform : FunctionComponent<SignupformProps> = ({callback_LoginForm}) =
     const [form, setform] = useState<{emailaddress: string, password: string, username: string}>(startSignUpState);
     const [err, setErr] = useState<boolean>(false);
     const [error_msg, setError_msg] = useState<string>("");
-    const {setLoadingTrue, setLoadingFalse}: any = useAuth();
+    const {setLoadingTrue, setLoadingFalse}: authProviderType = useAuth();
 
     function handleChange(e: any){setform({ ... form, [e.target.name] : e.target.value});}
 
@@ -36,12 +36,15 @@ const Signupform : FunctionComponent<SignupformProps> = ({callback_LoginForm}) =
         setError_msg(message);
     }
 
-    function signUpProviders(providername: string){
+    async function signUpProviders(providername: string){
         setLoadingTrue();
-        if(providername === "google")signInWithPopup(auth, googleprovider);
-        else if(providername === "facebook")signInWithPopup(auth, facebookprovider);
-        else if(providername === "twitter")signInWithPopup(auth, twitterprovider);
-        else if(providername === "github")signInWithPopup(auth, githubprovider);
+        if(providername === "google"){
+            const result: UserCredential = await signInWithPopup(auth, googleprovider);
+            console.log(result);
+        }
+        else if(providername === "github"){
+            signInWithPopup(auth, githubprovider);
+        }
     }
 
     return (
@@ -72,22 +75,12 @@ const Signupform : FunctionComponent<SignupformProps> = ({callback_LoginForm}) =
                 <motion.div className="auth-button" whileHover={{ opacity: 0.8 }} whileTap={{ scale: 0.97 }}
                 onClick={() => { signUpProviders("google");}}>
                     <img src={googlesvg} alt="google" className="google-icon-g" />
-                    <h2>Google</h2>
-                </motion.div>
-                <motion.div className="auth-button" whileHover={{ opacity: 0.8 }} whileTap={{ scale: 0.97 }}
-                onClick={() => { signUpProviders("facebook");}}>
-                    <img src={facebooksvg} alt="facebook" className="facebook-icon-g" />
-                    <h2>Facebook</h2>
-                </motion.div>
-                <motion.div className="auth-button" whileHover={{ opacity: 0.8 }} whileTap={{ scale: 0.97 }}
-                onClick={() => { signUpProviders("twitter");}}>
-                    <img src={twittersvg} alt="twitter" className="twitter-icon-g" />
-                    <h2>Twitter</h2>
+                    <h2>Google Sign Up</h2>
                 </motion.div>
                 <motion.div className="auth-button" whileHover={{ opacity: 0.8 }} whileTap={{ scale: 0.97 }}
                 onClick={() => { signUpProviders("github");}}>
                     <img src={githubsvg} alt="github" className="github-icon-g" />
-                    <h2>Github</h2>
+                    <h2>Github Sign Up</h2>
                 </motion.div>
             </div>
             {err && (<h6 className="error-display">{error_msg}</h6>)}

@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import Tooltip from '@mui/material/Tooltip';
 import Zoom from '@mui/material/Zoom';
 import { useAuth } from '../contexts/Authcontext';
+import { authProviderType } from '../types';
 
 type SMNavbarProps = {
   darklight: string,
@@ -27,7 +28,7 @@ const SMNavbar : FunctionComponent<SMNavbarProps> = ({
   set_accessRqsts,
   set_accessStngs
 }) => {
-  const {userDB}: any = useAuth();
+  const {userDB}: authProviderType = useAuth();
 
   return (
     <div className="SMNavbar-nav">

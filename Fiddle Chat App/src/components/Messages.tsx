@@ -13,6 +13,7 @@ import { handleSendingPrivateMessage, handleDeleteFriend } from "../contexts/Acc
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
 import useLocalStorage from 'use-local-storage';
+import { authProviderType } from '../types';
 
 const variants = {
   open: { opacity: 1, y: "0px"},
@@ -23,7 +24,7 @@ type MessagesProps = {msgRequestID: string, darklight: string, set_accessHome: (
 
 const Messages : FunctionComponent<MessagesProps> = ({msgRequestID, darklight, set_accessHome}) => {
   const ref = useRef<null | HTMLDivElement>(null);
-  const {userDB}: any = useAuth();
+  const { userDB }: authProviderType = useAuth();
 
   const [friendsProfile, setfriendsProfile] = useState<{
     id: string, 
@@ -106,12 +107,12 @@ const Messages : FunctionComponent<MessagesProps> = ({msgRequestID, darklight, s
 
   const getMessageRef = (): DocumentReference<DocumentData> => {
     if(msgHolder.current === true){
-      const userRef: DocumentReference<DocumentData> = doc(db, "users", userDB.uid);
+      const userRef: DocumentReference<DocumentData> = doc(db, "users", userDB!.uid);
       return doc(userRef, "messages", msgRequestID);
     }
     else{
       const friendRef:  DocumentReference<DocumentData> = doc(db, "users", msgRequestID);
-      return doc(friendRef, "messages", userDB.uid);
+      return doc(friendRef, "messages", userDB!.uid);
     }
   }
 
@@ -130,12 +131,12 @@ const Messages : FunctionComponent<MessagesProps> = ({msgRequestID, darklight, s
         }[] = [];
 
       querySnapshot.forEach((currentdoc) => {
-        if(currentdoc.data().senderID === userDB.uid){
+        if(currentdoc.data().senderID === userDB!.uid){
           messagesarr.push({
             msgid: currentdoc.id,
-            id: userDB.uid,
-            profile: userDB.displayPhoto,
-            name: userDB.username,
+            id: userDB!.uid,
+            profile: userDB!.displayPhoto,
+            name: userDB!.username,
             latest_msg: currentdoc.data().messageSent,
             date_sent: currentdoc.data().timestamp
           });
@@ -163,7 +164,7 @@ const Messages : FunctionComponent<MessagesProps> = ({msgRequestID, darklight, s
         if(onloadComplete.current === true)return;
         onloadComplete.current = true;
         //init basic user profile data
-        const userRef = doc(db, "users", userDB.uid);
+        const userRef = doc(db, "users", userDB!.uid);
         const friendRef: DocumentReference<DocumentData> = doc(db, "users", msgRequestID);
         const msg = await initFriend(friendRef);
         //prepare ref to retrieve messages from
@@ -182,7 +183,7 @@ const Messages : FunctionComponent<MessagesProps> = ({msgRequestID, darklight, s
         }
     }
     
-    userDB && userDB.uid ? loadSetup() : () => {};
+    userDB! && userDB!.uid ? loadSetup() : () => {};
   }, [msgRequestID])
 
   return (
@@ -230,7 +231,7 @@ const Messages : FunctionComponent<MessagesProps> = ({msgRequestID, darklight, s
                                                   userName={messageobj.name} 
                                                   message={messageobj.latest_msg} 
                                                   timesent={messageobj.date_sent}
-                                                  signedInUserID={userDB.uid}
+                                                  signedInUserID={userDB!.uid}
                                                   />)}
               {blockMSG ? 
                 <h3 className='chat-messages-begin'>{friendsProfile.username} has deleted you from their friend list</h3>
@@ -245,11 +246,11 @@ const Messages : FunctionComponent<MessagesProps> = ({msgRequestID, darklight, s
               { 
                   (
                   () => {
-                          if(userDB.displayPhoto !== null)
+                          if(userDB!.displayPhoto !== null)
                           {
-                              return <img className="icon" src={userDB.displayPhoto} referrerPolicy="no-referrer"/>;
+                              return <img className="icon" src={userDB!.displayPhoto} referrerPolicy="no-referrer"/>;
                           }
-                          else if(userDB.displayPhoto === null)
+                          else if(userDB!.displayPhoto === null)
                           {
                               if(darklight === 'light')
                               {

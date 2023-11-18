@@ -4,11 +4,12 @@ import { doc, collection, query, orderBy, onSnapshot, DocumentData, DocumentRefe
 import { db } from "../firebase";
 import { useEffect, useState, useRef, FunctionComponent } from 'react';
 import { FriendComponent } from "./sub_components";
+import { authProviderType } from "../types";
 
 type RequestsProps = {darklight: string,}
 
 const FriendList : FunctionComponent<RequestsProps> = ({ darklight }) => {
-    const {userDB}: any = useAuth();
+    const {userDB}: authProviderType = useAuth();
     const friendsLoaded = useRef<boolean>(false);
 
     const [friendslist, setFriendslist] = useState<{id: string, username: string, profile: string | null}[]>([]);
@@ -17,7 +18,7 @@ const FriendList : FunctionComponent<RequestsProps> = ({ darklight }) => {
         const getAllFriends = async() => {
             if(friendsLoaded.current === true)return;
             friendsLoaded.current = true;
-            const userRef: DocumentReference<DocumentData> = doc(db, "users", userDB.uid);
+            const userRef: DocumentReference<DocumentData> = doc(db, "users", userDB!.uid);
             const q: Query<DocumentData> = query(collection(userRef, "friends"), orderBy("timestamp", "asc"));
 
             const unsub: Unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -35,7 +36,7 @@ const FriendList : FunctionComponent<RequestsProps> = ({ darklight }) => {
             return () =>{unsub();}
         }
         
-        userDB.uid && getAllFriends()
+        userDB!.uid && getAllFriends()
     }, [])
 
     return (

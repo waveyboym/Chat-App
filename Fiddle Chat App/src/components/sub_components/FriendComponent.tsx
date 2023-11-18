@@ -4,6 +4,7 @@ import {user_LM, user_DM, deletefriend} from "../../projectAssets";
 import { useAuth } from '../../contexts/Authcontext';
 import {handleDeleteFriend} from "../../contexts/AccessDB";
 import { FunctionComponent } from 'react';
+import { authProviderType } from "../../types";
 
 type FriendComponentProps = {
     uid: string,
@@ -13,7 +14,7 @@ type FriendComponentProps = {
 }
 
 const FriendComponent : FunctionComponent<FriendComponentProps> = ({uid, profile, darklight, username}) => {
-    const {userDB}: any = useAuth();
+    const {userDB}: authProviderType = useAuth();
 
     function deleteFriend(){
         const infoObj = {

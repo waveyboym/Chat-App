@@ -4,6 +4,7 @@ import {user_LM, user_DM, addfriend_green, deletefriend} from "../../projectAsse
 import { useAuth } from '../../contexts/Authcontext';
 import {acceptFriendRequest, deleteFriendRequest} from "../../contexts/AccessDB";
 import { FunctionComponent } from 'react';
+import { authProviderType } from "../../types";
 
 type RequestComponentProps = {
     uid: string,
@@ -13,7 +14,7 @@ type RequestComponentProps = {
 }
 
 const RequestComponent : FunctionComponent<RequestComponentProps> = ({uid, profile, darklight, username}) => {
-    const {userDB}: any = useAuth();
+    const {userDB}: authProviderType = useAuth();
 
     function acceptRequest(){
         const infoObj = {

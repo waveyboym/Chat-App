@@ -9,31 +9,24 @@ import { auth } from "../../firebase";
 import Tooltip from '@mui/material/Tooltip';
 import Zoom from '@mui/material/Zoom';
 import { changePersonalDetails, deleteAccount } from "../../contexts/AccessDB";
+import { authProviderType, personalDetailsForm } from "../../types";
+import { DocumentData } from "firebase/firestore";
 
 type PersonalDetailsProps = {darklight: string}
 
 const PersonalDetails : FunctionComponent<PersonalDetailsProps> = ({darklight}) => {
 
-  const {userDB, setLoadingTrue}: any = useAuth();
+  const {userDB, setLoadingTrue}: authProviderType = useAuth();
 
-  const [form, setform] = useState<{
-    profile: string | null,
-    uid: string,
-    username: string,
-    password: string;
-    email: string,
-    dob: string,
-    pronouns: string,
-    position: string
-}>({
-    profile: userDB.displayPhoto,
-    uid: userDB.uid,
-    username: userDB.username,
+  const [form, setform] = useState<personalDetailsForm>({
+    profile: userDB!.displayPhoto,
+    uid: userDB!.uid,
+    username: userDB!.username,
     password: '',
-    email: userDB.email,
-    dob: userDB.dateOfBirth,
-    pronouns: userDB.pronouns,
-    position: userDB.position,
+    email: userDB!.email,
+    dob: userDB!.dateOfBirth,
+    pronouns: userDB!.pronouns,
+    position: userDB!.position,
   });
 
   const [showpassword, set_showpassword] = useState<boolean>(false);
@@ -50,17 +43,9 @@ const PersonalDetails : FunctionComponent<PersonalDetailsProps> = ({darklight}) 
   function submitChanges(){
     setErr(false); 
     const obj: {
-      oldData: any,
-      newData: {
-        profile: any,
-        uid: string,
-        username: string,
-        password: string;
-        email: string,
-        dob: string,
-        pronouns: string,
-        position: string
-    }} = 
+      oldData: DocumentData | null,
+      newData: personalDetailsForm
+    } = 
     {
       oldData: userDB,
       newData: form
@@ -93,11 +78,11 @@ const PersonalDetails : FunctionComponent<PersonalDetailsProps> = ({darklight}) 
             { 
               (
               () => {
-                      if(userDB.displayPhoto !== null)
+                      if(userDB!.displayPhoto !== null)
                       {
-                          return <img src={userDB.displayPhoto} alt="icon" className="icon" referrerPolicy="no-referrer"/>;
+                          return <img src={userDB!.displayPhoto} alt="icon" className="icon" referrerPolicy="no-referrer"/>;
                       }
-                      else if(userDB.displayPhoto === null)
+                      else if(userDB!.displayPhoto === null)
                       {
                           if(darklight === 'light')
                           {
@@ -127,7 +112,7 @@ const PersonalDetails : FunctionComponent<PersonalDetailsProps> = ({darklight}) 
             <h3>Username</h3>
             <input name="username" type="text" onChange={handleChange} value={form.username}/>
         </div>
-        { userDB.loginmethod === "form" ?
+        { userDB!.loginmethod === "form" ?
             <div className="pd-form-object">
                 <h3>Password</h3>
                 <input name="password" 
@@ -162,7 +147,7 @@ const PersonalDetails : FunctionComponent<PersonalDetailsProps> = ({darklight}) 
             </div>
           </Tooltip>
         }
-        { userDB.loginmethod === "form" ?
+        { userDB!.loginmethod === "form" ?
           <div className="pd-form-object">
               <h3>Email</h3>
               <input name="email" type="text" onChange={handleChange} value={form.email} />
@@ -196,25 +181,25 @@ const PersonalDetails : FunctionComponent<PersonalDetailsProps> = ({darklight}) 
             <h2>Save Changes</h2>
             <img src={save} alt="save-changes"/>
           </motion.div>
-          { userDB.loginmethod === "google" ?
+          { userDB!.loginmethod === "google" ?
               <motion.div className="google-logout" whileTap={{scale: 0.97}} whileHover={{opacity: 0.9}}
                 onClick={signOutOfApp}>
                 <h2>Google Log Out</h2>
                 <img src={google_small} alt="google"/>
               </motion.div>
-            : userDB.loginmethod === "facebook" ?
+            : userDB!.loginmethod === "facebook" ?
               <motion.div className="facebook-logout" whileTap={{scale: 0.97}} whileHover={{opacity: 0.9}}
               onClick={signOutOfApp}>
                 <h2>Facebook Log Out</h2>
                 <img src={facebook_small} alt="facebook"/>
               </motion.div>
-            : userDB.loginmethod === "twitter" ?
+            : userDB!.loginmethod === "twitter" ?
               <motion.div className="twitter-logout" whileTap={{scale: 0.97}} whileHover={{opacity: 0.9}}
               onClick={signOutOfApp}>
                 <h2>Twitter Log Out</h2>
                 <img src={twitter_small} alt="twitter"/>
               </motion.div>
-            : userDB.loginmethod === "github" ?
+            : userDB!.loginmethod === "github" ?
               <motion.div className="github-logout" whileTap={{scale: 0.97}} whileHover={{opacity: 0.9}}
               onClick={signOutOfApp}>
                 <h2>Github Log Out</h2>

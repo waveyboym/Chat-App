@@ -1,19 +1,12 @@
-import React, {useContext, useState, useEffect} from "react";
+import {useContext, useState, useEffect, createContext} from "react";
 import { useNavigate } from "react-router-dom";
 import { DocumentData, doc, onSnapshot } from "firebase/firestore";
 import { db, auth } from "../firebase";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { loginResultsForm, loginResults__ExtProv } from "./FormHandler";
+import { authProviderType } from "../types";
 
-const AuthContext = React.createContext<{   
-        user: User | null,
-        UserUID: string | null,
-        userDB: DocumentData | null, 
-        isLoading: boolean, 
-        setLoadingTrue: () => void, 
-        setLoadingFalse: () => void
-    } | null
-    >(null);
+const AuthContext = createContext<authProviderType>({user: null, UserUID: null, userDB: null, isLoading: false, setLoadingTrue: () => {}, setLoadingFalse: () => {}});
 
 export const useAuth = () => useContext(AuthContext);
 
@@ -42,11 +35,16 @@ export const AuthProvider = ({ children }: any) => {
             set_Loading(true);
             setUser(loggeduser);
             if (user){ 
-                navigateToCorrectProvider(user);
-                SET__UserDB();
-                setUserUID(user.uid);
-                navigate("/chat");
-                set_Loading(false);
+                const res: boolean = navigateToCorrectProvider(user);
+                if(res === true){
+                    SET__UserDB();
+                    setUserUID(user.uid);
+                    navigate("/chat");
+                    set_Loading(false);
+                }
+                else{
+                    set_Loading(false);
+                }
             }
             else {
                 navigate("/");/* User is signed out*/
@@ -64,14 +62,15 @@ export const AuthProvider = ({ children }: any) => {
     )
 }
 
-function navigateToCorrectProvider(userobj: any){
-    if(userobj.providerData === null || userobj.providerData[0] === null)return;
+function navigateToCorrectProvider(userobj: any): boolean{
+    if(userobj.providerData === null || userobj.providerData[0] === null)return false;
     
     if(userobj.providerData[0].providerId === "google.com")loginResults__ExtProv("google");
-    else if(userobj.providerData[0].providerId === "facebook.com")loginResults__ExtProv("facebook");
-    else if(userobj.providerData[0].providerId === "twitter.com")loginResults__ExtProv("twitter");
     else if(userobj.providerData[0].providerId === "github.com")loginResults__ExtProv("github");
     else if(userobj.providerData[0].providerId === "password") loginResultsForm();
+    else return false;
+
+    return true;
 }
 
 /*EmailAuthProviderID: password

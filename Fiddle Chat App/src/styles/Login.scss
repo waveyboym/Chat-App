@@ -186,17 +186,16 @@ $login-btn-col-active: #6630fa;
                         display: flex;
                         justify-content: center;
                         align-items: center;
-                        width: 175px;
+                        width: 365px;
                         height: 57px;
                         border-radius: 15px;
                         background: $external-login-btn-col;
                         h2{
                             color: $gray-text-col;
                             font-size: 30px;
+                            margin-left: 5px;
                         }
                     }
-
-                    .auth-button:nth-child(even){margin-left: 15px;}
 
                     .auth-button:active{
                         background: $external-login-btn-col-active;

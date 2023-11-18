@@ -4,6 +4,7 @@ import { useState, FunctionComponent } from 'react';
 import "../styles/SmallComp.scss";
 import { useAuth } from '../contexts/Authcontext';
 import { handleJoinRoom, handleCreateRoom } from "../contexts/AccessDB";
+import { authProviderType } from "../types";
 
 type JoinRoomProps = {set_accessRoom: (arg: string) => void;}
 
@@ -12,7 +13,7 @@ const JoinRoom : FunctionComponent<JoinRoomProps> = ({set_accessRoom}) => {
   const [roomName, setRoomName] = useState<{roomName: string}>({roomName: ''});
   const [err, setErr] = useState<boolean>(false);
   const [errMsg, seterrMsg] = useState<string>("");
-  const {userDB}: any = useAuth();
+  const {userDB}: authProviderType = useAuth();
 
   function handleChange(e: any){setform({ ... form, [e.target.name] : e.target.value});}
 

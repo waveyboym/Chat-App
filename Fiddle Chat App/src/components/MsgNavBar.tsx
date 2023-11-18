@@ -6,6 +6,7 @@ import { useAuth } from '../contexts/Authcontext';
 import { doc, collection, query, orderBy, onSnapshot, limit, getDocs, getDoc, DocumentReference, DocumentData, Query, QuerySnapshot, DocumentSnapshot, Unsubscribe, where } from "firebase/firestore";
 import { db } from "../firebase";
 import { motion } from "framer-motion";
+import { authProviderType } from "../types";
 
 const variants = {
   open: { height: "calc(100vh - 145px)", },//change this value to "calc(100vh - 105px)" when using OS title bar otherwise "calc(100vh - 145px)"
@@ -23,7 +24,7 @@ type MsgNavBarProps = {
 const MsgNavBar : FunctionComponent<MsgNavBarProps> = ({setTheme, darklight, currently_accessed_state, set_accessMsg, set_accessRoom}) => {
 
   const [isSearching, set_isSearching] = useState<boolean>(false);
-  const {UserUID}: any = useAuth();
+  const {UserUID}: authProviderType = useAuth();
   const [openRoomNav, setOpenRoomNav] = useState<boolean>(false);
   const contactsLoaded = useRef<boolean>(false);
   const roomsLoaded = useRef<boolean>(false);
@@ -77,7 +78,7 @@ const MsgNavBar : FunctionComponent<MsgNavBarProps> = ({setTheme, darklight, cur
     set_isSearching(false);
     setsearchText("");
     if(openRoomNav){
-      const userRef: DocumentReference<DocumentData> = doc(db, "users", UserUID);
+      const userRef: DocumentReference<DocumentData> = doc(db, "users", UserUID!);
       const q: Query<DocumentData> = query(collection(userRef, "rooms"));
 
       setroomlist([]);
@@ -97,7 +98,7 @@ const MsgNavBar : FunctionComponent<MsgNavBarProps> = ({setTheme, darklight, cur
       });
     }
     else{
-      const userRef: DocumentReference<DocumentData> = doc(db, "users", UserUID);
+      const userRef: DocumentReference<DocumentData> = doc(db, "users", UserUID!);
       const q: Query<DocumentData> = query(collection(userRef, "friends"), orderBy("timestamp", "desc"), limit(25));
 
       const querySnapshot = await getDocs(q);
@@ -114,7 +115,7 @@ const MsgNavBar : FunctionComponent<MsgNavBarProps> = ({setTheme, darklight, cur
         else{
           //go to friend ref with message and push to array from them
           const friendRef: DocumentReference<DocumentData> = doc(db, "users", currentdoc.data().friendID);
-          const messagesRef: DocumentReference<DocumentData> = doc(friendRef, "messages", UserUID);
+          const messagesRef: DocumentReference<DocumentData> = doc(friendRef, "messages", UserUID!);
           await createContactObj(messagesRef, currentdoc.data().friendID);
         }
       })
@@ -135,7 +136,7 @@ const MsgNavBar : FunctionComponent<MsgNavBarProps> = ({setTheme, darklight, cur
       if(contactsLoaded.current === true)return;
       contactsLoaded.current = true;
 
-      const userRef: DocumentReference<DocumentData> = doc(db, "users", UserUID);
+      const userRef: DocumentReference<DocumentData> = doc(db, "users", UserUID!);
       const q: Query<DocumentData> = query(collection(userRef, "friends"), orderBy("timestamp", "desc"), limit(25));
 
       const unsub: Unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -152,7 +153,7 @@ const MsgNavBar : FunctionComponent<MsgNavBarProps> = ({setTheme, darklight, cur
           else{
             //go to friend ref with message and push to array from them
             const friendRef: DocumentReference<DocumentData> = doc(db, "users", currentdoc.data().friendID);
-            const messagesRef: DocumentReference<DocumentData> = doc(friendRef, "messages", UserUID);
+            const messagesRef: DocumentReference<DocumentData> = doc(friendRef, "messages", UserUID!);
             await createContactObj(messagesRef, currentdoc.data().friendID);
           }
         })
@@ -184,7 +185,7 @@ const MsgNavBar : FunctionComponent<MsgNavBarProps> = ({setTheme, darklight, cur
     if(roomsLoaded.current === true)return;
     roomsLoaded.current = true;
 
-    const userRef: DocumentReference<DocumentData> = doc(db, "users", UserUID);
+    const userRef: DocumentReference<DocumentData> = doc(db, "users", UserUID!);
     const unsub: Unsubscribe = onSnapshot(collection(userRef, "rooms"), (roomquery) => {
       setroomlist([]);
       roomquery.forEach(async(roomdoc) => {
@@ -238,8 +239,8 @@ const MsgNavBar : FunctionComponent<MsgNavBarProps> = ({setTheme, darklight, cur
       await getAllRooms();
     }
     
-    UserUID ? loadsetup() : () => {}
-  }, [UserUID])
+    UserUID! ? loadsetup() : () => {}
+  }, [UserUID!])
 
   return (
     <div className="MsgNavBar-navbar" data-theme={setTheme}>

@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { useState } from 'react';
 import { useAuth } from '../contexts/Authcontext';
 import { sendFriendRequestTo } from "../contexts/AccessDB";
+import { authProviderType } from "../types";
+import { DocumentData } from "firebase/firestore";
 
 const AddFriend = () => {
 
@@ -12,7 +14,7 @@ const AddFriend = () => {
   const [sentR, setsentR] = useState<boolean>(false);
   const [errMsg, seterrMsg] = useState<string>("");
 
-  const {userDB}: any = useAuth();
+  const {userDB}: authProviderType = useAuth();
 
   function handleChange(e: any){setform({ ... form, [e.target.name] : e.target.value});}
 
@@ -27,7 +29,7 @@ const AddFriend = () => {
     }
 
     const infoObj: {
-      currentUser: any,
+      currentUser: DocumentData | null,
       friendId: string
     } = {
       currentUser: userDB,
@@ -57,7 +59,7 @@ const AddFriend = () => {
       <div className="add-friend-section">
         <h2>Enter your friends User ID here</h2>
         <input name="userID" type="text" onChange={handleChange}/>
-        <p>Example of a User ID: {userDB.uid}</p>
+        <p>Example of a User ID: {userDB!.uid}</p>
         <motion.div className="send-request-btn" whileHover={{opacity: 0.9}} whileTap={{scale: 0.97}} onClick={sendRequest}>
           <h3>Send Request</h3>
           <img src={addfriend_green} alt="send-request"/>

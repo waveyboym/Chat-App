@@ -1,11 +1,12 @@
 import {useState, FunctionComponent} from 'react';
 import "../../styles/Login.scss";
-import { facebooksvg, githubsvg, googlesvg, twittersvg} from "../../projectAssets";
+import { githubsvg, googlesvg} from "../../projectAssets";
 import { motion } from "framer-motion";
-import { regTestSignIn, signInUser, googleprovider, facebookprovider, twitterprovider, githubprovider} from "../../contexts/FormHandler";
+import { regTestSignIn, signInUser, googleprovider, githubprovider} from "../../contexts/FormHandler";
 import { signInWithPopup } from "firebase/auth";
 import { auth } from "../../firebase";
 import { useAuth } from '../../contexts/Authcontext';
+import { authProviderType } from '../../types';
 
 const startLoginState = {
     password: '',
@@ -18,7 +19,7 @@ const Loginform : FunctionComponent<LoginformProps> = ({callback_resetpwd, callb
     const [form, setform] = useState<{password: string, emailaddress: string}>(startLoginState);
     const [err, setErr] = useState<boolean>(false);
     const [error_msg, setError_msg] = useState<string>("");
-    const {setLoadingTrue, setLoadingFalse}: any = useAuth();
+    const {setLoadingTrue, setLoadingFalse}: authProviderType = useAuth();
 
     function handleChange(e: any){setform({ ... form, [e.target.name] : e.target.value});}
 
@@ -47,8 +48,6 @@ const Loginform : FunctionComponent<LoginformProps> = ({callback_resetpwd, callb
     function loginProviders(providername: string){
         setLoadingTrue();
         if(providername === "google")signInWithPopup(auth, googleprovider);
-        else if(providername === "facebook")signInWithPopup(auth, facebookprovider);
-        else if(providername === "twitter")signInWithPopup(auth, twitterprovider);
         else if(providername === "github")signInWithPopup(auth, githubprovider);
     }
 
@@ -79,22 +78,12 @@ const Loginform : FunctionComponent<LoginformProps> = ({callback_resetpwd, callb
                 <motion.div className="auth-button" whileHover={{ opacity: 0.8 }} whileTap={{ scale: 0.97 }}
                 onClick={() => { loginProviders("google");}}>
                     <img src={googlesvg} alt="google" className="google-icon-g" />
-                    <h2>Google</h2>
-                </motion.div>
-                <motion.div className="auth-button" whileHover={{ opacity: 0.8 }} whileTap={{ scale: 0.97 }}
-                onClick={() => { loginProviders("facebook");}}>
-                    <img src={facebooksvg} alt="facebook" className="facebook-icon-g" />
-                    <h2>Facebook</h2>
-                </motion.div>
-                <motion.div className="auth-button" whileHover={{ opacity: 0.8 }} whileTap={{ scale: 0.97 }}
-                onClick={() => { loginProviders("twitter");}}>
-                    <img src={twittersvg} alt="twitter" className="twitter-icon-g" />
-                    <h2>Twitter</h2>
+                    <h2>Google Login</h2>
                 </motion.div>
                 <motion.div className="auth-button" whileHover={{ opacity: 0.8 }} whileTap={{ scale: 0.97 }}
                 onClick={() => { loginProviders("github");}}>
                     <img src={githubsvg} alt="github" className="github-icon-g" />
-                    <h2>Github</h2>
+                    <h2>Github Login</h2>
                 </motion.div>
             </div>
             {err && (<h6 className="error-display">{error_msg}</h6>)}

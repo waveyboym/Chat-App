@@ -6,6 +6,7 @@ import "../../styles/Room.scss";
 import {FunctionComponent} from "react";
 import { useAuth } from '../../contexts/Authcontext';
 import { sendFriendRequestTo } from "../../contexts/AccessDB";
+import { authProviderType } from '../../types';
 
 type RoomMemberProps = {
     id: string, 
@@ -16,10 +17,10 @@ type RoomMemberProps = {
 }
 
 const RoomMember : FunctionComponent<RoomMemberProps> = ({id, inroom, profile, darklight, username}) => {
-    const {userDB}: any = useAuth();
+    const {userDB}: authProviderType = useAuth();
 
     const sendFriendRequest = async() => {
-        if(userDB.uid === id)return;
+        if(userDB!.uid === id)return;
         const obj = {
             currentUser: userDB,
             friendId: id
@@ -59,7 +60,7 @@ const RoomMember : FunctionComponent<RoomMemberProps> = ({id, inroom, profile, d
                         </div>
                     </Tooltip>
                     <h2>{username}</h2>
-                    { userDB.uid !== id ?
+                    { userDB!.uid !== id ?
                         (<motion.div className="nav-icon" whileHover={{ opacity: 0.8 }} whileTap={{ scale: 0.97}} onClick={sendFriendRequest}>
                             {darklight === 'light'? <img src={addfriend_LM} alt="pronouns"/>
                             : <img src={addfriend_DM} alt="pronouns"/>}

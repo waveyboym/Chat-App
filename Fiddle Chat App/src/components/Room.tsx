@@ -14,6 +14,7 @@ import { handleSendingRoomMessage, handleLeaveRoom } from "../contexts/AccessDB"
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
 import useLocalStorage from 'use-local-storage';
+import { authProviderType } from '../types';
 
 const variants = {
     open: { opacity: 1, y: "0px"},
@@ -47,7 +48,7 @@ const Room : FunctionComponent<RoomProps> = ({darklight, roomRequestID, set_acce
     const ref = useRef<null | HTMLDivElement>(null);
     const contactsLoaded = useRef<boolean>(false);
     const messagesLoaded = useRef<boolean>(false);
-    const {userDB}: any = useAuth();
+    const {userDB}: authProviderType = useAuth();
     const [emojipickerchngr, set_emojipickerchngr] = useState<boolean>(false);
 
     function showEmojiPicker(){set_emojipickerchngr(!emojipickerchngr);}
@@ -205,7 +206,7 @@ const Room : FunctionComponent<RoomProps> = ({darklight, roomRequestID, set_acce
                                 userName={obj.name} 
                                 message={obj.latest_msg} 
                                 timesent={obj.date_sent}
-                                signedInUserID={userDB.uid}
+                                signedInUserID={userDB!.uid}
                                 darklight={darklight}
                                 />)}
                             <div ref={ref} className="chat-aligner-plus-room"></div>
@@ -216,11 +217,11 @@ const Room : FunctionComponent<RoomProps> = ({darklight, roomRequestID, set_acce
                             { 
                                 (
                                 () => {
-                                        if(userDB.displayPhoto !== null)
+                                        if(userDB!.displayPhoto !== null)
                                         {
-                                            return <img className="icon" src={userDB.displayPhoto} referrerPolicy="no-referrer"/>;
+                                            return <img className="icon" src={userDB!.displayPhoto} referrerPolicy="no-referrer"/>;
                                         }
-                                        else if(userDB.displayPhoto === null)
+                                        else if(userDB!.displayPhoto === null)
                                         {
                                             if(darklight === 'light')
                                             {

@@ -4,18 +4,19 @@ import { doc, collection, query, orderBy, onSnapshot, DocumentData, DocumentRefe
 import { db } from "../firebase";
 import { useEffect, useState, FunctionComponent } from 'react';
 import { RequestComponent } from "./sub_components";
+import { authProviderType } from "../types";
 
 type RequestsProps = {darklight: string,}
 
 const Requests : FunctionComponent<RequestsProps> = ({darklight}) => {
 
-    const {userDB}: any = useAuth();
+    const {userDB}: authProviderType = useAuth();
 
     const [Requestslist, setRequestslist] = useState<any[]>([]);//don't modify any type
     
     useEffect(() => {
         const getAllRequests = async() => {
-            const userRef: DocumentReference<DocumentData> = doc(db, "users", userDB.uid);
+            const userRef: DocumentReference<DocumentData> = doc(db, "users", userDB!.uid);
             const q: Query<DocumentData> = query(collection(userRef, "requests"), orderBy("timestamp", "desc"));
 
             const unsub: Unsubscribe = onSnapshot(q, (querySnapshot) => {setRequestslist(querySnapshot.docs);})
@@ -23,7 +24,7 @@ const Requests : FunctionComponent<RequestsProps> = ({darklight}) => {
             return () =>{unsub();}
         }
         
-        userDB.uid && getAllRequests()
+        userDB!.uid && getAllRequests()
     }, [])
 
     return (
