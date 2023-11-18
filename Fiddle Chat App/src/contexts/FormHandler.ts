@@ -1,14 +1,12 @@
 import { auth, db } from "../firebase";
 import { GoogleAuthProvider, createUserWithEmailAndPassword,
     signInWithEmailAndPassword, sendPasswordResetEmail, getRedirectResult,
-    FacebookAuthProvider, TwitterAuthProvider, GithubAuthProvider, updateProfile } from "firebase/auth";
+    GithubAuthProvider, updateProfile } from "firebase/auth";
 import { doc, setDoc, collection, query, where , getDocs} from "firebase/firestore";
 const validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const validPassword = new RegExp('^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,}$');
 const validusername = new RegExp('^(?=.*?[a-z]).{4,}$');
 export const googleprovider = new GoogleAuthProvider();
-export const facebookprovider = new FacebookAuthProvider();
-export const twitterprovider = new TwitterAuthProvider();
 export const githubprovider = new GithubAuthProvider();
 
 export const createNewUser = (props: any) => {
