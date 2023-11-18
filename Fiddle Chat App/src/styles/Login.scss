@@ -261,7 +261,13 @@ $login-btn-col-active: #6630fa;
         h1{
             color: $white-text-col;
             font-size: 30px;
-            margin-bottom: 50px;
+            margin-bottom: 10px;
+        }
+
+        p{
+            color: $white-text-col;
+            font-size: 15px;
+            margin-bottom: 30px;
         }
     }
 }

@@ -3,7 +3,7 @@ import "../../styles/Login.scss";
 import { githubsvg, googlesvg} from "../../projectAssets";
 import { motion } from "framer-motion";
 import { regTestSignIn, signInUser, googleprovider, githubprovider} from "../../contexts/FormHandler";
-import { signInWithPopup } from "firebase/auth";
+import { UserCredential, signInWithPopup } from "firebase/auth";
 import { auth } from "../../firebase";
 import { useAuth } from '../../contexts/Authcontext';
 import { authProviderType } from '../../types';
@@ -45,10 +45,26 @@ const Loginform : FunctionComponent<LoginformProps> = ({callback_resetpwd, callb
         }
     }
 
-    function loginProviders(providername: string){
+    async function loginProviders(providername: string){
         setLoadingTrue();
-        if(providername === "google")signInWithPopup(auth, googleprovider);
-        else if(providername === "github")signInWithPopup(auth, githubprovider);
+        try{
+            if(providername === "google"){
+                const result: UserCredential = await signInWithPopup(auth, googleprovider);
+                console.log(result);
+            }
+            else if(providername === "github"){
+                const result: UserCredential = await signInWithPopup(auth, githubprovider);
+                console.log(result);
+            }
+        }
+        catch(e){
+            setLoadingFalse();
+            const result = (e as Error).message;
+            if(result !== "Firebase: Error (auth/popup-closed-by-user)."){
+                setErr(true);
+                setError_msg(result);
+            }
+        }
     }
 
     return(

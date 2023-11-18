@@ -44,6 +44,7 @@ export default function Login() {
             </div>
             {isLoading && (<div className="loading-content-page">
                                 <h1>getting everything ready for you...</h1>
+                                <p>please note, if you cancelled your login, this loader may still show for a couple of seconds. This is a limitation from firebase itself</p>
                                 <MutatingDots 
                                     height="100"
                                     width="100"

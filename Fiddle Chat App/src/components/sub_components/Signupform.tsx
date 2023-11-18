@@ -38,12 +38,23 @@ const Signupform : FunctionComponent<SignupformProps> = ({callback_LoginForm}) =
 
     async function signUpProviders(providername: string){
         setLoadingTrue();
-        if(providername === "google"){
-            const result: UserCredential = await signInWithPopup(auth, googleprovider);
-            console.log(result);
+        try{
+            if(providername === "google"){
+                const result: UserCredential = await signInWithPopup(auth, googleprovider);
+                console.log(result);
+            }
+            else if(providername === "github"){
+                const result: UserCredential = await signInWithPopup(auth, githubprovider);
+                console.log(result);
+            }
         }
-        else if(providername === "github"){
-            signInWithPopup(auth, githubprovider);
+        catch(e){
+            setLoadingFalse();
+            const result = (e as Error).message;
+            if(result !== "Firebase: Error (auth/popup-closed-by-user)."){
+                setErr(true);
+                setError_msg(result);
+            }
         }
     }
 

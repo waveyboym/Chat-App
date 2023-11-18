@@ -63,7 +63,7 @@ const PersonalDetails : FunctionComponent<PersonalDetailsProps> = ({darklight}) 
 
   function signOutOfApp(){
     setLoadingTrue();
-    
+    localStorage.clear();
     signOut(auth);
   }
 
