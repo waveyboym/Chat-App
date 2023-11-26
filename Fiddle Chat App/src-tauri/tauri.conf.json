@@ -27,6 +27,13 @@
         "unmaximize": true,
         "unminimize": true,
         "startDragging": true
+      },
+      "http": {
+        "all": false,
+        "request": false,
+        "scope": [
+          "https://apis.google.com/*"
+        ]
       }
     },
     "bundle": {
@@ -83,13 +90,13 @@
         "center": true
       },
       {
-         "width": 300,
-         "height": 400,
-         "resizable": false,
-         "decorations": false,
-         "url": "splashscreen.html",
-         "label": "splashscreen",
-         "center": true
+          "width": 300,
+          "height": 400,
+          "resizable": false,
+          "decorations": false,
+          "url": "splashscreen.html",
+          "label": "splashscreen",
+          "center": true
       }
     ]
   }

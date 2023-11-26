@@ -1,8 +1,12 @@
-import { auth, db } from "../firebase";
+import { auth, database, db } from "../firebase";
 import { GoogleAuthProvider, createUserWithEmailAndPassword,
     signInWithEmailAndPassword, sendPasswordResetEmail, getRedirectResult,
-    GithubAuthProvider, updateProfile } from "firebase/auth";
-import { doc, setDoc, collection, query, where , getDocs} from "firebase/firestore";
+    GithubAuthProvider, updateProfile, signInWithCustomToken } from "firebase/auth";
+import { doc, setDoc, collection, query, where , getDocs, onSnapshot, Unsubscribe} from "firebase/firestore";
+import { Database, child, get } from "firebase/database";
+import firebase from "firebase/app/";
+import { getDatabase, ref, set } from "firebase/database";
+import { v4 as uuidv4 } from 'uuid';
 const validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const validPassword = new RegExp('^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,}$');
 const validusername = new RegExp('^(?=.*?[a-z]).{4,}$');
@@ -106,6 +110,34 @@ export const loginResults__ExtProv = (providername: any) => {
         console.log(errorCode + " : " + errorMessage);
     });
 }
+
+/*
+export const signInHandlerGoogle = async() => {
+    // generating uuid
+    const uuid: string = uuidv4();
+
+    await setDoc(doc(db, "onetime-uuids", uuid), {});
+
+    const dbRef = ref(getDatabase());
+    get(child(dbRef, `onetime-uuids/${uuid}`)).then(async(snapshot) => {
+    if(snapshot.exists()){
+        console.log(snapshot.val());
+        const authToken = snapshot.val();
+        await signInWithCustomToken(auth, authToken);
+    } else {
+        console.log("Failed to sign user up");
+    }
+    }).catch((error) => {
+        console.error(error);
+    });
+
+    // invoking main process method to open user's default browser
+    //window.electronApi.ipcRenderer.invoke("initiate-login", uuid);
+
+    // Build Firebase credential with the Google ID token.
+    const idToken = response.credential;
+    const credential = GoogleAuthProvider.credential(idToken);
+} */
 
 export const loginResultsForm = async() => {
     const user = auth.currentUser;
