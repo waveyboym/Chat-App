@@ -13,7 +13,7 @@
   },
   "package": {
     "productName": "Fiddle Chat App",
-    "version": "0.0.2"
+    "version": "0.2.0"
   },
   "tauri": {
     "allowlist": {
@@ -116,7 +116,7 @@
   },
   "package": {
     "productName": "Fiddle Chat App",
-    "version": "0.0.2"
+    "version": "0.2.0"
   },
   "tauri": {
     "allowlist": {

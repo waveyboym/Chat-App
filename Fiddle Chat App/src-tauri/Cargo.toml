@@ -1,6 +1,6 @@
 [package]
 name = "fiddle-chat-app"
-version = "0.0.2"
+version = "0.2.0"
 description = "A real time chat application that allows users to chat with each other through private messages and rooms"
 authors = ["waveyboym"]
 license = ""
