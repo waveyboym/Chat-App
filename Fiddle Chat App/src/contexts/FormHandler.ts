@@ -1,12 +1,14 @@
-import { auth, database, db } from "../firebase";
+import { auth, db } from "../firebase";
 import { GoogleAuthProvider, createUserWithEmailAndPassword,
     signInWithEmailAndPassword, sendPasswordResetEmail, getRedirectResult,
-    GithubAuthProvider, updateProfile, signInWithCustomToken } from "firebase/auth";
-import { doc, setDoc, collection, query, where , getDocs, onSnapshot, Unsubscribe} from "firebase/firestore";
-import { Database, child, get } from "firebase/database";
-import firebase from "firebase/app/";
-import { getDatabase, ref, set } from "firebase/database";
-import { v4 as uuidv4 } from 'uuid';
+    GithubAuthProvider, updateProfile, signInWithCredential } from "firebase/auth";
+import { doc, setDoc, collection, query, where , getDocs} from "firebase/firestore";
+
+import { invoke } from '@tauri-apps/api';
+import { listen } from '@tauri-apps/api/event';
+import { open } from '@tauri-apps/api/shell';
+import callbacktemplate from "./callbacktemplate";
+
 const validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const validPassword = new RegExp('^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,}$');
 const validusername = new RegExp('^(?=.*?[a-z]).{4,}$');
@@ -111,33 +113,46 @@ export const loginResults__ExtProv = (providername: any) => {
     });
 }
 
-/*
-export const signInHandlerGoogle = async() => {
-    // generating uuid
-    const uuid: string = uuidv4();
-
-    await setDoc(doc(db, "onetime-uuids", uuid), {});
-
-    const dbRef = ref(getDatabase());
-    get(child(dbRef, `onetime-uuids/${uuid}`)).then(async(snapshot) => {
-    if(snapshot.exists()){
-        console.log(snapshot.val());
-        const authToken = snapshot.val();
-        await signInWithCustomToken(auth, authToken);
-    } else {
-        console.log("Failed to sign user up");
-    }
-    }).catch((error) => {
-        console.error(error);
+//This code belongs to this repo: https://github.com/igorjacauna/tauri-firebase-login
+export const signInHandlerGoogle = () => {
+    // Wait for callback from tauri oauth plugin
+    listen('oauth://url', (data) => {
+        googleSignIn(data.payload as string);
     });
+    
+    // Start tauri oauth plugin. When receive first request
+    // When it starts, will return the server port
+    // it will kill the server
+    invoke('plugin:oauth|start', {
+        config: {
+        // Optional config, but use here to more friendly callback page
+        response: callbacktemplate,
+        },
+    }).then((port) => {
+        openGoogleSignIn(port as string);
+    });
+} 
 
-    // invoking main process method to open user's default browser
-    //window.electronApi.ipcRenderer.invoke("initiate-login", uuid);
-
-    // Build Firebase credential with the Google ID token.
-    const idToken = response.credential;
-    const credential = GoogleAuthProvider.credential(idToken);
-} */
+export const signInHandlerGithub = () => {
+    // Wait for callback from tauri oauth plugin
+    listen('oauth://url', (data) => {
+        console.log(data.payload as string);
+        githubSignIn(data.payload as string);
+    });
+    
+    // Start tauri oauth plugin. When receive first request
+    // When it starts, will return the server port
+    // it will kill the server
+    invoke('plugin:oauth|start', {
+        config: {
+        // Optional config, but use here to more friendly callback page
+        response: callbacktemplate,
+        },
+    }).then((port) => {
+        openGithubSignIn(port as string);
+    });
+}
+//end of external code
 
 export const loginResultsForm = async() => {
     const user = auth.currentUser;
@@ -182,3 +197,87 @@ export const sendResetpswdEmail = (props: any) => {
 
     return sendPasswordResetEmail(auth, emailclean);
 }
+
+
+
+
+//This code belongs to this repo: https://github.com/igorjacauna/tauri-firebase-login
+// deep link related functions
+const openBrowserToConsentForGoogle = (port: string) => {
+    // Replace CLIENT_ID_FROM_FIREBASE
+    // Must allow localhost as redirect_uri for CLIENT_ID on GCP: https://console.cloud.google.com/apis/credentials
+    return open('https://accounts.google.com/o/oauth2/auth?' +
+        'response_type=token&' +
+        `client_id=${import.meta.env.VITE_GOOGLECLIENTID}&` +
+        `redirect_uri=http%3A//localhost:${port}&` +
+        'scope=email%20profile%20openid&' +
+        'prompt=consent'
+    );
+};
+
+const openBrowserToConsentForGithub = (port: string) => {
+    // Replace CLIENT ID FROM GITHUB
+    // https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps
+    return open('https://github.com/login/oauth/authorize?' +
+        `client_id=${import.meta.env.VITE_GITHUBCLIENTID}&` +
+        `redirect_uri=http://127.0.0.1:${port}`
+    );
+};
+
+const openGoogleSignIn = (port: string) => {
+    return new Promise((resolve, reject) => {
+        openBrowserToConsentForGoogle(port).then(resolve).catch(reject);
+    });
+};
+
+const googleSignIn = (payload: string) => {
+    const url = new URL(payload);
+    // Get `access_token` from redirect_uri param
+    const access_token = new URLSearchParams(url.hash.substring(1)).get('access_token');
+
+    if (!access_token)return;
+
+    const credential = GoogleAuthProvider.credential(null, access_token);
+
+    signInWithCredential(auth, credential)
+        .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error(errorCode, errorMessage);
+        });
+};
+
+const openGithubSignIn = (port: string) => {
+    return new Promise((resolve, reject) => {
+        openBrowserToConsentForGithub(port).then(resolve).catch(reject);
+    });
+};
+
+const githubSignIn = (payload: string) => {
+    //http://127.0.0.1:57956/?code=b49012f768a283458fca
+
+    //http://127.0.0.1:58166/?code=4c1cc7c671d96794284e
+    //const url = new URL(payload);
+    // Get `access_token` from redirect_uri param
+    //const access_token = new URLSearchParams(url.hash.substring(1)).get('code');
+
+    let paramString = payload.split('?')[1];
+    let queryString = new URLSearchParams(paramString);
+    const access_token = queryString.get("code");
+
+    if (!access_token){
+        console.log("Auth state changed but failed to acquire token: " + payload);
+        return;
+    }
+
+    const credential = GithubAuthProvider.credential(access_token);
+
+    signInWithCredential(auth, credential)
+        .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error(errorCode, errorMessage);
+        });
+};
+
+//end of external code

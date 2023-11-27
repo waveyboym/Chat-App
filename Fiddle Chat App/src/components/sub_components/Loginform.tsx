@@ -2,9 +2,7 @@ import {useState, FunctionComponent} from 'react';
 import "../../styles/Login.scss";
 import { githubsvg, googlesvg} from "../../projectAssets";
 import { motion } from "framer-motion";
-import { regTestSignIn, signInUser, googleprovider, githubprovider} from "../../contexts/FormHandler";
-import { UserCredential, signInWithPopup } from "firebase/auth";
-import { auth } from "../../firebase";
+import { regTestSignIn, signInUser, signInHandlerGoogle, signInHandlerGithub} from "../../contexts/FormHandler";
 import { useAuth } from '../../contexts/Authcontext';
 import { authProviderType } from '../../types';
 
@@ -45,17 +43,11 @@ const Loginform : FunctionComponent<LoginformProps> = ({callback_resetpwd, callb
         }
     }
 
-    async function loginProviders(providername: string){
+    function loginProviders(providername: string){
         setLoadingTrue();
         try{
-            if(providername === "google"){
-                const result: UserCredential = await signInWithPopup(auth, googleprovider);
-                console.log(result);
-            }
-            else if(providername === "github"){
-                const result: UserCredential = await signInWithPopup(auth, githubprovider);
-                console.log(result);
-            }
+            if(providername === "google")signInHandlerGoogle();
+            else if(providername === "github")signInHandlerGithub();
         }
         catch(e){
             setLoadingFalse();
@@ -96,7 +88,7 @@ const Loginform : FunctionComponent<LoginformProps> = ({callback_resetpwd, callb
                     <img src={googlesvg} alt="google" className="google-icon-g" />
                     <h2>Google Login</h2>
                 </motion.div>
-                <motion.div className="auth-button" whileHover={{ opacity: 0.8 }} whileTap={{ scale: 0.97 }}
+                <motion.div className="auth-button hidden-auth-button" whileHover={{ opacity: 0.8 }} whileTap={{ scale: 0.97 }}
                 onClick={() => { loginProviders("github");}}>
                     <img src={githubsvg} alt="github" className="github-icon-g" />
                     <h2>Github Login</h2>

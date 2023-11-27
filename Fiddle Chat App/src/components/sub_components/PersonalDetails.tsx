@@ -64,7 +64,11 @@ const PersonalDetails : FunctionComponent<PersonalDetailsProps> = ({darklight}) 
   function signOutOfApp(){
     setLoadingTrue();
     localStorage.clear();
-    signOut(auth);
+    signOut(auth).then(() => {
+      // Sign-out successful.
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
   function calldeleteAccount() {deleteAccount();}

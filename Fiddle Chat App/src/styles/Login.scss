@@ -204,6 +204,10 @@ $login-btn-col-active: #6630fa;
                     .auth-button:active{
                         background: $external-login-btn-col-active;
                     }
+
+                    .hidden-auth-button{
+                        visibility: hidden;
+                    }
                 }
 
                 .email-opened-g, .email-sent-g{

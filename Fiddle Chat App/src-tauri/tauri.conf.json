@@ -27,13 +27,6 @@
         "unmaximize": true,
         "unminimize": true,
         "startDragging": true
-      },
-      "http": {
-        "all": false,
-        "request": false,
-        "scope": [
-          "https://apis.google.com/*"
-        ]
       }
     },
     "bundle": {
