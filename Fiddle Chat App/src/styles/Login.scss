@@ -21,6 +21,7 @@ $login-btn-col-active: #6630fa;
         position: absolute;
         backdrop-filter: blur(20px);
         border-radius: 50%;
+        z-index: 20;
     }
 
     .circle-1{
@@ -53,6 +54,9 @@ $login-btn-col-active: #6630fa;
         height: 100vh;
         background: rgba(37, 37, 37, 0.05);
         backdrop-filter: blur(35px);
+        position: absolute;
+        top: 0;
+        right: 0;
 
         .company-logo{
             position: fixed;
