@@ -11,6 +11,7 @@
     --root-border-col: rgba(255, 255, 255, 0.637);
     --root-chat-bg-layer: rgba(197, 197, 197, 0.25);
     --root-emoji-border-col: #C3C3C3;
+    --title-bar-height: 40px;
 }
 
 [data-theme='dark'] {
@@ -155,4 +156,11 @@ $border-col: var(--root-border-col);
 $chat-bg-layer: var(--root-chat-bg-layer);
 $emoji-border-col: var(--root-emoji-border-col);
 $dark-selected-col: #8257FE;
-$title-bar-height: 40px;//change to 0px when using OS title bar, change to 40px when using custom title bar
+
+.AppFrame{
+    --title-bar-height: 0px;
+}
+
+.AppFrameless{
+    --title-bar-height: 40px;
+}

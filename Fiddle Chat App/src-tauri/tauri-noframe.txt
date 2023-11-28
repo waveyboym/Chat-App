@@ -1,0 +1,100 @@
+{
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build",
+    "devPath": "http://localhost:1420",
+    "distDir": "../dist",
+    "withGlobalTauri": true
+  },
+  "package": {
+    "productName": "Fiddle Chat App",
+    "version": "0.2.0"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": false,
+      "shell": {
+        "all": false,
+        "open": true
+      },
+      "window": {
+        "all": false
+      },
+      "http": {
+        "all": false,
+        "request": false,
+        "scope": [
+          "https://apis.google.com/*",
+          "http://developers.google.com/*"
+        ]
+      },
+      "os": {
+        "all": true
+      }
+    },
+    "bundle": {
+      "active": true,
+      "category": "DeveloperTool",
+      "copyright": "",
+      "deb": {
+        "depends": []
+      },
+      "externalBin": [],
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ],
+      "identifier": "com.fiddle-chat-app.dev",
+      "longDescription": "A real time chat application that allows users to chat with each other through private messages and rooms",
+      "macOS": {
+        "entitlements": null,
+        "exceptionDomain": "",
+        "frameworks": [],
+        "providerShortName": null,
+        "signingIdentity": null
+      },
+      "resources": [],
+      "shortDescription": "A real time chat app",
+      "targets": "all",
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": ""
+      }
+    },
+    "security": {
+      "csp": null
+    },
+    "updater": {
+      "active": false
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "height": 660,
+        "resizable": true,
+        "title": "Fiddle Chat App",
+        "width": 1024,
+        "minHeight": 660,
+        "minWidth": 1024,
+        "titleBarStyle": "Transparent",
+        "decorations": true,
+        "visible": false,
+        "center": true
+      },
+      {
+          "width": 300,
+          "height": 400,
+          "resizable": false,
+          "decorations": false,
+          "title": "Fiddle Chat App",
+          "url": "splashscreen.html",
+          "label": "splashscreen",
+          "center": true
+      }
+    ]
+  }
+}

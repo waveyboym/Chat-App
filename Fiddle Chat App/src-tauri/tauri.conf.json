@@ -27,6 +27,17 @@
         "unmaximize": true,
         "unminimize": true,
         "startDragging": true
+      },
+      "http": {
+        "all": false,
+        "request": false,
+        "scope": [
+          "https://apis.google.com/*",
+          "http://developers.google.com/*"
+        ]
+      },
+      "os": {
+        "all": true
       }
     },
     "bundle": {
@@ -87,6 +98,7 @@
           "height": 400,
           "resizable": false,
           "decorations": false,
+          "title": "Fiddle Chat App",
           "url": "splashscreen.html",
           "label": "splashscreen",
           "center": true

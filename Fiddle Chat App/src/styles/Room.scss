@@ -2,19 +2,19 @@
 
 .Room-section{
     width: calc(100vw - 461px);
-    height: calc(100vh - $title-bar-height);
+    height: calc(100vh - var(--title-bar-height));
     display: flex;
 
     .messages-box{
         width: calc(100vw - 714px);//503
-        height: calc(100vh - $title-bar-height);
+        height: calc(100vh - var(--title-bar-height));
         border-left: 1px solid $border-col;
         border-right: 1px solid $border-col;
 
         .top-bar-blur{
             position: absolute;
             width: calc(100vw - 714px);
-            top: $title-bar-height;
+            top: var(--title-bar-height);
             height: 52px;
             background: $top-layer-blur;
             display: flex;
@@ -59,17 +59,17 @@
 
         .text-messages-box-room{
             width: calc(100vw - 714px);
-            height: calc(100vh - $title-bar-height);
+            height: calc(100vh - var(--title-bar-height));
 
             .text-messages-container-plain-room{
                 width: calc(100vw - 714px);
-                height: calc(100vh - $title-bar-height);
+                height: calc(100vh - var(--title-bar-height));
                 z-index: 500;
                 background: $darker-side-bar-col;
 
                 .background-img-container-room{
                     width: calc(100vw - 714px);
-                    height: calc(100vh - $title-bar-height);
+                    height: calc(100vh - var(--title-bar-height));
                     overflow: hidden;
                     z-index: 100;
         
@@ -84,9 +84,9 @@
 
                 .chat-bg-layer-room{
                     background: $chat-bg-layer; 
-                    margin-top: calc(-100vh + $title-bar-height);
+                    margin-top: calc(-100vh + var(--title-bar-height));
                     width: calc(100vw - 714px);
-                    height: calc(100vh - $title-bar-height);
+                    height: calc(100vh - var(--title-bar-height));
                     overflow-y: scroll;
                     overflow: overlay;
                     position: absolute;
@@ -245,7 +245,7 @@
 
     .details-box{
         width: 251px;
-        height: calc(100vh - $title-bar-height);
+        height: calc(100vh - var(--title-bar-height));
         display: flex;
         flex-direction: column;
         align-items: center;

@@ -4,6 +4,16 @@ export default `
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            http-equiv="Content-Security-Policy"
+            content="script-src https://apis.google.com/
+                'self' 'unsafe-inline'"
+        />
+        <meta
+            http-equiv="Content-Security-Policy"
+            content="script-src http://developers.google.com/
+                'self' 'unsafe-inline'"
+        />
         <title>Fiddle Chat App</title>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@400;600&display=swap');

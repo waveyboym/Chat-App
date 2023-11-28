@@ -4,6 +4,16 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="src-tauri/icons/32x32.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+        http-equiv="Content-Security-Policy"
+        content="script-src https://apis.google.com/
+            'self' 'unsafe-inline'"
+    />
+    <meta
+        http-equiv="Content-Security-Policy"
+        content="script-src http://developers.google.com/
+            'self' 'unsafe-inline'"
+    />
     <title>Fiddle Chat App</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@400;600&display=swap');
@@ -50,6 +60,7 @@
             text-overflow: ellipsis;
             word-wrap: break-word;
             margin-bottom: 20px;
+            text-align: center;
         }
 
         .splashscreen-content-page h2{
@@ -60,6 +71,7 @@
             text-overflow: ellipsis;
             word-wrap: break-word;
             margin-top: 20px;
+            text-align: center;
         }
     </style>
   </head>
