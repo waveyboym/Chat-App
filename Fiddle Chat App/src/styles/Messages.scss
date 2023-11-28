@@ -296,17 +296,20 @@
     z-index: 900;
     .message-bubble{
         max-width: calc(100% - 40px);
-        min-height: 40px;
         height: min-content;
-        border-radius: 17px;
+        border-radius: 15px;
         p{
             padding-left: 8px;
             padding-right: 8px;
+            margin: 0px;
+            padding-top: 6px;
+            padding-bottom: 6px;
             color: $text-col;
             font-size: 12px;
             word-wrap: break-word;
             font-weight: 400;
             text-align: left;
+            white-space: pre-line;
             -webkit-user-select: text;  /* Chrome all / Safari all */
             -moz-user-select: text;     /* Firefox all */
             -ms-user-select: text;      /* IE 10+ */

@@ -279,7 +279,7 @@ const Messages : FunctionComponent<MessagesProps> = ({msgRequestID, darklight, s
                 inputProps={{ style: { color: darklight ==='light'? '#444444' : '#E6E6E6', fontFamily: 'Baloo Bhai 2 ,cursive' } }}
               />
             </div>
-            <Tooltip title="select emoji's: " placement="top" TransitionComponent={Zoom}>
+            <Tooltip title=" select emoji's: " placement="top" TransitionComponent={Zoom}>
               <motion.div className="emoji-icon" whileHover={{ opacity: 0.8, scale: 1.03 }} whileTap={{scale: 0.97}} onClick={showEmojiPicker}>
                 { darklight ==='light'? <img src={emoji_LM} alt="select emoji"/>
                 : <img src={emoji_DM} alt="select emoji"/>}
