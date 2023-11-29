@@ -146,6 +146,14 @@
         }
     }
 
+    .is-online{
+        border: 1px solid $good-change-col;
+    }
+
+    .is-offline{
+        border: 1px solid $gray-text-col;
+    }
+
     h2{
         width: calc(100vw - 780px);
         max-width: calc(100vw - 780px);

@@ -5,6 +5,7 @@ import { db, auth } from "../firebase";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { loginResultsForm, loginResults__ExtProv } from "./FormHandler";
 import { authProviderType } from "../types";
+import { goOffline, goOnline } from "./AccessDB";
 
 const AuthContext = createContext<authProviderType>({user: null, UserUID: null, userDB: null, isLoading: false, setLoadingTrue: () => {}, setLoadingFalse: () => {}});
 
@@ -45,6 +46,7 @@ export const AuthProvider = ({ children }: any) => {
                 else{
                     set_Loading(false);
                 }
+                goOnline();
             }
             else {
                 navigate("/");/* User is signed out*/

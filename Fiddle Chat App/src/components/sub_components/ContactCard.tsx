@@ -10,10 +10,11 @@ type ContactCardProps = {
   setName: string,
   setLtstMsg: string,
   setRead: boolean,
+  onlineStatus: boolean,
   setMsgTab: (arg: string)=> void;
 }
 
-const ContactCard : FunctionComponent<ContactCardProps> = ({darklight, setid, setProfile, setName, setLtstMsg, setRead, setMsgTab}) => {
+const ContactCard : FunctionComponent<ContactCardProps> = ({darklight, setid, setProfile, setName, setLtstMsg, setRead, onlineStatus, setMsgTab}) => {
 
   function changeSelectedMsg(){
     let msgToSelect = document.getElementById(setid);
@@ -32,7 +33,7 @@ const ContactCard : FunctionComponent<ContactCardProps> = ({darklight, setid, se
 
   return (
       <motion.div className="contact-msg-card" onClick={changeSelectedMsg} id={setid} whileTap={{scale: 0.97}}>
-        <div className="friends-icon">
+        <div className={"friends-icon " + (onlineStatus === true ? "is-online" : "is-offline")}>
           { 
             (
               () => {

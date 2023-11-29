@@ -227,6 +227,14 @@
         }
     }
 
+    .is-online{
+        border: 1px solid $good-change-col;
+    }
+
+    .is-offline{
+        border: 1px solid $gray-text-col;
+    }
+
     .name-and-message{
         margin-left: 10px;
         width: 239px;

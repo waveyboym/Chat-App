@@ -34,6 +34,7 @@ const MsgNavBar : FunctionComponent<MsgNavBarProps> = ({setTheme, darklight, cur
       profile: string | null,
       name: string,
       latest_msg: string,
+      onlineStatus: boolean,
       already_read: boolean,//make functionality later
     }[]>([]);
   const [contactlistlength, set_contactlistlength] = useState<number>(0);
@@ -59,6 +60,7 @@ const MsgNavBar : FunctionComponent<MsgNavBarProps> = ({setTheme, darklight, cur
       profile: res.data()?.displayPhoto,
       name: res.data()?.username,
       latest_msg: lastSentMessage.empty ? "" : lastSentMessage.docs[0]._document.data.value.mapValue.fields.messageSent.stringValue,
+      onlineStatus: res.data()?.OnlineStatus,
       already_read: true,//make functionality later
     };
     setContactslist(oldArray => [...oldArray, LSM_obj]);
@@ -175,6 +177,7 @@ const MsgNavBar : FunctionComponent<MsgNavBarProps> = ({setTheme, darklight, cur
         profile: currentdoc.data()?.displayPhoto,
         name: currentdoc.data()?.username,
         latest_msg: "",
+        onlineStatus: currentdoc.data().OnlineStatus,
         already_read: true,//make functionality later
       };
       setContactslist(oldArray => [...oldArray, LSM_obj]);
@@ -266,6 +269,7 @@ const MsgNavBar : FunctionComponent<MsgNavBarProps> = ({setTheme, darklight, cur
               setName={contactobj.name} 
               setLtstMsg={contactobj.latest_msg} 
               setRead={contactobj.already_read}
+              onlineStatus={contactobj.onlineStatus}
               setMsgTab={changeSelectedIdTo}
               darklight={darklight}
               />

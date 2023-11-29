@@ -11,9 +11,10 @@ type FriendComponentProps = {
     profile: string | null,
     darklight: string,
     username: string,
+    onlineStatus: boolean
 }
 
-const FriendComponent : FunctionComponent<FriendComponentProps> = ({uid, profile, darklight, username}) => {
+const FriendComponent : FunctionComponent<FriendComponentProps> = ({uid, profile, darklight, username, onlineStatus}) => {
     const {userDB}: authProviderType = useAuth();
 
     function deleteFriend(){
@@ -26,7 +27,7 @@ const FriendComponent : FunctionComponent<FriendComponentProps> = ({uid, profile
 
     return(
         <div className="friend-component">
-            <div className="user-img">
+            <div className={"user-img "  + (onlineStatus === true ? "is-online" : "is-offline")}>
                 { 
                     (
                     () => {

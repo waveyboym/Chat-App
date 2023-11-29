@@ -50,6 +50,14 @@
                 }
             }
 
+            .is-online{
+                border: 1px solid $good-change-col;
+            }
+        
+            .is-offline{
+                border: 1px solid $gray-text-col;
+            }
+
             h1{
                 margin-left: 15px;
                 font-size: 24px;
@@ -274,6 +282,14 @@
                 align-items: center;
                 background: $darker-side-bar-col;
             }
+        }
+
+        .is-online{
+            border: 1px solid $good-change-col;
+        }
+    
+        .is-offline{
+            border: 1px solid $gray-text-col;
         }
 
         .nav-icon{

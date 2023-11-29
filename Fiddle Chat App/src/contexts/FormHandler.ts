@@ -98,7 +98,8 @@ export const loginResults__ExtProv = (providername: any) => {
             position: "N/A",
             loginmethod: providername,
             lastUpdate: new Date(),
-            AccountActive: true
+            AccountActive: true,
+            OnlineStatus: true
         });
 
         const userRef = doc(db, "users", user.uid);
@@ -174,7 +175,8 @@ export const loginResultsForm = async() => {
             position: "N/A",            
             loginmethod: "form",
             lastUpdate: new Date(),
-            AccountActive: true 
+            AccountActive: true, 
+            OnlineStatus: true
         });
 
         const userRef = doc(db, "users", user.uid);

@@ -361,3 +361,21 @@ export const handleLeaveRoom = async(obj: {currentUser: any,roomID: string}): Pr
     deleteDoc(doc(thisUserRef, "rooms", roomID));
     //done : )
 }
+
+export const goOffline = async() => {
+    const user: User | null = auth.currentUser;
+    if(user === null)return;
+
+    const currentUserRef: DocumentReference<DocumentData> = doc(db, "users", user.uid);
+
+    await updateDoc(currentUserRef, { "OnlineStatus": false,});
+}
+
+export const goOnline = async() => {
+    const user: User | null = auth.currentUser;
+    if(user === null)return;
+
+    const currentUserRef: DocumentReference<DocumentData> = doc(db, "users", user.uid);
+
+    await updateDoc(currentUserRef, { "OnlineStatus": true,});
+}

@@ -10,6 +10,7 @@ import Login from './pages/Login';
 import Chats from './pages/Chats';
 import { AuthProvider } from "./contexts/Authcontext";
 import { Theme, ThemeProvider, createTheme } from '@mui/material/styles';
+import { goOffline } from "./contexts/AccessDB";
 
 const theme: Theme = createTheme({
     typography: {
@@ -39,35 +40,41 @@ function AppFrameless() {
         const closeID: HTMLElement | null = document.getElementById('close');
 
         const handleScreenResize = async() => {
-        const isMaximized: boolean = await appWindow.isMaximized();
-        if(isMaximized === true){
-            const maximizebtn: HTMLElement | null = document.getElementById("maximize");
-            const restorebtn: HTMLElement | null = document.getElementById("restore");
+            const isMaximized: boolean = await appWindow.isMaximized();
+            if(isMaximized === true){
+                const maximizebtn: HTMLElement | null = document.getElementById("maximize");
+                const restorebtn: HTMLElement | null = document.getElementById("restore");
 
-            if(maximizebtn)maximizebtn.style.visibility = "hidden";
-            if(restorebtn)restorebtn.style.visibility = "visible";
-        }
-        else{
-            const maximizebtn: HTMLElement | null = document.getElementById("maximize");
-            const restorebtn: HTMLElement | null = document.getElementById("restore");
+                if(maximizebtn)maximizebtn.style.visibility = "hidden";
+                if(restorebtn)restorebtn.style.visibility = "visible";
+            }
+            else{
+                const maximizebtn: HTMLElement | null = document.getElementById("maximize");
+                const restorebtn: HTMLElement | null = document.getElementById("restore");
 
-            if(maximizebtn)maximizebtn.style.visibility = "visible";
-            if(restorebtn)restorebtn.style.visibility = "hidden";
+                if(maximizebtn)maximizebtn.style.visibility = "visible";
+                if(restorebtn)restorebtn.style.visibility = "hidden";
+            }
         }
+
+        const minimizeWindow = () => appWindow.minimize();
+        const togglemaximizeWindow = () => appWindow.toggleMaximize();
+        const closeWindow = () => {
+            goOffline().then(() => appWindow.close()).catch((_error) => appWindow.close());
         }
     
         window.addEventListener("resize", handleScreenResize);
-        if(minimizeID)minimizeID.addEventListener('click', () => appWindow.minimize());
-        if(maximizeID)maximizeID.addEventListener('click', () => appWindow.toggleMaximize());
-        if(restoreID)restoreID.addEventListener('click', () => appWindow.toggleMaximize());
-        if(closeID)closeID.addEventListener('click', () => appWindow.close());
+        if(minimizeID)minimizeID.addEventListener('click', minimizeWindow);
+        if(maximizeID)maximizeID.addEventListener('click', togglemaximizeWindow);
+        if(restoreID)restoreID.addEventListener('click', togglemaximizeWindow);
+        if(closeID)closeID.addEventListener('click', closeWindow);
         
         return () => {
-        window.removeEventListener("resize", handleScreenResize);
-        if(minimizeID)minimizeID.removeEventListener('click', () => appWindow.minimize());
-        if(maximizeID)maximizeID.removeEventListener('click', () => appWindow.toggleMaximize());
-        if(restoreID)restoreID.removeEventListener('click', () => appWindow.toggleMaximize());
-        if(closeID)closeID.removeEventListener('click', () => appWindow.close());
+            window.removeEventListener("resize", handleScreenResize);
+            if(minimizeID)minimizeID.removeEventListener('click', minimizeWindow);
+            if(maximizeID)maximizeID.removeEventListener('click', togglemaximizeWindow);
+            if(restoreID)restoreID.removeEventListener('click', togglemaximizeWindow);
+            if(closeID)closeID.removeEventListener('click', closeWindow);
         };
     }, [])
 

@@ -31,8 +31,9 @@ const Messages : FunctionComponent<MessagesProps> = ({msgRequestID, darklight, s
     username: string, 
     profile: null| string, 
     dob: string, 
-    pronouns: string
-  }>({id: msgRequestID, username: "", profile: null, dob: "", pronouns: ""});
+    pronouns: string,
+    onlineStatus: boolean,
+  }>({id: msgRequestID, username: "", profile: null, dob: "", pronouns: "", onlineStatus: false});
 
   const onloadComplete = useRef<boolean>(false);
   const [messagesList, setmessagesList] = useState<{
@@ -87,17 +88,18 @@ const Messages : FunctionComponent<MessagesProps> = ({msgRequestID, darklight, s
   }
 
   const initFriend = async(friendRef: DocumentReference<DocumentData>): Promise<"FAILED" | "SUCCESS"> => {
-    setfriendsProfile({id: msgRequestID,username: "",profile: null,dob: "",pronouns: ""});
+    setfriendsProfile({id: msgRequestID,username: "",profile: null,dob: "",pronouns: "", onlineStatus: false});
     const frienddocSnap: DocumentSnapshot<DocumentData> = await getDoc(friendRef);
     if(frienddocSnap.exists() !== true)return "FAILED";
     else{
-      const objToInsert: {id: string, username: string, profile: string | null, dob: string, pronouns: string} = 
+      const objToInsert: {id: string, username: string, profile: string | null, dob: string, pronouns: string, onlineStatus: boolean} = 
         {
           id: msgRequestID,
           username: frienddocSnap.data()?.username,
           profile: frienddocSnap.data()?.displayPhoto,
           dob: frienddocSnap.data()?.dateOfBirth,
           pronouns: frienddocSnap.data()?.pronouns,
+          onlineStatus: frienddocSnap.data()?.OnlineStatus,
         }
       tempProfile.current = frienddocSnap.data()?.displayPhoto;
       tempUsername.current = frienddocSnap.data()?.username;
@@ -122,6 +124,10 @@ const Messages : FunctionComponent<MessagesProps> = ({msgRequestID, darklight, s
     const messagesRef: DocumentReference<DocumentData> = getMessageRef();
     const q: Query<DocumentData> = query(collection(messagesRef, "privatemessages"), orderBy("timestamp", "asc"), limit(25));
     const unsub: Unsubscribe = onSnapshot(q, (querySnapshot) => {
+      //update the last objects in querySnapshot in the database as read in private message
+      //but this may cause an infinite loop as any updates will trigger this function
+      //to prevent that, just update the data if it has not been updated to true and return
+      querySnapshot.docs[0].data()
       let messagesarr: {
           msgid: string, 
           id: string, 
@@ -174,11 +180,12 @@ const Messages : FunctionComponent<MessagesProps> = ({msgRequestID, darklight, s
           const MessageHolderSnap = await getDoc(onfriendListRef);
           if(MessageHolderSnap.exists() !== true){
             setblockMSG(true);
+            onloadComplete.current = false;
             return;
           }
           else{
             msgHolder.current = MessageHolderSnap.data()?.messageHolder === true ? true : false;
-            await initMessages();
+            initMessages().then(() => onloadComplete.current = false).catch((_error) => {});
           }
           
         }
@@ -191,7 +198,7 @@ const Messages : FunctionComponent<MessagesProps> = ({msgRequestID, darklight, s
     <div className="messages-details-box">
       <div className="messages-box">
         <div className="top-bar-blur">
-          <div className="friends-icon">
+          <div className={"friends-icon " + (friendsProfile.onlineStatus === true ? "is-online" : "is-offline")}>
             { 
                 (
                 () => {
@@ -214,7 +221,7 @@ const Messages : FunctionComponent<MessagesProps> = ({msgRequestID, darklight, s
                 )()
             }
           </div>
-          <h1>{friendsProfile.username}</h1>
+          <h1>{friendsProfile.username} - {(friendsProfile.onlineStatus === true ? "Online" : "Offline")}</h1>
         </div>
         <div className="text-messages-box">
           <div className="text-messages-container-plain">
@@ -311,7 +318,7 @@ const Messages : FunctionComponent<MessagesProps> = ({msgRequestID, darklight, s
         </div>
       </div>
       <div className="details-box">
-        <div className="friends-icon">
+        <div className={"friends-icon " + (friendsProfile.onlineStatus === true ? "is-online" : "is-offline")}>
           { 
             (
             () => {

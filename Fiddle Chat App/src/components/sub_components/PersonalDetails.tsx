@@ -8,7 +8,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 import Tooltip from '@mui/material/Tooltip';
 import Zoom from '@mui/material/Zoom';
-import { changePersonalDetails, deleteAccount } from "../../contexts/AccessDB";
+import { changePersonalDetails, deleteAccount, goOffline } from "../../contexts/AccessDB";
 import { authProviderType, personalDetailsForm } from "../../types";
 import { DocumentData } from "firebase/firestore";
 
@@ -63,6 +63,7 @@ const PersonalDetails : FunctionComponent<PersonalDetailsProps> = ({darklight}) 
 
   function signOutOfApp(){
     setLoadingTrue();
+    goOffline();
     localStorage.clear();
     signOut(auth).then(() => {
       // Sign-out successful.

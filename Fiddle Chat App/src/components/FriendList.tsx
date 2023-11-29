@@ -12,7 +12,7 @@ const FriendList : FunctionComponent<RequestsProps> = ({ darklight }) => {
     const {userDB}: authProviderType = useAuth();
     const friendsLoaded = useRef<boolean>(false);
 
-    const [friendslist, setFriendslist] = useState<{id: string, username: string, profile: string | null}[]>([]);
+    const [friendslist, setFriendslist] = useState<{id: string, username: string, onlineStatus: boolean, profile: string | null}[]>([]);
     
     useEffect(() => {
         const getAllFriends = async() => {
@@ -28,6 +28,7 @@ const FriendList : FunctionComponent<RequestsProps> = ({ darklight }) => {
                     setFriendslist(oldFriendsarr => [...oldFriendsarr, {
                         id: frienddocSnap.data()?.uid,
                         username: frienddocSnap.data()?.username,
+                        onlineStatus: frienddocSnap.data()?.OnlineStatus,
                         profile: frienddocSnap.data()?.displayPhoto,
                     }]);
                 })
@@ -50,6 +51,7 @@ const FriendList : FunctionComponent<RequestsProps> = ({ darklight }) => {
                         uid={friends.id} 
                         profile={friends.profile === null ? null : friends.profile} 
                         username={friends.username}
+                        onlineStatus={friends.onlineStatus}
                         darklight={darklight}
                     />
                 )}
