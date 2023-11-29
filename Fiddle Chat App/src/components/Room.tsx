@@ -82,8 +82,8 @@ const Room : FunctionComponent<RoomProps> = ({darklight, roomRequestID, set_acce
     }
 
     const getAllRoomMembers = async(roomRef: DocumentReference<DocumentData>): Promise<() => void> => {
+        setRoomMembers([]);
         const unsub: Unsubscribe = onSnapshot(collection(roomRef, "members"), (memberquery) => {
-            setRoomMembers([]);
             membersArrSize.current = memberquery.size;
             memberquery.forEach(async(docdata) => {
                 const memberRef: DocumentReference<DocumentData> = doc(db, "users", docdata.id);
@@ -110,11 +110,11 @@ const Room : FunctionComponent<RoomProps> = ({darklight, roomRequestID, set_acce
 
             if(messagesLoaded.current === true)return () => {};
             messagesLoaded.current = true;
-
+            
             const roomRef: DocumentReference<DocumentData> = doc(db, "rooms", roomRequestID);
             const q: Query<DocumentData> = query(collection(roomRef, "roommessages"), orderBy("timestamp", "asc"), limit(25));
+            setmessagesList([]);
             const unsub: Unsubscribe = onSnapshot(q, (querySnapshot) => {
-                setmessagesList([]);
                 querySnapshot.forEach((currentdoc: QueryDocumentSnapshot<DocumentData>) => {
                     //dont make a call instead check in room members array for anyone with matching uid
                     const memberObj = RoomMembers.find(obj => {return obj.id === currentdoc.data().senderID});
@@ -134,7 +134,7 @@ const Room : FunctionComponent<RoomProps> = ({darklight, roomRequestID, set_acce
             return () =>{unsub();}
         }
 
-        (onloadComplete.current === true) && (RoomMembers.length > 0) && (RoomMembers.length === membersArrSize.current) ? 
+        (onloadComplete.current === true) && (RoomMembers.length === membersArrSize.current) ? 
             initMessagesData() 
             : 
             () => {};
@@ -142,11 +142,14 @@ const Room : FunctionComponent<RoomProps> = ({darklight, roomRequestID, set_acce
 
     useEffect(() => {
         const initRoomData = async() => {
-            if(contactsLoaded.current === true)return;
+            console.log("tying to reload data");
+            if(contactsLoaded.current === true && onloadComplete.current === false)return;
             contactsLoaded.current = true;
+            messagesLoaded.current = false;
             //init basic room data
+            console.log("tying to reload data and got through check");
             const roomRef = doc(db, "rooms", roomRequestID);
-
+            setroomDetails({id: roomRequestID, profile: null, roomName: ""});
             const roomdocSnap = await getDoc(roomRef);
             if(roomdocSnap.exists() !== true)return;
             setroomDetails({
@@ -159,7 +162,7 @@ const Room : FunctionComponent<RoomProps> = ({darklight, roomRequestID, set_acce
         }
 
         roomRequestID ? initRoomData() : () => {};
-    }, [])
+    }, [roomRequestID])
 
     return (
         <div className="Room-section">
@@ -250,7 +253,7 @@ const Room : FunctionComponent<RoomProps> = ({darklight, roomRequestID, set_acce
                                 inputProps={{ style: { color: darklight ==='light'? '#444444' : '#E6E6E6', fontFamily: 'Baloo Bhai 2 ,cursive' } }}
                             />
                         </div>
-                        <Tooltip title="select emoji's: " placement="top" TransitionComponent={Zoom}>
+                        <Tooltip title=" select emoji's: " placement="top" TransitionComponent={Zoom}>
                             <motion.div className="emoji-icon" whileHover={{ opacity: 0.8, scale: 1.03 }} whileTap={{scale: 0.97}} onClick={showEmojiPicker}>
                                 { darklight ==='light'? <img src={emoji_LM} alt="select emoji"/>
                                 : <img src={emoji_DM} alt="select emoji"/>}

@@ -87,6 +87,7 @@ const Messages : FunctionComponent<MessagesProps> = ({msgRequestID, darklight, s
   }
 
   const initFriend = async(friendRef: DocumentReference<DocumentData>): Promise<"FAILED" | "SUCCESS"> => {
+    setfriendsProfile({id: msgRequestID,username: "",profile: null,dob: "",pronouns: ""});
     const frienddocSnap: DocumentSnapshot<DocumentData> = await getDoc(friendRef);
     if(frienddocSnap.exists() !== true)return "FAILED";
     else{
@@ -117,10 +118,10 @@ const Messages : FunctionComponent<MessagesProps> = ({msgRequestID, darklight, s
   }
 
   const initMessages = async(): Promise<() => void> => {
+    setmessagesList([]);
     const messagesRef: DocumentReference<DocumentData> = getMessageRef();
     const q: Query<DocumentData> = query(collection(messagesRef, "privatemessages"), orderBy("timestamp", "asc"), limit(25));
     const unsub: Unsubscribe = onSnapshot(q, (querySnapshot) => {
-      setmessagesList([]);
       let messagesarr: {
           msgid: string, 
           id: string, 
