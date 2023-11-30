@@ -31,7 +31,7 @@ npm install
 5. You will also now have to set up firebase and create a secrets file in the root directory. Have a look at <a href="#setting-up-firebase">Setting up firebase</a> to set up a firebase project.
 6. Once that is completed, you can run: 
 ```
-npm install
+npm run tauri dev
 ```
 7. Please note that by default, the application will launch as a frame-less window. If you want to change that, follow the instructions for changing that under <a href="#change-app-window-between-frame-less-and-not-frame-less">Change App window from frame-less to not frame-less</a>
 
@@ -109,7 +109,7 @@ service cloud.firestore {
  # TODO
 - [ ] Improve load times between opening messages
 - [x] Improve user interface for navigating between private messages and room messages(DONE)
-- [ ] Add support for presence detection(whether or not a user is online)
+- [x] Add support for presence detection(whether or not a user is online)
 - [x] Add ability to view all friends in a separate component(DONE)
 - [ ] Add stories/most recent updates
 - [x] Maybe add more themes

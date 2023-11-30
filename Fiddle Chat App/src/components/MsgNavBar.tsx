@@ -66,7 +66,6 @@ const MsgNavBar : FunctionComponent<MsgNavBarProps> = ({setTheme, darklight, cur
     setContactslist(oldArray => [...oldArray, LSM_obj]);
   }
 
-
   function handleSearch(e: any){
     set_isSearching(true);
     if(e.key === "Enter"){
