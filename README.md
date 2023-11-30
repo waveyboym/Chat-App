@@ -37,7 +37,7 @@ npm run tauri dev
 
 # Setting up firebase
 1. To set up firebase, navigate to <a href="https://firebase.google.com/docs/web/setup?authuser=0#add-sdk-and-initialize">firebase setup</a> and follow the instructions.
-2. Once you have created a new project, add your <a href="https://firebase.google.com/docs/web/learn-more?authuser=0#config-object">Firebase project configuration</a> into an ```.env``` file. The ```.env``` file must reside at the root of the application, which is this directory:
+2. Once you have created a new project, add your <a href="https://firebase.google.com/docs/web/learn-more?authuser=0#config-object">Firebase project configuration</a> into an ```.env``` file. The ```.env``` file must reside at the root of the application, which is <a href="https://github.com/waveyboym/Chat-App/tree/main/Fiddle%20Chat%20App">this directory</a>
 3. The contents that you must place in the ```.env``` file are as follows:
 ```
 VITE_APIKEY=<Your firebase api key goes here and remove the angle brackets>
