@@ -1,17 +1,8 @@
+![logo](img/logo.png "logo")
+![application"](img/application.png "application")
+
 # Chat-App
 A real time chat application done with tauri and react with a firebase backend
-
-# Note
-This branch is done with tauri. The old version which is done with electron is accessible here: https://github.com/waveyboym/Chat-App/tree/read-only-old-version.
-The old version will no longer receive updates and/or fixes. I'm just putting it up in case anyone might want to have access to it.
-
-# Presentation
-![private messaging](img/privchat.png "private messaging")
-\
-\
-\
-\
-![room messaging"](img/roomchat.png "room messaging")
 
 # I am a user/tester
 Executables for windows and linux is available <a href="https://github.com/waveyboym/Chat-App/releases">here</a> \
@@ -80,7 +71,7 @@ service cloud.firestore {
 3. For a non-frameless window, open <a href="https://github.com/waveyboym/Chat-App/blob/main/Fiddle%20Chat%20App/src-tauri/tauri-noframe.txt">tauri-noframe.txt</a> and select, copy and paste everything into <a href="https://github.com/waveyboym/Chat-App/blob/main/Fiddle%20Chat%20App/src-tauri/tauri.conf.json">tauri.conf.json</a>
 
 # Adding more colour themes
-1. To add another colour theme, first go to <a href="https://github.com/waveyboym/Chat-App/blob/main/Fiddle%20Chat%20App/src/components/sub_components/Themes.tsx">Themes.tsx</a> and go to line 155 and copy and paste the code above it; it looks like this :
+1. To add another colour theme, first go to <a href="https://github.com/waveyboym/Chat-App/blob/main/Fiddle%20Chat%20App/src/components/sub_components/Themes.tsx">Themes.tsx</a> and go to a line after the last "theme-selector" div and paste the following replacing "light-yellow-col | dark-yellow-col" and "lyellow | dyellow" with the name of your colour and the text in between h3 tags with the name of your colour to display:
 ```
 <div className="theme-selector">
             <motion.div 
@@ -93,24 +84,24 @@ service cloud.firestore {
             <h3>Light yellow theme</h3>
           </div>
 ```
-1. Change the parameters to suite your needs for the colour you want to create.
-2. Go to <a href="https://github.com/waveyboym/Chat-App/blob/main/Fiddle%20Chat%20App/src/App.tsx">App.tsx</a> and at line 28 add the colour name of your colour, eg "lgreen" was chosen above, so lyellow would be added as another colourtheme to compare: 
-```colourtheme === "light" || colourtheme === "lpink" || colourtheme === "lred" || colourtheme === "lgreen" || colourtheme === "lyellow"```
-1. Do the same thing as above at line 33 in the same file
 2. Go to <a href="https://github.com/waveyboym/Chat-App/blob/main/Fiddle%20Chat%20App/src/styles/Settings.scss">Settings.scss</a> and at line 448 add the class name of the theme-selector you created and it's corresponding colour, eg ```#light-yellow-col{background: #f8e962;}```
-3. Go to <a href="https://github.com/waveyboym/Chat-App/blob/main/Fiddle%20Chat%20App/src/styles/_constantMixins.scss">_constantMixins.scss</a> and depending on whether or not the colour you created is a darker or lighter colour, copy all the code in root, that is line 1 to 14 or line 16 to 29 and paste it at line 131.
-4. Name ```[data-theme='dgreen']``` with the name of your colour, eg ```[data-theme='lyellow']```. Make sure this matches otherwise the colours won't reflect when you change the theme.
-5. Change the three variables, \
+3. Go to <a href="https://github.com/waveyboym/Chat-App/blob/main/Fiddle%20Chat%20App/src/styles/_constantMixins.scss">_constantMixins.scss</a>
+4. If you colour is a dark colour, copy a block that has a colour starting with such as ```[data-theme='dgreen']```. If is light, copy ```[data-theme='lgreen']```.
+5. Name ```[data-theme='dgreen']``` with the name of your colour, eg ```[data-theme='lyellow']```. Make sure this matches otherwise the colours won't reflect when you change the theme.
+6. Change the three variables, \
     --root-dark-side-bar-col, \
     --root-top-most-app-draggable-sec and  \
     --root-lighter-side-bar-col by adjusting their colours in the section of code you just copied over to suit your needs.
-6. You are done and may now launch the app with ```npm run tauri dev```
+
+# Note
+This branch is done with tauri. The old version which is done with electron is accessible here: https://github.com/waveyboym/Chat-App/tree/read-only-old-version.
+The old version will no longer receive updates and/or fixes. I'm just putting it up in case anyone might want to have access to it.
 
  # TODO
 - [ ] Improve load times between opening messages
-- [x] Improve user interface for navigating between private messages and room messages(DONE)
+- [x] Improve user interface for navigating between private messages and room message
 - [x] Add support for presence detection(whether or not a user is online)
-- [x] Add ability to view all friends in a separate component(DONE)
+- [x] Add ability to view all friends in a separate component
 - [ ] Add stories/most recent updates
 - [x] Maybe add more themes
 

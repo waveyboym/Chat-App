@@ -18,13 +18,11 @@ const theme: Theme = createTheme({
 function AppFrame() {
     const defaultDark: boolean = true;
     const [colourtheme, setTheme] = useLocalStorage<string>('colourtheme', defaultDark ? 'dark' : 'light');
-    const [DARKLIGHT, setDARKLIGHT] = useLocalStorage<string>("DARKLIGHT",
-    colourtheme === "light" || colourtheme === "lpink" || colourtheme === "lred" || colourtheme === "lgreen"
-        ? "light" : "dark");
+    const [DARKLIGHT, setDARKLIGHT] = useLocalStorage<string>("DARKLIGHT", colourtheme.startsWith("l") ? "light" : "dark");
 
     function switchThemes(colour: string){
         setTheme(colour);
-        setDARKLIGHT(colour === "light" || colour === "lpink" || colour === "lred" || colour === "lgreen" ? "light" : "dark");
+        setDARKLIGHT(colour.startsWith("l") ? "light" : "dark");
     }
 
     return (
