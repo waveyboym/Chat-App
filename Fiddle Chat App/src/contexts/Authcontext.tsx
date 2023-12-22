@@ -35,18 +35,18 @@ export const AuthProvider = ({ children }: any) => {
         const unsub = onAuthStateChanged(auth, async(loggeduser) => {
             set_Loading(true);
             setUser(loggeduser);
-            if (user){ 
-                const res: boolean = navigateToCorrectProvider(user);
+            if (loggeduser){ 
+                const res: boolean = await navigateToCorrectProvider(loggeduser);
                 if(res === true){
                     SET__UserDB();
-                    setUserUID(user.uid);
+                    setUserUID(loggeduser.uid);
                     navigate("/chat");
                     set_Loading(false);
+                    goOnline();
                 }
                 else{
                     set_Loading(false);
                 }
-                goOnline();
             }
             else {
                 navigate("/");/* User is signed out*/
@@ -64,15 +64,15 @@ export const AuthProvider = ({ children }: any) => {
     )
 }
 
-function navigateToCorrectProvider(userobj: any): boolean{
-    if(userobj.providerData === null || userobj.providerData[0] === null)return false;
-    if(userobj.providerData[0].providerId === "google.com")loginResults__ExtProv("google");
-    else if(userobj.providerData[0].providerId === "github.com")loginResults__ExtProv("github");
-    else if(userobj.providerData[0].providerId === "password") loginResultsForm();
-    else return false;
-
-    return true;
+function navigateToCorrectProvider(userobj: User): Promise<boolean>{
+    if(userobj.providerData === null || userobj.providerData[0] === null)return returnFalse();
+    else if(userobj.providerData[0].providerId === "google.com")return loginResults__ExtProv(userobj, "google");
+    else if(userobj.providerData[0].providerId === "github.com")return loginResults__ExtProv(userobj, "github");
+    else if(userobj.providerData[0].providerId === "password")return loginResultsForm();
+    else return returnFalse();
 }
+
+async function returnFalse(): Promise<boolean> { return false; }
 
 /*EmailAuthProviderID: password
 PhoneAuthProviderID: phone

@@ -113,8 +113,8 @@ const Room : FunctionComponent<RoomProps> = ({darklight, roomRequestID, set_acce
             
             const roomRef: DocumentReference<DocumentData> = doc(db, "rooms", roomRequestID);
             const q: Query<DocumentData> = query(collection(roomRef, "roommessages"), orderBy("timestamp", "asc"), limit(25));
-            setmessagesList([]);
             const unsub: Unsubscribe = onSnapshot(q, (querySnapshot) => {
+                setmessagesList([]);
                 querySnapshot.forEach((currentdoc: QueryDocumentSnapshot<DocumentData>) => {
                     //dont make a call instead check in room members array for anyone with matching uid
                     const memberObj = RoomMembers.find(obj => {return obj.id === currentdoc.data().senderID});
@@ -142,12 +142,10 @@ const Room : FunctionComponent<RoomProps> = ({darklight, roomRequestID, set_acce
 
     useEffect(() => {
         const initRoomData = async() => {
-            console.log("tying to reload data");
             if(contactsLoaded.current === true && onloadComplete.current === false)return;
             contactsLoaded.current = true;
             messagesLoaded.current = false;
             //init basic room data
-            console.log("tying to reload data and got through check");
             const roomRef = doc(db, "rooms", roomRequestID);
             setroomDetails({id: roomRequestID, profile: null, roomName: ""});
             const roomdocSnap = await getDoc(roomRef);

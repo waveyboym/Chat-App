@@ -1,7 +1,7 @@
 import { auth, db } from "../firebase";
 import { GoogleAuthProvider, createUserWithEmailAndPassword,
     signInWithEmailAndPassword, sendPasswordResetEmail, getRedirectResult,
-    GithubAuthProvider, updateProfile, signInWithCredential } from "firebase/auth";
+    GithubAuthProvider, updateProfile, signInWithCredential, User } from "firebase/auth";
 import { doc, setDoc, collection, query, where , getDocs} from "firebase/firestore";
 
 import { invoke } from '@tauri-apps/api';
@@ -77,42 +77,34 @@ export const signInUser = (props: {password: string, emailaddress: string}) => {
     return signInWithEmailAndPassword(auth, emailclean, passwordclean);
 }
 
-export const loginResults__ExtProv = (providername: any) => {
-    getRedirectResult(auth).
-    then( async(result) => {
-        // The signed-in user info.
-        if(result === null)return;
-        const user = result.user;
-        if(user === null)return;
-        
-        const usersRef = query(collection(db, "users"), where("uid", "==", user.uid));
-        const snapshot = await getDocs(usersRef);
-        if(snapshot.docs.length !== 0)return;
+export const loginResults__ExtProv = async(userobj: User, providername: string): Promise<boolean> => {
+    // The signed-in user info.
+    const user = userobj;
+    if(user === null)return false;
+    
+    const usersRef = query(collection(db, "users"), where("uid", "==", user.uid));
+    const snapshot = await getDocs(usersRef);
+    if(snapshot.docs.length !== 0)return false;
 
-        await setDoc(doc(db, "users", user.uid), {
-            uid: user.uid,
-            displayPhoto: user.providerData[0].photoURL,
-            username: user.providerData[0].displayName,
-            email: user.providerData[0].email,
-            dateOfBirth: "N/A",
-            pronouns: "N/A",
-            position: "N/A",
-            loginmethod: providername,
-            lastUpdate: new Date(),
-            AccountActive: true,
-            OnlineStatus: true
-        });
-
-        const userRef = doc(db, "users", user.uid);
-        await setDoc(doc(userRef, "messages", user.uid), {});
-        await setDoc(doc(userRef, "requests", user.uid), {});
-        await setDoc(doc(userRef, "friends", user.uid), {});
-    }).catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode + " : " + errorMessage);
+    await setDoc(doc(db, "users", user.uid), {
+        uid: user.uid,
+        displayPhoto: user.providerData[0].photoURL,
+        username: user.providerData[0].displayName,
+        email: user.providerData[0].email,
+        dateOfBirth: "N/A",
+        pronouns: "N/A",
+        position: "N/A",
+        loginmethod: providername,
+        lastUpdate: new Date(),
+        AccountActive: true,
+        OnlineStatus: true
     });
+
+    const userRef = doc(db, "users", user.uid);
+    await setDoc(doc(userRef, "messages", user.uid), {});
+    await setDoc(doc(userRef, "requests", user.uid), {});
+    await setDoc(doc(userRef, "friends", user.uid), {});
+    return true;
 }
 
 //This code belongs to this repo: https://github.com/igorjacauna/tauri-firebase-login
@@ -155,15 +147,15 @@ export const signInHandlerGithub = () => {
 }
 //end of external code
 
-export const loginResultsForm = async() => {
+export const loginResultsForm = async(): Promise<boolean> => {
     const user = auth.currentUser;
-    if(user === null)return;
+    if(user === null)return false;
 
     try {
         // The signed-in user info.
         const usersRef = query(collection(db, "users"), where("uid", "==", user.uid));
         const snapshot = await getDocs(usersRef);
-        if(snapshot.docs.length !== 0)return;
+        if(snapshot.docs.length !== 0)return false;
 
         await setDoc(doc(db, "users", user.uid), {
             uid: user.uid,          
@@ -190,6 +182,8 @@ export const loginResultsForm = async() => {
         const errorMessage = error.message;
         console.log(errorCode + " : " + errorMessage);
     };
+
+    return true;
 }
 
 export const sendResetpswdEmail = (props: any) => {
