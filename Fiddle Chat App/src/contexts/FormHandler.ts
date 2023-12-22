@@ -84,7 +84,7 @@ export const loginResults__ExtProv = async(userobj: User, providername: string):
     
     const usersRef = query(collection(db, "users"), where("uid", "==", user.uid));
     const snapshot = await getDocs(usersRef);
-    if(snapshot.docs.length !== 0)return false;
+    if(snapshot.docs.length !== 0)return true;
 
     await setDoc(doc(db, "users", user.uid), {
         uid: user.uid,
@@ -155,7 +155,7 @@ export const loginResultsForm = async(): Promise<boolean> => {
         // The signed-in user info.
         const usersRef = query(collection(db, "users"), where("uid", "==", user.uid));
         const snapshot = await getDocs(usersRef);
-        if(snapshot.docs.length !== 0)return false;
+        if(snapshot.docs.length !== 0)return true;
 
         await setDoc(doc(db, "users", user.uid), {
             uid: user.uid,          
