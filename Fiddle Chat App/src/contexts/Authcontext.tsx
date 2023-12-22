@@ -66,7 +66,6 @@ export const AuthProvider = ({ children }: any) => {
 
 function navigateToCorrectProvider(userobj: any): boolean{
     if(userobj.providerData === null || userobj.providerData[0] === null)return false;
-    
     if(userobj.providerData[0].providerId === "google.com")loginResults__ExtProv("google");
     else if(userobj.providerData[0].providerId === "github.com")loginResults__ExtProv("github");
     else if(userobj.providerData[0].providerId === "password") loginResultsForm();

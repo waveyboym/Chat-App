@@ -6,12 +6,12 @@ export default `
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
             http-equiv="Content-Security-Policy"
-            content="script-src https://apis.google.com/
+            content="script-src https://apis.google.com/ https://github.com
                 'self' 'unsafe-inline'"
         />
         <meta
             http-equiv="Content-Security-Policy"
-            content="script-src http://developers.google.com/
+            content="script-src http://developers.google.com/ https://github.com
                 'self' 'unsafe-inline'"
         />
         <title>Fiddle Chat App</title>

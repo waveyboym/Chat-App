@@ -80,7 +80,7 @@ const Signupform : FunctionComponent<SignupformProps> = ({callback_LoginForm}) =
                     <img src={googlesvg} alt="google" className="google-icon-g" />
                     <h2>Google Sign Up</h2>
                 </motion.div>
-                <motion.div className="auth-button hidden-auth-button" whileHover={{ opacity: 0.8 }} whileTap={{ scale: 0.97 }}
+                <motion.div className="auth-button" whileHover={{ opacity: 0.8 }} whileTap={{ scale: 0.97 }}
                 onClick={() => { signUpProviders("github");}}>
                     <img src={githubsvg} alt="github" className="github-icon-g" />
                     <h2>Github Sign Up</h2>

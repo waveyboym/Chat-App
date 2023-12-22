@@ -88,7 +88,7 @@ const Loginform : FunctionComponent<LoginformProps> = ({callback_resetpwd, callb
                     <img src={googlesvg} alt="google" className="google-icon-g" />
                     <h2>Google Login</h2>
                 </motion.div>
-                <motion.div className="auth-button hidden-auth-button" whileHover={{ opacity: 0.8 }} whileTap={{ scale: 0.97 }}
+                <motion.div className="auth-button" whileHover={{ opacity: 0.8 }} whileTap={{ scale: 0.97 }}
                 onClick={() => { loginProviders("github");}}>
                     <img src={githubsvg} alt="github" className="github-icon-g" />
                     <h2>Github Login</h2>

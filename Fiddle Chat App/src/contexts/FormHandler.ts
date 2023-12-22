@@ -7,6 +7,7 @@ import { doc, setDoc, collection, query, where , getDocs} from "firebase/firesto
 import { invoke } from '@tauri-apps/api';
 import { listen } from '@tauri-apps/api/event';
 import { open } from '@tauri-apps/api/shell';
+import { ResponseType, fetch } from "@tauri-apps/api/http";
 import callbacktemplate from "./callbacktemplate";
 
 const validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -137,8 +138,7 @@ export const signInHandlerGoogle = () => {
 export const signInHandlerGithub = () => {
     // Wait for callback from tauri oauth plugin
     listen('oauth://url', (data) => {
-        console.log(data.payload as string);
-        githubSignIn(data.payload as string);
+        requestGithubSignIn(data.payload as string);
     });
     
     // Start tauri oauth plugin. When receive first request
@@ -150,7 +150,7 @@ export const signInHandlerGithub = () => {
         response: callbacktemplate,
         },
     }).then((port) => {
-        openGithubSignIn(port as string);
+        openRequestGithubIdentity(port as string);
     });
 }
 //end of external code
@@ -217,7 +217,7 @@ const openBrowserToConsentForGoogle = (port: string) => {
     );
 };
 
-const openBrowserToConsentForGithub = (port: string) => {
+const openBrowserToConsentIdentityForGithub = (port: string) => {
     // Replace CLIENT ID FROM GITHUB
     // https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authorizing-oauth-apps
     return open('https://github.com/login/oauth/authorize?' +
@@ -226,11 +226,21 @@ const openBrowserToConsentForGithub = (port: string) => {
     );
 };
 
+
+
 const openGoogleSignIn = (port: string) => {
     return new Promise((resolve, reject) => {
         openBrowserToConsentForGoogle(port).then(resolve).catch(reject);
     });
 };
+
+const openRequestGithubIdentity = (port: string) => {
+    return new Promise((resolve, reject) => {
+        openBrowserToConsentIdentityForGithub(port).then(resolve).catch(reject);
+    });
+};
+
+
 
 const googleSignIn = (payload: string) => {
     const url = new URL(payload);
@@ -249,26 +259,31 @@ const googleSignIn = (payload: string) => {
         });
 };
 
-const openGithubSignIn = (port: string) => {
-    return new Promise((resolve, reject) => {
-        openBrowserToConsentForGithub(port).then(resolve).catch(reject);
-    });
-};
-
-const githubSignIn = (payload: string) => {
-    //http://127.0.0.1:57956/?code=b49012f768a283458fca
-
-    //http://127.0.0.1:58166/?code=4c1cc7c671d96794284e
+const requestGithubSignIn = async(payload: string) => {
     //const url = new URL(payload);
     // Get `access_token` from redirect_uri param
     //const access_token = new URLSearchParams(url.hash.substring(1)).get('code');
 
-    let paramString = payload.split('?')[1];
-    let queryString = new URLSearchParams(paramString);
-    const access_token = queryString.get("code");
+    const paramString_code = payload.split('?')[1];
+    const queryString_code = new URLSearchParams(paramString_code);
+    const github_code = queryString_code.get("code");
+
+    if (!github_code){
+        console.log("Auth state changed but failed to acquire token: " + payload);
+        return;
+    }
+
+    const response: any = await fetch('https://github.com/login/oauth/access_token?' +
+    `client_id=${import.meta.env.VITE_GITHUBCLIENTID}&` +
+    `client_secret=${import.meta.env.VITE_GITHUBCLIENTSECRET}&` +
+    `code=${github_code}`, { method: "POST", responseType: ResponseType.Text });
+    
+    const paramString_access_token = response.data.split('&')[0];
+    const queryString_access_token = new URLSearchParams(paramString_access_token);
+    const access_token = queryString_access_token.get("access_token");
 
     if (!access_token){
-        console.log("Auth state changed but failed to acquire token: " + payload);
+        console.log("Unable to acquire access token: " + response);
         return;
     }
 

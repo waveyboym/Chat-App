@@ -29,11 +29,12 @@
         "startDragging": true
       },
       "http": {
-        "all": false,
-        "request": false,
+        "all": true,
+        "request": true,
         "scope": [
           "https://apis.google.com/*",
-          "http://developers.google.com/*"
+          "http://developers.google.com/*",
+          "https://github.com/*"
         ]
       },
       "os": {
