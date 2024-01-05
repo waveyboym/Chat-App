@@ -8,7 +8,7 @@
   },
   "package": {
     "productName": "Fiddle Chat App",
-    "version": "0.3.1"
+    "version": "0.3.2"
   },
   "tauri": {
     "allowlist": {
@@ -20,12 +20,9 @@
       "window": {
         "all": false,
         "close": true,
-        "hide": true,
-        "show": true,
-        "maximize": true,
-        "minimize": true,
-        "unmaximize": true,
-        "unminimize": true,
+      },
+      "dialog": {
+        "all": true
       },
       "http": {
         "all": true,
