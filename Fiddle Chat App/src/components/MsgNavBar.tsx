@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 import { authProviderType } from "../types";
 
 const variants = {
-  open: { height: "calc(100vh - 145px)", },//change this value to "calc(100vh - 105px)" when using OS title bar otherwise "calc(100vh - 145px)"
+  open: { height: "calc(100vh - 105px)", },//change this value to "calc(100vh - 105px)" when using OS title bar otherwise "calc(100vh - 145px)"
   closed: {  height: "61px", }, 
 }
 

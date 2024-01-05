@@ -16,7 +16,6 @@
             background: $top-layer-blur;
             display: flex;
             align-items: center;
-            backdrop-filter: blur(10px);
             h1{
                 margin-left: 15px;
                 font-size: 24px;
@@ -73,7 +72,6 @@
         background: $top-layer-blur;
         display: flex;
         align-items: center;
-        backdrop-filter: blur(10px);
         h1{
             margin-left: 15px;
             font-size: 24px;
@@ -247,8 +245,7 @@
         z-index: 2500;
         width: 100vw;
         height: 100vh;
-        background: rgba(37, 37, 37, 0.05);
-        backdrop-filter: blur(25px);
+        background: linear-gradient(252.46deg, #001D36 0%, #3F1A61 52.08%, #8A7A94 100%);
         position: fixed;
         top: 0;
         left: 0;
@@ -321,7 +318,6 @@
         background: $top-layer-blur;
         display: flex;
         align-items: center;
-        backdrop-filter: blur(10px);
         h1{
             font-size: 24px;
             color: $text-col;
@@ -470,7 +466,6 @@
         background: $top-layer-blur;
         display: flex;
         align-items: center;
-        backdrop-filter: blur(10px);
         h1{
             font-size: 24px;
             color: $text-col;

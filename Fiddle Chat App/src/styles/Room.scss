@@ -19,7 +19,6 @@
             background: $top-layer-blur;
             display: flex;
             align-items: center;
-            backdrop-filter: blur(10px);
             z-index: 1000;
 
             .friends-icon{
