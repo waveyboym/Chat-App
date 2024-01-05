@@ -13,7 +13,7 @@ edition = "2021"
 tauri-build = { version = "1.4", features = [] }
 
 [dependencies]
-tauri = { version = "1.4", features = [ "http-all", "window-start-dragging", "window-hide", "window-maximize", "window-minimize", "window-close", "window-unminimize", "window-show", "window-unmaximize", "os-all", "shell-open"] }
+tauri = { version = "1.4", features = [ "http-all", "os-all", "shell-open"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 tauri-plugin-oauth = { git = "https://github.com/FabianLars/tauri-plugin-oauth", branch = "main" }

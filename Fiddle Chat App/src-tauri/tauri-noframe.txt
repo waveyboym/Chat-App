@@ -90,7 +90,7 @@
           "width": 300,
           "height": 400,
           "resizable": false,
-          "decorations": false,
+          "decorations": true,
           "title": "Fiddle Chat App",
           "url": "splashscreen.html",
           "label": "splashscreen",

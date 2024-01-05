@@ -18,15 +18,7 @@
         "open": true
       },
       "window": {
-        "all": false,
-        "close": true,
-        "hide": true,
-        "show": true,
-        "maximize": true,
-        "minimize": true,
-        "unmaximize": true,
-        "unminimize": true,
-        "startDragging": true
+        "all": false
       },
       "http": {
         "all": true,
@@ -83,14 +75,14 @@
     "windows": [
       {
         "fullscreen": false,
-        "height": 700,
+        "height": 660,
         "resizable": true,
         "title": "Fiddle Chat App",
         "width": 1024,
-        "minHeight": 700,
+        "minHeight": 660,
         "minWidth": 1024,
         "titleBarStyle": "Transparent",
-        "decorations": false,
+        "decorations": true,
         "visible": false,
         "center": true
       },
@@ -98,7 +90,7 @@
           "width": 300,
           "height": 400,
           "resizable": false,
-          "decorations": false,
+          "decorations": true,
           "title": "Fiddle Chat App",
           "url": "splashscreen.html",
           "label": "splashscreen",
