@@ -8,7 +8,7 @@
   },
   "package": {
     "productName": "Fiddle Chat App",
-    "version": "0.3.1"
+    "version": "0.3.2"
   },
   "tauri": {
     "allowlist": {
@@ -18,15 +18,24 @@
         "open": true
       },
       "window": {
-        "all": false
+        "all": false,
+        "close": true
+      },
+      "dialog": {
+        "all": true
       },
       "http": {
         "all": true,
         "request": true,
         "scope": [
-          "https://apis.google.com/*",
-          "http://developers.google.com/*",
-          "https://github.com/*"
+          "https://*.apis.google.com/**",
+          "https://apis.google.com/**",
+          "http://*.developers.google.com/**",
+          "http://developers.google.com/**",
+          "https://*.github.com/**",
+          "https://github.com/*",
+          "https://localhost/**",
+          "tauri://localhost/**"
         ]
       },
       "os": {
@@ -90,7 +99,7 @@
           "width": 300,
           "height": 400,
           "resizable": false,
-          "decorations": false,
+          "decorations": true,
           "title": "Fiddle Chat App",
           "url": "splashscreen.html",
           "label": "splashscreen",
